@@ -5,7 +5,12 @@ import { nextCookies } from "better-auth/next-js";
 
 const prisma = new PrismaClient();
 export const auth = betterAuth({
-
+    session: {
+        cookieCache:{
+        enabled: true,
+        cookieCacheMaxAge: 60 * 5
+        },
+    },
     database: prismaAdapter(prisma, {provider: "postgresql"}),
     emailAndPassword: {
         enabled: true,
