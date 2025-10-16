@@ -27,10 +27,10 @@ export default function SignUpPage() {
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [showPasswordRequirements, setShowPasswordRequirements] =
-  useState(false);
+    useState(false);
   const router = useRouter();
   const searchParams = useSearchParams();
-  
+
   const form = useForm<SignUpInput>({
     resolver: zodResolver(signUpSchema),
     defaultValues: {
@@ -39,8 +39,8 @@ export default function SignUpPage() {
       password: "",
     },
   });
-  
-  const {isSubmitting } = form.formState
+
+  const { isSubmitting } = form.formState;
 
   const handleSignUp = async (data: SignUpInput) => {
     setError("");
@@ -51,8 +51,10 @@ export default function SignUpPage() {
       if (!result.user) {
         setError("Failed to create account. Please try again.");
       } else {
-        // Redirect to home or dashboard on success
-        router.push(searchParams.get("callbackUrl") || "/");
+        // Redirect to verification page on success
+        router.push(
+          `/verificationEmail?email=${encodeURIComponent(data.email)}`
+        );
       }
     } catch (err) {
       setError(
@@ -60,14 +62,13 @@ export default function SignUpPage() {
           err instanceof Error ? err.message : "Unknown error"
         }`
       );
-     } 
+    }
   };
 
   useEffect(() => {
-    authClient.getSession().then(session => {
-      if (session.data != null) 
-        router.push("/");
-      })
+    authClient.getSession().then((session) => {
+      if (session.data != null) router.push("/");
+    });
   }, [router]);
 
   return (

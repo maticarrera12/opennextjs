@@ -1,5 +1,5 @@
+import { GitHubIcon, GoogleIcon } from "@/components/auth/OAuthIcons";
 import { ElementType, ComponentProps } from "react";
-import { Github as GithubIcon, Chrome as GoogleIcon } from "lucide-react";
 
 export const SUPPORTED_OAUTH_PROVIDERS = ["google", "github"] as const;
 
@@ -19,6 +19,6 @@ export const SUPPORTED_OAUTH_PROVIDERS_DETAILS: Record<
   },
   github: {
     name: "GitHub",
-    Icon: GithubIcon,
+    Icon: GitHubIcon,
   },
 };
