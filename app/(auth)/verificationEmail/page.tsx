@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import BetterAuthActionButton from "@/components/auth/BetterAuthActionButton";
+import BetterAuthActionButton from "@/components/auth/better-auth-action-button";
 import { authClient } from "@/lib/auth-client";
 import { useSearchParams } from "next/navigation";
 
@@ -38,7 +38,7 @@ function EmailVerification({ email }: { email: string }) {
 
       <BetterAuthActionButton
         variant="outline"
-        className="w-full"
+        className="w-full bg-indigo-500  text-white"
         successMessage="Verification email sent!"
         disabled={timeToNextResend > 0}
         action={() => {
@@ -62,13 +62,15 @@ export default function VerificationEmailPage() {
   const email = searchParams.get("email") || "";
 
   return (
-    <div className="max-w-md mx-auto mt-8 p-6 bg-white rounded-lg shadow-md">
-      <h1 className="text-2xl font-bold mb-4">Check your email</h1>
-      <EmailVerification email={email} />
-      <div className="text-center mt-4">
-        <p className="text-sm text-gray-500">
-          Once verified, you&apos;ll be automatically signed in.
-        </p>
+    <div className="min-h-screen flex items-center justify-center">
+      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
+        <h1 className="text-2xl font-bold mb-4">Check your email</h1>
+        <EmailVerification email={email} />
+        <div className="text-center mt-4">
+          <p className="text-sm text-gray-500">
+            Once verified, you&apos;ll be automatically signed in.
+          </p>
+        </div>
       </div>
     </div>
   );

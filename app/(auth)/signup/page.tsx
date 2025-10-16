@@ -5,8 +5,7 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUp } from "@/lib/actions/auth-actions";
 import Link from "next/link";
-import { Eye, EyeOff, Github } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
+import { useRouter} from "next/navigation";
 import { signUpSchema, type SignUpInput } from "@/lib/schemas";
 import {
   Form,
@@ -18,18 +17,17 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { PasswordStrength } from "@/components/ui/password-strength";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
+import PasswordInput from "@/components/password-input";
 
 export default function SignUpPage() {
-  const [showPassword, setShowPassword] = useState(false);
+
   const [error, setError] = useState("");
-  const [showPasswordRequirements, setShowPasswordRequirements] =
-    useState(false);
+
   const router = useRouter();
-  const searchParams = useSearchParams();
+
 
   const form = useForm<SignUpInput>({
     resolver: zodResolver(signUpSchema),
@@ -139,45 +137,7 @@ export default function SignUpPage() {
                 )}
               />
 
-              <FormField
-                control={form.control}
-                name="password"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel>Password</FormLabel>
-                    <FormControl>
-                      <div className="space-y-0">
-                        <div className="relative">
-                          <Input
-                            type={showPassword ? "text" : "password"}
-                            placeholder="Password"
-                            className="pr-10"
-                            {...field}
-                            onFocus={() => setShowPasswordRequirements(true)}
-                            onBlur={() => setShowPasswordRequirements(false)}
-                          />
-                          <button
-                            type="button"
-                            className="absolute right-3 top-1/2 -translate-y-1/2 text-slate-400 hover:text-slate-600"
-                            onClick={() => setShowPassword(!showPassword)}
-                          >
-                            {showPassword ? (
-                              <EyeOff className="w-4 h-4" />
-                            ) : (
-                              <Eye className="w-4 h-4" />
-                            )}
-                          </button>
-                        </div>
-                        <PasswordStrength
-                          password={field.value}
-                          show={showPasswordRequirements}
-                        />
-                      </div>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+              <PasswordInput form={form} />
 
               <Button
                 type="submit"

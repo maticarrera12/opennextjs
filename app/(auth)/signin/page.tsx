@@ -184,7 +184,7 @@ export default function SignInPage() {
                 disabled={isSubmitting}
                 className="w-full bg-indigo-600 hover:bg-indigo-700"
               >
-                <LoadingSwap isLoading={isSubmitting}>Sign Up</LoadingSwap>
+                <LoadingSwap isLoading={isSubmitting}>Sign In</LoadingSwap>
               </Button>
             </form>
           </Form>

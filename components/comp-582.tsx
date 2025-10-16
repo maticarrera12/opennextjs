@@ -188,7 +188,7 @@ export default function Navbar() {
               onClick={() => (window.location.href = "/signin")}
               className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
             >
-              Sign up
+              Sign In
             </Button>
           ) : (
             <UserMenu />
