@@ -5,7 +5,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "@/lib/actions/auth-actions";
 import { toast } from "sonner";
 import Link from "next/link";
-import { Eye, EyeOff} from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
 import { useRouter, useSearchParams } from "next/navigation";
 import { signInSchema, type SignInInput } from "@/lib/schemas";
 import {
@@ -19,7 +19,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import SocialAuthButtons from "@/components/SocialAuthButtons";
+import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignInPage() {
@@ -59,11 +59,11 @@ export default function SignInPage() {
     }
   };
 
-    useEffect(() => {
-      authClient.getSession().then((session) => {
-        if (session.data != null) router.push("/");
-      });
-    }, [router]);
+  useEffect(() => {
+    authClient.getSession().then((session) => {
+      if (session.data != null) router.push("/");
+    });
+  }, [router]);
 
   return (
     <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4">

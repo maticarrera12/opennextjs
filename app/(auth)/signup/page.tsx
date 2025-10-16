@@ -20,7 +20,7 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { PasswordStrength } from "@/components/ui/password-strength";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import SocialAuthButtons from "@/components/SocialAuthButtons";
+import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignUpPage() {
