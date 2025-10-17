@@ -2,13 +2,11 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import z from "zod"
 import {
   Form,
   FormControl,
   FormField,
   FormItem,
-  FormLabel,
   FormMessage,
 } from "@/components/ui/form"
 import { Button } from "@/components/ui/button"
@@ -26,6 +24,7 @@ import Link from "next/link"
 import { ResetPasswordInput, resetPasswordSchema } from "@/lib/schemas"
 import { authClient } from "@/lib/auth-client"
 import PasswordInput from "@/components/password-input"
+import ThemeToggle from "@/components/theme-toggle"
 
 
 
@@ -70,11 +69,11 @@ export default function ResetPasswordPage() {
 
   if (token == null || error != null) {
     return (
-      <div className="min-h-screen flex items-center justify-center">
-        <Card className="w-full max-w-md mx-auto">
+      <div className="min-h-screen flex items-center justify-center bg-page px-4">
+        <Card className="w-full max-w-md mx-auto bg-card border-subtle">
           <CardHeader>
-            <CardTitle>Invalid Reset Link</CardTitle>
-            <CardDescription>
+            <CardTitle className="text-primary">Invalid Reset Link</CardTitle>
+            <CardDescription className="text-secondary">
               The password reset link is invalid or has expired.
             </CardDescription>
           </CardHeader>
@@ -89,10 +88,10 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4">
-      <Card className="w-full max-w-md mx-auto">
+    <div className="min-h-screen flex items-center justify-center bg-page px-4">
+      <Card className="w-full max-w-md mx-auto bg-card border-subtle">
         <CardHeader>
-          <CardTitle className="text-2xl fle1">Reset Your Password</CardTitle>
+          <CardTitle className="text-2xl text-primary">Reset Your Password</CardTitle>
         </CardHeader>
         <CardContent>
           <Form {...form}>
@@ -103,7 +102,7 @@ export default function ResetPasswordPage() {
               <FormField
                 control={form.control}
                 name="password"
-                render={({ field }) => (
+                render={() => (
                   <FormItem>
                     <FormControl>
                       <PasswordInput form={form} />
@@ -113,7 +112,7 @@ export default function ResetPasswordPage() {
                 )}
               />
 
-              <Button type="submit" disabled={isSubmitting} className="flex-1 w-full bg-indigo-600 hover:bg-indigo-700">
+              <Button type="submit" disabled={isSubmitting} className="flex-1 w-full bg-indigo-600 hover:bg-indigo-700 text-white">
                 <LoadingSwap isLoading={isSubmitting}>
                   Reset Password
                 </LoadingSwap>

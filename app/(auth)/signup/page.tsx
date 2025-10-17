@@ -21,6 +21,8 @@ import { LoadingSwap } from "@/components/ui/loading-swap";
 import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
 import PasswordInput from "@/components/password-input";
+import { Separator } from "@/components/ui/separator";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function SignUpPage() {
 
@@ -70,16 +72,16 @@ export default function SignUpPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-page px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-slate-900">Create Account</h1>
-          <p className="mt-2 text-sm text-slate-600">
+          <h1 className="text-3xl font-bold text-primary">Create Account</h1>
+          <p className="mt-2 text-sm text-secondary">
             Sign up to get started with better-auth
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
+        <div className="bg-card rounded-xl shadow-sm border border-subtle p-8">
           {/* Social Login Buttons */}
           <div className="grid grid-cols-2 gap-3">
             <SocialAuthButtons />
@@ -87,10 +89,10 @@ export default function SignUpPage() {
 
           <div className="relative my-6">
             <div className="absolute inset-0 flex items-center">
-              <div className="w-full border-t border-slate-200" />
+              <Separator />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-white text-slate-500">
+              <span className="px-2 bg-indigo-50 dark:bg-indigo-950 text-muted-foreground">
                 Or continue with
               </span>
             </div>
@@ -142,14 +144,14 @@ export default function SignUpPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-indigo-600 hover:bg-indigo-700"
+                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
               >
                 <LoadingSwap isLoading={isSubmitting}>Sign Up</LoadingSwap>
               </Button>
             </form>
           </Form>
 
-          <p className="mt-6 text-center text-sm text-slate-600">
+          <p className="mt-6 text-center text-sm text-tertiary">
             Already have an account?{" "}
             <Link
               href="/signin"

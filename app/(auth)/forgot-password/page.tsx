@@ -2,7 +2,6 @@
 
 import { useForm } from "react-hook-form"
 import { zodResolver } from "@hookform/resolvers/zod"
-import z from "zod"
 import {
   Form,
   FormControl,
@@ -18,14 +17,11 @@ import { LoadingSwap } from "@/components/ui/loading-swap"
 import { toast } from "sonner"
 import { authClient } from "@/lib/auth-client"
 import { forgotPasswordSchema, ForgotPasswordInput } from "@/lib/schemas/auth.schema"
+import { useRouter } from "next/navigation"
+import ThemeToggle from "@/components/theme-toggle"
 
-
-
-export function ForgotPassword({
-  openSignInTab,
-}: {
-  openSignInTab: () => void
-}) {
+export function ForgotPassword() {
+  const router = useRouter()
   const form = useForm<ForgotPasswordInput>({
     resolver: zodResolver(forgotPasswordSchema),
     defaultValues: {
@@ -64,6 +60,7 @@ export function ForgotPassword({
           control={form.control}
           name="email"
           render={({ field }) => (
+            
             <FormItem>
               <FormLabel>Email</FormLabel>
               <FormControl>
@@ -75,10 +72,10 @@ export function ForgotPassword({
         />
 
         <div className="flex gap-2">
-          <Button type="button" variant="outline" onClick={openSignInTab}>
+          <Button type="button" variant="outline" className="bg-indigo-50 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-50 border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900 hover:text-indigo-900 dark:hover:text-indigo-50" onClick={() => router.push('/signin')}>
             Back
           </Button>
-          <Button type="submit" disabled={isSubmitting} className="flex-1 bg-indigo-600 hover:bg-indigo-700">
+          <Button type="submit" disabled={isSubmitting} className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white">
             <LoadingSwap isLoading={isSubmitting}>Send Reset Email</LoadingSwap>
           </Button>
         </div>
@@ -89,17 +86,17 @@ export function ForgotPassword({
 
 export default function ForgotPasswordPage() {
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-slate-50 to-slate-100 px-4">
+    <div className="min-h-screen flex items-center justify-center bg-page px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-slate-900">Reset Password</h1>
-          <p className="mt-2 text-sm text-slate-600">
+          <h1 className="text-3xl font-bold text-primary">Reset Password</h1>
+          <p className="mt-2 text-sm text-secondary">
             Enter your email to receive a password reset link
           </p>
         </div>
 
-        <div className="bg-white rounded-xl shadow-sm border border-slate-200 p-8">
-          <ForgotPassword openSignInTab={() => window.history.back()} />
+        <div className="bg-card rounded-xl shadow-sm border border-subtle p-8">
+          <ForgotPassword />
         </div>
       </div>
     </div>
