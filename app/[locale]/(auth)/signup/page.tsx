@@ -5,8 +5,9 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signUp } from "@/lib/actions/auth-actions";
 import Link from "next/link";
-import { useRouter} from "next/navigation";
+import { useRouter } from "next/navigation";
 import { signUpSchema, type SignUpInput } from "@/lib/schemas";
+import { useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -25,11 +26,9 @@ import { Separator } from "@/components/ui/separator";
 import ThemeToggle from "@/components/theme-toggle";
 
 export default function SignUpPage() {
-
   const [error, setError] = useState("");
-
   const router = useRouter();
-
+  const t = useTranslations("auth.signup");
 
   const form = useForm<SignUpInput>({
     resolver: zodResolver(signUpSchema),
@@ -49,7 +48,7 @@ export default function SignUpPage() {
       const result = await signUp(data.email, data.password, data.name);
 
       if (!result.user) {
-        setError("Failed to create account. Please try again.");
+        setError(t("error"));
       } else {
         // Redirect to verification page on success
         router.push(
@@ -58,7 +57,7 @@ export default function SignUpPage() {
       }
     } catch (err) {
       setError(
-        `Authentication error: ${
+        `${t("unexpectedError")}: ${
           err instanceof Error ? err.message : "Unknown error"
         }`
       );
@@ -75,10 +74,8 @@ export default function SignUpPage() {
     <div className="min-h-screen flex items-center justify-center bg-page px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
-          <h1 className="text-3xl font-bold text-primary">Create Account</h1>
-          <p className="mt-2 text-sm text-secondary">
-            Sign up to get started with better-auth
-          </p>
+          <h1 className="text-3xl font-bold text-primary">{t("title")}</h1>
+          <p className="mt-2 text-sm text-secondary">{t("subtitle")}</p>
         </div>
 
         <div className="bg-card rounded-xl shadow-sm border border-subtle p-8">
@@ -93,7 +90,7 @@ export default function SignUpPage() {
             </div>
             <div className="relative flex justify-center text-sm">
               <span className="px-2 bg-indigo-50 dark:bg-indigo-950 text-muted-foreground">
-                Or continue with
+                {t("orContinueWith")}
               </span>
             </div>
           </div>
@@ -116,9 +113,9 @@ export default function SignUpPage() {
                 name="name"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Full Name</FormLabel>
+                    <FormLabel>{t("name")}</FormLabel>
                     <FormControl>
-                      <Input placeholder="Full name" {...field} />
+                      <Input placeholder={t("name")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -130,9 +127,9 @@ export default function SignUpPage() {
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel>Email address</FormLabel>
+                    <FormLabel>{t("email")}</FormLabel>
                     <FormControl>
-                      <Input type="email" placeholder="Email" {...field} />
+                      <Input type="email" placeholder={t("email")} {...field} />
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -146,18 +143,20 @@ export default function SignUpPage() {
                 disabled={isSubmitting}
                 className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
               >
-                <LoadingSwap isLoading={isSubmitting}>Sign Up</LoadingSwap>
+                <LoadingSwap isLoading={isSubmitting}>
+                  {t("submit")}
+                </LoadingSwap>
               </Button>
             </form>
           </Form>
 
           <p className="mt-6 text-center text-sm text-tertiary">
-            Already have an account?{" "}
+            {t("haveAccount")}{" "}
             <Link
               href="/signin"
               className="font-medium text-indigo-600 hover:text-indigo-500"
             >
-              Sign in
+              {t("signIn")}
             </Link>
           </p>
         </div>

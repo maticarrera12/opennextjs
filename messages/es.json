@@ -1,0 +1,72 @@
+{
+  "userMenu": {
+    "profileImage": "Imagen de perfil",
+    "menu": {
+      "option1": "Configuración",
+      "option2": "Proyectos",
+      "option3": "Documentación",
+      "option4": "Marcadores",
+      "option5": "Editar Perfil",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Bienvenido de nuevo",
+      "subtitle": "Inicia sesión en tu cuenta",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submit": "Iniciar Sesión",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "orContinueWith": "O continúa con",
+      "success": "¡Sesión iniciada exitosamente!",
+      "error": "Correo o contraseña inválidos",
+      "unexpectedError": "Ocurrió un error inesperado",
+      "rememberMe": "Recuérdame"
+    },
+    "signup": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate para comenzar con better-auth",
+      "name": "Nombre Completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Registrarse",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Inicia sesión",
+      "orContinueWith": "O continúa con",
+      "success": "¡Cuenta creada exitosamente!",
+      "error": "Error al crear la cuenta. Por favor, intenta de nuevo.",
+      "unexpectedError": "Error de autenticación"
+    },
+    "forgotPassword": {
+      "title": "Olvidé mi Contraseña",
+      "subtitle": "Ingresa tu correo para restablecer tu contraseña",
+      "email": "Correo electrónico",
+      "submit": "Enviar Enlace",
+      "backToSignIn": "Volver a inicio de sesión",
+      "success": "¡Enlace de restablecimiento enviado a tu correo!",
+      "error": "Error al enviar el enlace. Por favor, intenta de nuevo.",
+      "checkEmail": "Revisa tu correo para el enlace de restablecimiento"
+    },
+    "resetPassword": {
+      "title": "Restablecer Contraseña",
+      "subtitle": "Ingresa tu nueva contraseña",
+      "password": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "submit": "Restablecer Contraseña",
+      "success": "¡Contraseña restablecida exitosamente!",
+      "error": "Error al restablecer la contraseña. Por favor, intenta de nuevo.",
+      "passwordsDontMatch": "Las contraseñas no coinciden"
+    },
+    "verification": {
+      "title": "Revisa tu correo",
+      "message": "Te enviamos un enlace de verificación. Por favor, revisa tu correo y haz clic en el enlace para verificar tu cuenta.",
+      "resendButton": "Reenviar Correo",
+      "resendCountdown": "Reenviar Correo ({seconds})",
+      "footer": "Una vez verificado, iniciarás sesión automáticamente.",
+      "success": "¡Correo de verificación enviado!"
+    }
+  }
+}

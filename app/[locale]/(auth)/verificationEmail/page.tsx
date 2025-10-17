@@ -3,10 +3,12 @@ import React, { useEffect, useRef, useState } from "react";
 import BetterAuthActionButton from "@/components/auth/better-auth-action-button";
 import { authClient } from "@/lib/auth-client";
 import { useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 function EmailVerification({ email }: { email: string }) {
   const [timeToNextResend, setTimeToNextResend] = useState(5);
   const interval = useRef<NodeJS.Timeout>(undefined);
+  const t = useTranslations("auth.verification");
 
   useEffect(() => {
     startEmailVerificationCountdown();
@@ -31,15 +33,12 @@ function EmailVerification({ email }: { email: string }) {
 
   return (
     <div className="space-y-4">
-      <p className="text-sm text-muted-foreground mt-2">
-        We sent you a verification link. Please check your email and click the
-        link to verify your account.
-      </p>
+      <p className="text-sm text-muted-foreground mt-2">{t("message")}</p>
 
       <BetterAuthActionButton
         variant="outline"
         className="w-full bg-indigo-500  text-white"
-        successMessage="Verification email sent!"
+        successMessage={t("success")}
         disabled={timeToNextResend > 0}
         action={() => {
           startEmailVerificationCountdown();
@@ -50,8 +49,8 @@ function EmailVerification({ email }: { email: string }) {
         }}
       >
         {timeToNextResend > 0
-          ? `Resend Email (${timeToNextResend})`
-          : "Resend Email"}
+          ? t("resendCountdown", { seconds: timeToNextResend })
+          : t("resendButton")}
       </BetterAuthActionButton>
     </div>
   );
@@ -60,16 +59,15 @@ function EmailVerification({ email }: { email: string }) {
 export default function VerificationEmailPage() {
   const searchParams = useSearchParams();
   const email = searchParams.get("email") || "";
+  const t = useTranslations("auth.verification");
 
   return (
     <div className="min-h-screen flex items-center justify-center">
       <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">Check your email</h1>
+        <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
         <EmailVerification email={email} />
         <div className="text-center mt-4">
-          <p className="text-sm text-gray-500">
-            Once verified, you&apos;ll be automatically signed in.
-          </p>
+          <p className="text-sm text-gray-500">{t("footer")}</p>
         </div>
       </div>
     </div>

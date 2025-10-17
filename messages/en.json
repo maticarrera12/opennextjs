@@ -1,0 +1,72 @@
+{
+  "userMenu": {
+    "profileImage": "Profile image",
+    "menu": {
+      "option1": "Settings",
+      "option2": "Projects",
+      "option3": "Documentation",
+      "option4": "Bookmarks",
+      "option5": "Edit Profile",
+      "logout": "Log Out"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Welcome back",
+      "subtitle": "Sign in to your account",
+      "email": "Email",
+      "password": "Password",
+      "forgotPassword": "Forgot your password?",
+      "submit": "Sign In",
+      "noAccount": "Don't have an account?",
+      "signUp": "Sign up",
+      "orContinueWith": "Or continue with",
+      "success": "Signed in successfully!",
+      "error": "Invalid email or password",
+      "unexpectedError": "An unexpected error occurred",
+      "rememberMe": "Remember me"
+    },
+    "signup": {
+      "title": "Create Account",
+      "subtitle": "Sign up to get started with better-auth",
+      "name": "Full Name",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign Up",
+      "haveAccount": "Already have an account?",
+      "signIn": "Sign in",
+      "orContinueWith": "Or continue with",
+      "success": "Account created successfully!",
+      "error": "Failed to create account. Please try again.",
+      "unexpectedError": "Authentication error"
+    },
+    "forgotPassword": {
+      "title": "Forgot Password",
+      "subtitle": "Enter your email to reset your password",
+      "email": "Email address",
+      "submit": "Send Reset Link",
+      "backToSignIn": "Back to sign in",
+      "success": "Password reset link sent to your email!",
+      "error": "Failed to send reset link. Please try again.",
+      "checkEmail": "Check your email for the reset link"
+    },
+    "resetPassword": {
+      "title": "Reset Password",
+      "subtitle": "Enter your new password",
+      "password": "New Password",
+      "confirmPassword": "Confirm Password",
+      "submit": "Reset Password",
+      "success": "Password reset successfully!",
+      "error": "Failed to reset password. Please try again.",
+      "passwordsDontMatch": "Passwords don't match"
+    },
+    "verification": {
+      "title": "Check your email",
+      "message": "We sent you a verification link. Please check your email and click the link to verify your account.",
+      "resendButton": "Resend Email",
+      "resendCountdown": "Resend Email ({seconds})",
+      "footer": "Once verified, you'll be automatically signed in.",
+      "success": "Verification email sent!"
+    }
+  }
+}
