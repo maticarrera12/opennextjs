@@ -161,6 +161,9 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
+          <Button onClick={() => (window.location.href = "/app")}
+            className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
+            >Try App</Button>
           {/* Theme toggle */}
           <ThemeToggle />
           {/* Language selector */}

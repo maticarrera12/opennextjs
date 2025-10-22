@@ -1,8 +1,6 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
-// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+// ============================================
+// PRISMA SCHEMA - AI Brand Kit + Better Auth
+// ============================================
 
 generator client {
   provider = "prisma-client-js"
@@ -13,25 +11,72 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+// ============================================
+// BETTER AUTH MODELS
+// ============================================
+
 model User {
-  id            String    @id
+  id            String    @id @default(cuid())
   name          String
-  email         String
+  email         String    @unique
   emailVerified Boolean   @default(false)
   image         String?
-  createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @default(now()) @updatedAt
+  
+  // Better Auth relations
   sessions      Session[]
   accounts      Account[]
+  
+  // ============================================
+  // AI BRAND KIT - User Extensions
+  // ============================================
+  
+  // Roles & Access
+  role          Role       @default(USER)
 
-  @@unique([email])
+  // Current Plan
+  plan          PlanType    @default(FREE)
+  planStatus    PlanStatus  @default(ACTIVE)
+
+  // Credits
+  credits         Int   @default(20)
+  lifetimeCredits Int   @default(0)
+
+  // Subscription tracking
+  subscriptionProvider   SubscriptionProvider?
+  subscriptionId         String?   @unique
+  subscriptionStatus     String?
+  currentPeriodStart     DateTime?
+  currentPeriodEnd       DateTime?
+  cancelAtPeriodEnd      Boolean   @default(false)
+
+  // Stripe
+  stripeCustomerId       String?   @unique
+  stripePriceId          String?
+
+  // Lemon Squeezy
+  lemonSqueezyCustomerId String?   @unique
+  lemonSqueezyVariantId  String?
+
+  // AI Brand Kit Relations
+  projects      BrandProject[]
+  assets        BrandAsset[]
+  creditHistory CreditTransaction[]
+  purchases     Purchase[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @default(now()) @updatedAt
+
+  @@index([email])
+  @@index([plan])
+  @@index([stripeCustomerId])
+  @@index([lemonSqueezyCustomerId])
   @@map("user")
 }
 
 model Session {
-  id        String   @id
+  id        String   @id @default(cuid())
   expiresAt DateTime
-  token     String
+  token     String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   ipAddress String?
@@ -39,12 +84,11 @@ model Session {
   userId    String
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
 
-  @@unique([token])
   @@map("session")
 }
 
 model Account {
-  id                    String    @id
+  id                    String    @id @default(cuid())
   accountId             String
   providerId            String
   userId                String
@@ -63,7 +107,7 @@ model Account {
 }
 
 model Verification {
-  id         String   @id
+  id         String   @id @default(cuid())
   identifier String
   value      String
   expiresAt  DateTime
@@ -71,4 +115,236 @@ model Verification {
   updatedAt  DateTime @default(now()) @updatedAt
 
   @@map("verification")
+}
+
+// ============================================
+// ENUMS
+// ============================================
+
+enum Role {
+  USER
+  ADMIN
+}
+
+enum PlanType {
+  FREE    
+  PRO     
+  BUSINESS 
+}
+
+enum PlanStatus {
+  ACTIVE
+  PAST_DUE
+  CANCELED
+  TRIALING
+  PAUSED
+}
+
+enum SubscriptionProvider {
+  STRIPE
+  LEMONSQUEEZY
+}
+
+// ============================================
+// CREDITS SYSTEM
+// ============================================
+
+model CreditTransaction {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  transactionGroupId String?
+
+  type        CreditTransactionType
+  amount      Int
+  balance     Int
+
+  reason      String
+  description String?
+
+  assetId     String?
+  asset       BrandAsset? @relation(fields: [assetId], references: [id])
+
+  purchaseId  String?
+  purchase    Purchase? @relation(fields: [purchaseId], references: [id])
+
+  metadata    Json?
+
+  createdAt   DateTime @default(now())
+
+  @@index([userId, createdAt])
+  @@index([type])
+}
+
+enum CreditTransactionType {
+  DEDUCTION
+  REFUND
+  PURCHASE
+  SUBSCRIPTION
+  BONUS
+  ADMIN_ADJUSTMENT
+}
+
+// ============================================
+// PURCHASES
+// ============================================
+
+model Purchase {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type        PurchaseType
+  provider    SubscriptionProvider
+
+  plan        PlanType?
+  credits     Int?
+
+  amount      Int
+  currency    String       @default("usd")
+
+  providerCustomerId     String
+  providerPaymentId      String
+  providerSubscriptionId String?
+  providerProductId      String?
+
+  status      PurchaseStatus
+
+  metadata    Json?
+
+  creditTransactions CreditTransaction[]
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([provider, providerPaymentId])
+  @@index([userId])
+  @@index([provider])
+  @@index([status])
+}
+
+enum PurchaseType {
+  SUBSCRIPTION
+  CREDIT_PACK
+  UPGRADE
+}
+
+enum PurchaseStatus {
+  PENDING
+  COMPLETED
+  FAILED
+  REFUNDED
+  CANCELED
+}
+
+// ============================================
+// BRAND PROJECTS
+// ============================================
+
+model BrandProject {
+  id          String   @id @default(cuid())
+  userId      String
+  user        User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  name             String
+  businessType     String
+  industry         String
+  targetAudience   String?
+  brandVibe        String[]
+  description      String?
+
+  assets      BrandAsset[]
+
+  isPublic    Boolean  @default(false)
+  isFavorite  Boolean  @default(false)
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@index([userId, createdAt])
+}
+
+// ============================================
+// GENERATED ASSETS
+// ============================================
+
+model BrandAsset {
+  id          String       @id @default(cuid())
+  projectId   String?
+  project     BrandProject? @relation(fields: [projectId], references: [id], onDelete: Cascade)
+
+  userId      String
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  type        AssetType
+  data        Json
+
+  url              String?
+  storageProvider  String   @default("vercel-blob")
+  storagePath      String?
+  fileSize         Int?
+  mimeType         String?
+
+  prompt           String?
+  creditsUsed      Int
+  generationTime   Int?
+  model            String?
+
+  status           AssetStatus @default(COMPLETED)
+  errorMessage     String?
+
+  isFavorite  Boolean @default(false)
+  downloads   Int     @default(0)
+
+  creditTransactions CreditTransaction[]
+
+  createdAt   DateTime @default(now())
+
+  @@index([projectId])
+  @@index([userId, createdAt])
+  @@index([type])
+  @@index([status])
+}
+
+enum AssetType {
+  LOGO
+  AVATAR
+  BRAND_NAME
+  TAGLINE
+  COLOR_PALETTE
+  BRAND_VOICE
+}
+
+enum AssetStatus {
+  PENDING
+  PROCESSING
+  COMPLETED
+  FAILED
+}
+
+// ============================================
+// PLAN LIMITS & FEATURES
+// ============================================
+
+model PlanLimit {
+  id          String   @id @default(cuid())
+  plan        PlanType
+  interval    PlanInterval @default(MONTHLY)
+
+  monthlyCredits       Int
+  maxProjectsPerMonth  Int?
+  maxAssetsPerProject  Int?
+
+  features    Json
+
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  @@unique([plan, interval])
+}
+
+enum PlanInterval {
+  MONTHLY
+  YEARLY
 }

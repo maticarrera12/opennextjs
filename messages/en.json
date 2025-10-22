@@ -68,5 +68,66 @@
       "footer": "Once verified, you'll be automatically signed in.",
       "success": "Verification email sent!"
     }
+  },
+  "pricing": {
+    "title": "Simple, Transparent Pricing",
+    "subtitle": "Choose the plan that fits your needs",
+    "interval": {
+      "monthly": "Monthly",
+      "annual": "Annual",
+      "savePercent": "Save 16%"
+    },
+    "developmentMode": {
+      "title": "Development Mode:",
+      "message": "Payments are disabled. Configure your Stripe/Lemon Squeezy API keys in production to enable real payments."
+    },
+    "plans": {
+      "free": {
+        "name": "Free",
+        "features": {
+          "credits": "credits per month",
+          "rollover": "rollover enabled"
+        }
+      },
+      "pro": {
+        "name": "Pro"
+      },
+      "business": {
+        "name": "Business"
+      }
+    },
+    "perMonth": "/month",
+    "billedAnnually": "Billed {price} annually",
+    "buttons": {
+      "getStarted": "Get Started",
+      "subscribe": "Subscribe",
+      "configureToEnable": "Configure to Enable",
+      "choosePlan": "Choose Plan",
+      "buyCredits": "Buy Credits",
+      "currentPlan": "Current Plan"
+    },
+    "notConfigured": "Not configured - add price IDs to .env",
+    "creditPacks": {
+      "title": "Or Buy Credit Packs",
+      "credits": "credits",
+      "savePercent": "Save {percent}%",
+      "buyNow": "Buy Now",
+      "features": {
+        "addedInstantly": "credits added instantly",
+        "noExpiration": "No expiration date",
+        "oneTimePayment": "One-time payment",
+        "useAnytime": "Use anytime"
+      }
+    },
+    "alerts": {
+      "devMode": "Development mode: Configure payment provider to enable subscriptions",
+      "notConfigured": "This plan is not configured yet. Please add price IDs in your .env file",
+      "devModePurchase": "Development mode: Configure payment provider to enable purchases"
+    },
+    "paymentModal": {
+      "title": "Choose Payment Method",
+      "subtitle": "Select how you'd like to pay",
+      "comingSoon": "Coming Soon"
+    }
   }
 }

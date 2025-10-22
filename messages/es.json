@@ -68,5 +68,66 @@
       "footer": "Una vez verificado, iniciarás sesión automáticamente.",
       "success": "¡Correo de verificación enviado!"
     }
+  },
+  "pricing": {
+    "title": "Precios Simples y Transparentes",
+    "subtitle": "Elige el plan que se ajuste a tus necesidades",
+    "interval": {
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "savePercent": "Ahorra 16%"
+    },
+    "developmentMode": {
+      "title": "Modo de Desarrollo:",
+      "message": "Los pagos están deshabilitados. Configura tus claves API de Stripe/Lemon Squeezy en producción para habilitar pagos reales."
+    },
+    "plans": {
+      "free": {
+        "name": "Gratis",
+        "features": {
+          "credits": "créditos por mes",
+          "rollover": "renovación habilitada"
+        }
+      },
+      "pro": {
+        "name": "Pro"
+      },
+      "business": {
+        "name": "Empresarial"
+      }
+    },
+    "perMonth": "/mes",
+    "billedAnnually": "Facturado {price} anualmente",
+    "buttons": {
+      "getStarted": "Comenzar",
+      "subscribe": "Suscribirse",
+      "configureToEnable": "Configurar para Habilitar",
+      "choosePlan": "Elegir Plan",
+      "buyCredits": "Comprar Créditos",
+      "currentPlan": "Plan Actual"
+    },
+    "notConfigured": "No configurado - agrega price IDs en .env",
+    "creditPacks": {
+      "title": "O Compra Paquetes de Créditos",
+      "credits": "créditos",
+      "savePercent": "Ahorra {percent}%",
+      "buyNow": "Comprar Ahora",
+      "features": {
+        "addedInstantly": "créditos añadidos instantáneamente",
+        "noExpiration": "Sin fecha de expiración",
+        "oneTimePayment": "Pago único",
+        "useAnytime": "Usa cuando quieras"
+      }
+    },
+    "alerts": {
+      "devMode": "Modo de desarrollo: Configura el proveedor de pagos para habilitar suscripciones",
+      "notConfigured": "Este plan no está configurado aún. Por favor agrega los price IDs en tu archivo .env",
+      "devModePurchase": "Modo de desarrollo: Configura el proveedor de pagos para habilitar compras"
+    },
+    "paymentModal": {
+      "title": "Elige Método de Pago",
+      "subtitle": "Selecciona cómo deseas pagar",
+      "comingSoon": "Próximamente"
+    }
   }
 }
