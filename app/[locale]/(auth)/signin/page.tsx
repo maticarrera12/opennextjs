@@ -23,7 +23,6 @@ import { LoadingSwap } from "@/components/ui/loading-swap";
 import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
 import { Separator } from "@/components/ui/separator";
-import ThemeToggle from "@/components/theme-toggle";
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);

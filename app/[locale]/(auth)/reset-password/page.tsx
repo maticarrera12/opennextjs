@@ -24,7 +24,6 @@ import Link from "next/link";
 import { ResetPasswordInput, resetPasswordSchema } from "@/lib/schemas";
 import { authClient } from "@/lib/auth-client";
 import PasswordInput from "@/components/password-input";
-import ThemeToggle from "@/components/theme-toggle";
 import { useTranslations } from "next-intl";
 
 export default function ResetPasswordPage() {

@@ -23,7 +23,6 @@ import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
 import PasswordInput from "@/components/password-input";
 import { Separator } from "@/components/ui/separator";
-import ThemeToggle from "@/components/theme-toggle";
 
 export default function SignUpPage() {
   const [error, setError] = useState("");

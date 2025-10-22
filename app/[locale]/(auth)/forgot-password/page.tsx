@@ -21,7 +21,6 @@ import {
   ForgotPasswordInput,
 } from "@/lib/schemas/auth.schema";
 import { useRouter } from "next/navigation";
-import ThemeToggle from "@/components/theme-toggle";
 
 export function ForgotPassword() {
   const router = useRouter();
