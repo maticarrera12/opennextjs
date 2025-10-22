@@ -5,6 +5,7 @@ import crypto from "crypto";
 import { prisma } from "@/lib/prisma";
 import { CreditService } from "@/lib/credits";
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
+import { PlanStatus } from "@prisma/client";
 
 const webhookSecret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET!;
 
@@ -75,6 +76,7 @@ function verifySignature(body: string, signature: string | null): boolean {
   return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(digest));
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionUpdate(data: any) {
   const customerId = data.attributes.customer_id.toString();
   const variantId = data.attributes.variant_id.toString();
@@ -148,6 +150,7 @@ async function handleLSSubscriptionUpdate(data: any) {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionCanceled(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -166,6 +169,7 @@ async function handleLSSubscriptionCanceled(data: any) {
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionResumed(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -179,12 +183,13 @@ async function handleLSSubscriptionResumed(data: any) {
     where: { id: user.id },
     data: {
       cancelAtPeriodEnd: false,
-      planStatus: "ACTIVE",
+      planStatus: PlanStatus.ACTIVE,
       subscriptionStatus: "active",
     },
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionExpired(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -198,12 +203,13 @@ async function handleLSSubscriptionExpired(data: any) {
     where: { id: user.id },
     data: {
       plan: "FREE",
-      planStatus: "CANCELED",
+      planStatus: PlanStatus.CANCELED,
       subscriptionStatus: "expired",
     },
   });
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSOrderCreated(data: any) {
   const customerId = data.attributes.customer_id.toString();
   const variantId = data.attributes.first_order_item.variant_id.toString();
@@ -252,6 +258,7 @@ async function handleLSOrderCreated(data: any) {
   }
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSPaymentSuccess(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -265,6 +272,7 @@ async function handleLSPaymentSuccess(data: any) {
   await CreditService.monthlyReset(user.id);
 }
 
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSPaymentFailed(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -277,24 +285,24 @@ async function handleLSPaymentFailed(data: any) {
   await prisma.user.update({
     where: { id: user.id },
     data: {
-      planStatus: "PAST_DUE",
+      planStatus: PlanStatus.PAST_DUE,
       subscriptionStatus: "past_due",
     },
   });
 }
 
-function mapLSStatus(status: string): string {
-  const mapping: Record<string, string> = {
-    on_trial: "TRIALING",
-    active: "ACTIVE",
-    paused: "PAUSED",
-    past_due: "PAST_DUE",
-    unpaid: "PAST_DUE",
-    cancelled: "CANCELED",
-    expired: "CANCELED",
+function mapLSStatus(status: string): PlanStatus {
+  const mapping: Record<string, PlanStatus> = {
+    on_trial: PlanStatus.TRIALING,
+    active: PlanStatus.ACTIVE,
+    paused: PlanStatus.PAUSED,
+    past_due: PlanStatus.PAST_DUE,
+    unpaid: PlanStatus.PAST_DUE,
+    cancelled: PlanStatus.CANCELED,
+    expired: PlanStatus.CANCELED,
   };
 
-  return mapping[status] || "ACTIVE";
+  return mapping[status] || PlanStatus.ACTIVE;
 }
 
 function getPlanFromVariantId(variantId: string): keyof typeof PLANS | null {

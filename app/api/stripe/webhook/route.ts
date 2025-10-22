@@ -149,6 +149,7 @@ async function handleSubscriptionUpdate(
   console.log("💾 Updating user in database...");
 
   // Use available date fields from Stripe subscription
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const subscriptionAny = subscription as any;
 
   // Stripe subscriptions have these fields:
@@ -184,6 +185,7 @@ async function handleSubscriptionUpdate(
   console.log("   Cancel at period end:", cancelAtPeriod);
 
   // Build update data object, only including valid dates
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateData: any = {
     plan,
     planStatus: mapStripeStatus(subscription.status),
