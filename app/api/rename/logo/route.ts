@@ -4,9 +4,9 @@ import { NextRequest, NextResponse } from "next/server";
 import { auth } from "@/lib/auth";
 import { CreditService } from "@/lib/credits";
 import { CREDIT_COSTS, PLAN_FEATURES } from "@/lib/credits/constants";
-import { openai } from "@/lib/openai";
-import { uploadImage } from "@/lib/storage";
 import { prisma } from "@/lib/prisma";
+import { uploadImage } from "@/lib/storage";
+import { openai } from "@/lib/openai";
 
 export async function POST(req: NextRequest) {
   try {
@@ -89,6 +89,10 @@ export async function POST(req: NextRequest) {
 
       const generationTime = Date.now() - startTime;
 
+      if (!image.data?.[0]?.url) {
+        throw new Error("No image generated");
+      }
+
       // 8. Download and upload to storage
       const response = await fetch(image.data[0].url);
       const blob = await response.blob();
@@ -107,7 +111,7 @@ export async function POST(req: NextRequest) {
           mimeType: "image/png",
           generationTime,
           data: {
-            ...(asset.data as any),
+            ...(asset.data as Record<string, unknown>),
             revisedPrompt: image.data[0].revised_prompt,
           },
         },
