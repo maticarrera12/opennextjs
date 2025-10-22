@@ -1,7 +1,7 @@
 // lib/credits/index.ts
 import { prisma } from "../prisma";
-import { CREDIT_COSTS, PLANS } from "./constants";
-import type { PlanType, CreditTransactionType } from "@prisma/client";
+import { PLANS } from "./constants";
+import type { CreditTransactionType, Prisma } from "@prisma/client";
 
 export class CreditService {
   // Check if user has enough credits
@@ -31,7 +31,7 @@ export class CreditService {
     reason: string;
     description?: string;
     assetId?: string;
-    metadata?: any;
+    metadata?: Prisma.InputJsonValue;
   }): Promise<{ success: boolean; newBalance: number; error?: string }> {
     const { userId, amount, reason, description, assetId, metadata } = params;
 
@@ -161,8 +161,8 @@ export class CreditService {
       select: { plan: true, credits: true },
     });
 
-    if (!user || user.plan === "FREE" || user.plan === "CREDIT_PACK") {
-      return; // Free users and credit pack users don't get monthly resets
+    if (!user || user.plan === "FREE") {
+      return; // Free users don't get monthly resets
     }
 
     const planConfig = PLANS[user.plan];
