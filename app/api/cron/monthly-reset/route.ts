@@ -27,6 +27,16 @@ export async function GET(req: NextRequest) {
     for (const user of usersToReset) {
       try {
         await CreditService.monthlyReset(user.id);
+        
+        // Update currentPeriodEnd to avoid processing same user again
+        const nextPeriod = new Date(now);
+        nextPeriod.setMonth(nextPeriod.getMonth() + 1);
+        
+        await prisma.user.update({
+          where: { id: user.id },
+          data: { currentPeriodEnd: nextPeriod },
+        });
+        
         console.log(`Reset credits for user ${user.email}`);
       } catch (error) {
         console.error(`Failed to reset credits for ${user.email}:`, error);
