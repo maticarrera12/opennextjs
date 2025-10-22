@@ -5,6 +5,15 @@ import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Modal } from "@/components/ui/modal";
 import { PaymentMethodSelector } from "./payment-method-selector";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardFooter,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
+import { Check } from "lucide-react";
 
 interface PlanCardProps {
   plan: (typeof PLANS)[keyof typeof PLANS];
@@ -127,23 +136,23 @@ export function PricingCards() {
   };
 
   return (
-    <div className="w-full py-16">
+    <div className="w-full py-16 bg-background">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-900 mb-4">
+          <h2 className="text-4xl font-bold text-foreground mb-4">
             {t("title")}
           </h2>
-          <p className="text-xl text-gray-600">{t("subtitle")}</p>
+          <p className="text-xl text-muted-foreground">{t("subtitle")}</p>
 
           {/* Toggle Monthly/Annual */}
           <div className="mt-8 flex justify-center">
-            <div className="inline-flex bg-gray-100 rounded-lg p-1">
+            <div className="inline-flex bg-muted rounded-lg p-1">
               <button
                 onClick={() => setInterval("monthly")}
                 className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
                   interval === "monthly"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {t("interval.monthly")}
@@ -152,12 +161,12 @@ export function PricingCards() {
                 onClick={() => setInterval("annual")}
                 className={`px-6 py-2 rounded-md text-sm font-medium transition-all ${
                   interval === "annual"
-                    ? "bg-white text-gray-900 shadow-sm"
-                    : "text-gray-600 hover:text-gray-900"
+                    ? "bg-background text-foreground shadow-sm"
+                    : "text-muted-foreground hover:text-foreground"
                 }`}
               >
                 {t("interval.annual")}
-                <span className="ml-2 text-green-600 text-xs font-semibold">
+                <span className="ml-2 text-primary text-xs font-semibold">
                   {t("interval.savePercent")}
                 </span>
               </button>
@@ -167,8 +176,8 @@ export function PricingCards() {
 
         {/* Development Mode Warning */}
         {isDevelopment && (
-          <div className="mb-8 p-4 bg-yellow-50 border border-yellow-200 rounded-lg">
-            <p className="text-sm text-yellow-800 text-center">
+          <div className="mb-8 p-4 bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 rounded-lg">
+            <p className="text-sm text-yellow-800 dark:text-yellow-200 text-center">
               ⚠️ <strong>{t("developmentMode.title")}</strong>{" "}
               {t("developmentMode.message")}
             </p>
@@ -192,7 +201,7 @@ export function PricingCards() {
 
         {/* Credit Packs Section */}
         <div className="mt-20">
-          <h3 className="text-2xl font-bold text-center mb-8">
+          <h3 className="text-2xl font-bold text-foreground text-center mb-8">
             {t("creditPacks.title")}
           </h3>
           <div className="grid grid-cols-1 lg:grid-cols-1 gap-6 max-w-md mx-auto">
@@ -238,201 +247,135 @@ function PlanCard({
       ? Math.round(plan.price.annual / 12)
       : price;
 
+  const isCurrentPlan = currentUserPlan?.toUpperCase() === plan.id.toUpperCase();
+
   return (
-    <div
-      className={`relative border-2 rounded-lg p-6 flex flex-col bg-white ${
-        isPopular ? "border-blue-500 shadow-lg" : "border-gray-200"
+    <Card
+      className={`relative ${
+        isPopular ? "border-primary shadow-lg ring-2 ring-primary/20" : ""
       }`}
     >
       {isPopular && (
-        <div className="absolute -top-4 left-1/2 -translate-x-1/2 bg-blue-500 text-white px-4 py-1 rounded-full text-sm font-semibold">
+        <div className="absolute -top-3 left-1/2 -translate-x-1/2 bg-primary text-primary-foreground px-4 py-1 rounded-full text-xs font-semibold">
           Most Popular
         </div>
       )}
 
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-gray-900">{plan.name}</h3>
+      <CardHeader className="text-center pb-4">
+        <CardTitle className="text-2xl">{plan.name}</CardTitle>
         <div className="mt-4 flex items-baseline justify-center">
-          <span className="text-5xl font-bold text-gray-900">
+          <span className="text-5xl font-bold text-foreground">
             ${pricePerMonth}
           </span>
-          <span className="ml-2 text-gray-500">{t("perMonth")}</span>
+          <span className="ml-2 text-muted-foreground">{t("perMonth")}</span>
         </div>
         {interval === "annual" && (
-          <p className="mt-1 text-sm text-gray-500">
+          <CardDescription className="mt-1">
             {t("billedAnnually", { price: `$${price}` })}
-          </p>
+          </CardDescription>
         )}
-      </div>
+      </CardHeader>
 
-      {/* Features */}
-      <ul className="mt-8 space-y-3 flex-grow">
-        <li className="flex items-center gap-2">
-          <svg
-            className="h-4 w-4 text-green-500 flex-shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          <span className="text-sm text-gray-700">
-            <strong>{plan.credits.monthly}</strong>{" "}
-            {t("plans.free.features.credits")}
-            {plan.credits.rollover && ` (${t("plans.free.features.rollover")})`}
-          </span>
-        </li>
-        {plan.features.map((feature: string, idx: number) => (
-          <li key={idx} className="flex items-center gap-2">
-            <svg
-              className="h-4 w-4 text-green-500 flex-shrink-0"
-              fill="none"
-              viewBox="0 0 24 24"
-              stroke="currentColor"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth={2}
-                d="M5 13l4 4L19 7"
-              />
-            </svg>
-            <span className="text-sm text-gray-700">{feature}</span>
+      <CardContent className="flex-grow">
+        <ul className="space-y-3">
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-primary flex-shrink-0" />
+            <span className="text-sm text-foreground">
+              <strong>{plan.credits.monthly}</strong>{" "}
+              {t("plans.free.features.credits")}
+              {plan.credits.rollover && ` (${t("plans.free.features.rollover")})`}
+            </span>
           </li>
-        ))}
-      </ul>
+          {plan.features.map((feature: string, idx: number) => (
+            <li key={idx} className="flex items-center gap-2">
+              <Check className="h-4 w-4 text-primary flex-shrink-0" />
+              <span className="text-sm text-foreground">{feature}</span>
+            </li>
+          ))}
+        </ul>
+      </CardContent>
 
-      {/* CTA */}
-      <button
-        onClick={onChoosePlan}
-        disabled={currentUserPlan?.toUpperCase() === plan.id.toUpperCase()}
-        className={`mt-8 w-full py-3 rounded-lg font-semibold transition ${
-          currentUserPlan?.toUpperCase() === plan.id.toUpperCase()
-            ? "bg-green-100 text-green-700 cursor-not-allowed"
-            : isPopular
-              ? "bg-blue-600 text-white hover:bg-blue-700"
-              : "bg-gray-100 text-gray-900 hover:bg-gray-200"
-        }`}
-      >
-        {currentUserPlan?.toUpperCase() === plan.id.toUpperCase()
-          ? t("buttons.currentPlan")
-          : plan.id === "free"
+      <CardFooter>
+        <button
+          onClick={onChoosePlan}
+          disabled={isCurrentPlan}
+          className={`w-full py-3 rounded-lg font-semibold transition ${
+            isCurrentPlan
+              ? "bg-primary/10 text-primary cursor-not-allowed border border-primary/20"
+              : isPopular
+              ? "bg-primary text-primary-foreground hover:bg-primary/90"
+              : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+          }`}
+        >
+          {isCurrentPlan
+            ? t("buttons.currentPlan")
+            : plan.id === "free"
             ? t("buttons.getStarted")
             : t("buttons.choosePlan")}
-      </button>
-    </div>
+        </button>
+      </CardFooter>
+    </Card>
   );
 }
 
 function CreditPackCard({ pack, t, onBuyCredits }: CreditPackCardProps) {
   return (
-    <div className="relative border-2 border-gray-200 rounded-lg p-6 flex flex-col bg-white">
-      <div className="text-center">
-        <h3 className="text-2xl font-bold text-gray-900">{pack.name}</h3>
+    <Card>
+      <CardHeader className="text-center pb-4">
+        <CardTitle className="text-2xl">{pack.name}</CardTitle>
         <div className="mt-4 flex items-baseline justify-center">
-          <span className="text-5xl font-bold text-gray-900">
+          <span className="text-5xl font-bold text-foreground">
             ${pack.price}
           </span>
         </div>
-        <p className="mt-2 text-sm text-gray-500">
+        <CardDescription className="mt-2">
           {pack.credits} {t("creditPacks.credits")}
-        </p>
+        </CardDescription>
         {pack.savings > 0 && (
-          <p className="mt-1 text-sm text-green-600 font-semibold">
+          <p className="mt-1 text-sm text-primary font-semibold">
             {t("creditPacks.savePercent", { percent: pack.savings })}
           </p>
         )}
-      </div>
+      </CardHeader>
 
-      {/* Features/Benefits */}
-      <ul className="mt-8 space-y-3 flex-grow">
-        <li className="flex items-center gap-2">
-          <svg
-            className="h-4 w-4 text-green-500 flex-shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          <span className="text-sm text-gray-700">
-            <strong>{pack.credits}</strong>{" "}
-            {t("creditPacks.features.addedInstantly")}
-          </span>
-        </li>
-        <li className="flex items-center gap-2">
-          <svg
-            className="h-4 w-4 text-green-500 flex-shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          <span className="text-sm text-gray-700">
-            {t("creditPacks.features.noExpiration")}
-          </span>
-        </li>
-        <li className="flex items-center gap-2">
-          <svg
-            className="h-4 w-4 text-green-500 flex-shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          <span className="text-sm text-gray-700">
-            {t("creditPacks.features.oneTimePayment")}
-          </span>
-        </li>
-        <li className="flex items-center gap-2">
-          <svg
-            className="h-4 w-4 text-green-500 flex-shrink-0"
-            fill="none"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              strokeWidth={2}
-              d="M5 13l4 4L19 7"
-            />
-          </svg>
-          <span className="text-sm text-gray-700">
-            {t("creditPacks.features.useAnytime")}
-          </span>
-        </li>
-      </ul>
+      <CardContent className="flex-grow">
+        <ul className="space-y-3">
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-primary flex-shrink-0" />
+            <span className="text-sm text-foreground">
+              <strong>{pack.credits}</strong>{" "}
+              {t("creditPacks.features.addedInstantly")}
+            </span>
+          </li>
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-primary flex-shrink-0" />
+            <span className="text-sm text-foreground">
+              {t("creditPacks.features.noExpiration")}
+            </span>
+          </li>
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-primary flex-shrink-0" />
+            <span className="text-sm text-foreground">
+              {t("creditPacks.features.oneTimePayment")}
+            </span>
+          </li>
+          <li className="flex items-center gap-2">
+            <Check className="h-4 w-4 text-primary flex-shrink-0" />
+            <span className="text-sm text-foreground">
+              {t("creditPacks.features.useAnytime")}
+            </span>
+          </li>
+        </ul>
+      </CardContent>
 
-      {/* CTA */}
-      <button
-        onClick={onBuyCredits}
-        className="mt-8 w-full py-3 rounded-lg font-semibold transition bg-gray-100 text-gray-900 hover:bg-gray-200"
-      >
-        {t("buttons.buyCredits")}
-      </button>
-    </div>
+      <CardFooter>
+        <button
+          onClick={onBuyCredits}
+          className="w-full py-3 rounded-lg font-semibold transition bg-secondary text-secondary-foreground hover:bg-secondary/80"
+        >
+          {t("buttons.buyCredits")}
+        </button>
+      </CardFooter>
+    </Card>
   );
 }
