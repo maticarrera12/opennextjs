@@ -12,5 +12,5 @@ jobs:
     steps:
       - name: Call Monthly Reset Endpoint
         run: |
-          curl -X GET "${{ secrets.APP_URL }}/api/cron/monthly-reset" \
+          curl -X GET "${{ secrets.NEXT_PUBLIC_APP_URL }}/api/cron/monthly-reset" \
             -H "Authorization: Bearer ${{ secrets.CRON_SECRET }}"
