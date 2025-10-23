@@ -70,14 +70,14 @@ export default function SignUpPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-page px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-primary">{t("title")}</h1>
-          <p className="mt-2 text-sm text-secondary">{t("subtitle")}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
 
-        <div className="bg-card rounded-xl shadow-sm border border-subtle p-8">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-8">
           {/* Social Login Buttons */}
           <div className="grid grid-cols-2 gap-3">
             <SocialAuthButtons />
@@ -88,7 +88,7 @@ export default function SignUpPage() {
               <Separator />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-indigo-50 dark:bg-indigo-950 text-muted-foreground">
+              <span className="px-2 bg-card text-muted-foreground">
                 {t("orContinueWith")}
               </span>
             </div>
@@ -140,7 +140,7 @@ export default function SignUpPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <LoadingSwap isLoading={isSubmitting}>
                   {t("submit")}
@@ -149,11 +149,11 @@ export default function SignUpPage() {
             </form>
           </Form>
 
-          <p className="mt-6 text-center text-sm text-tertiary">
+          <p className="mt-6 text-center text-sm text-muted-foreground">
             {t("haveAccount")}{" "}
             <Link
               href="/signin"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              className="font-medium text-primary hover:text-primary/80"
             >
               {t("signIn")}
             </Link>

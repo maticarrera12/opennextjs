@@ -66,17 +66,17 @@ export default function ResetPasswordPage() {
 
   if (token == null || error != null) {
     return (
-      <div className="min-h-screen flex items-center justify-center bg-page px-4">
-        <Card className="w-full max-w-md mx-auto bg-card border-subtle">
+      <div className="min-h-screen flex items-center justify-center bg-background px-4">
+        <Card className="w-full max-w-md mx-auto bg-card border-border">
           <CardHeader>
             <CardTitle className="text-primary">Invalid Reset Link</CardTitle>
-            <CardDescription className="text-secondary">
+            <CardDescription className="text-muted-foreground">
               The password reset link is invalid or has expired.
             </CardDescription>
           </CardHeader>
           <CardContent>
             <Button
-              className="w-full bg-indigo-600 hover:bg-indigo-700"
+              className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
               asChild
             >
               <Link href="/signin">Back to Login</Link>
@@ -88,11 +88,11 @@ export default function ResetPasswordPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-page px-4">
-      <Card className="w-full max-w-md mx-auto bg-card border-subtle">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <Card className="w-full max-w-md mx-auto bg-card border-border">
         <CardHeader>
           <CardTitle className="text-2xl text-primary">{t("title")}</CardTitle>
-          <CardDescription className="text-secondary">
+          <CardDescription className="text-muted-foreground">
             {t("subtitle")}
           </CardDescription>
         </CardHeader>
@@ -118,7 +118,7 @@ export default function ResetPasswordPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="flex-1 w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+                className="flex-1 w-full bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <LoadingSwap isLoading={isSubmitting}>
                   {t("submit")}

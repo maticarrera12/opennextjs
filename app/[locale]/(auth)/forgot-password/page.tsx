@@ -75,7 +75,6 @@ export function ForgotPassword() {
           <Button
             type="button"
             variant="outline"
-            className="bg-indigo-50 dark:bg-indigo-950 text-indigo-900 dark:text-indigo-50 border-indigo-200 dark:border-indigo-800 hover:bg-indigo-100 dark:hover:bg-indigo-900 hover:text-indigo-900 dark:hover:text-indigo-50"
             onClick={() => router.push("/signin")}
           >
             {t("backToSignIn")}
@@ -83,7 +82,7 @@ export function ForgotPassword() {
           <Button
             type="submit"
             disabled={isSubmitting}
-            className="flex-1 bg-indigo-600 hover:bg-indigo-700 text-white"
+            className="flex-1 bg-primary hover:bg-primary/90 text-primary-foreground"
           >
             <LoadingSwap isLoading={isSubmitting}>{t("submit")}</LoadingSwap>
           </Button>
@@ -97,14 +96,14 @@ export default function ForgotPasswordPage() {
   const t = useTranslations("auth.forgotPassword");
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-page px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-primary">{t("title")}</h1>
-          <p className="mt-2 text-sm text-secondary">{t("subtitle")}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
 
-        <div className="bg-card rounded-xl shadow-sm border border-subtle p-8">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-8">
           <ForgotPassword />
         </div>
       </div>

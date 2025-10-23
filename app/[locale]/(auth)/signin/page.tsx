@@ -23,6 +23,7 @@ import { LoadingSwap } from "@/components/ui/loading-swap";
 import SocialAuthButtons from "@/components/social-auth-buttons";
 import { authClient } from "@/lib/auth-client";
 import { Separator } from "@/components/ui/separator";
+import ThemeToggle from "@/components/theme-toggle";
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -69,14 +70,14 @@ export default function SignInPage() {
   }, [router]);
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-page px-4">
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="max-w-md w-full space-y-8">
         <div className="text-center">
           <h1 className="text-3xl font-bold text-primary">{t("title")}</h1>
-          <p className="mt-2 text-sm text-secondary">{t("subtitle")}</p>
+          <p className="mt-2 text-sm text-muted-foreground">{t("subtitle")}</p>
         </div>
 
-        <div className="bg-card rounded-xl shadow-sm border border-subtle p-8">
+        <div className="bg-card rounded-xl shadow-sm border border-border p-8">
           {/* Social Login Buttons */}
           <div className="grid grid-cols-2 gap-3">
             <SocialAuthButtons />
@@ -87,7 +88,7 @@ export default function SignInPage() {
               <Separator />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-indigo-50 dark:bg-indigo-950 text-muted-foreground ">
+              <span className="px-2 bg-card text-muted-foreground">
                 {t("orContinueWith")}
               </span>
             </div>
@@ -158,11 +159,11 @@ export default function SignInPage() {
                     id="remember-me"
                     name="remember-me"
                     type="checkbox"
-                    className="h-4 w-4 text-indigo-600 focus:ring-indigo-500 border-slate-300 rounded cursor-pointer"
+                    className="h-4 w-4 text-primary focus:ring-primary border-border rounded cursor-pointer"
                   />
                   <label
                     htmlFor="remember-me"
-                    className="ml-2 block text-sm text-secondary cursor-pointer"
+                    className="ml-2 block text-sm text-foreground cursor-pointer"
                   >
                     Remember me
                   </label>
@@ -171,7 +172,7 @@ export default function SignInPage() {
                 <div className="text-sm">
                   <Link
                     href="/forgot-password"
-                    className="font-medium text-indigo-600 hover:text-indigo-500"
+                    className="font-medium text-primary hover:text-primary/80"
                   >
                     {t("forgotPassword")}
                   </Link>
@@ -181,7 +182,7 @@ export default function SignInPage() {
               <Button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-indigo-600 hover:bg-indigo-700 text-white"
+                className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
               >
                 <LoadingSwap isLoading={isSubmitting}>
                   {t("submit")}
@@ -190,17 +191,18 @@ export default function SignInPage() {
             </form>
           </Form>
 
-          <p className="mt-6 text-center text-sm text-tertiary">
+          <p className="mt-6 text-center text-sm text-muted-foreground">
             {t("noAccount")}{" "}
             <Link
               href="/signup"
-              className="font-medium text-indigo-600 hover:text-indigo-500"
+              className="font-medium text-primary hover:text-primary/80"
             >
               {t("signUp")}
             </Link>
           </p>
         </div>
       </div>
+      <ThemeToggle />
     </div>
   );
 }

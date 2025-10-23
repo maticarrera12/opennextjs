@@ -37,7 +37,7 @@ function EmailVerification({ email }: { email: string }) {
 
       <BetterAuthActionButton
         variant="outline"
-        className="w-full bg-indigo-500  text-white"
+        className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
         successMessage={t("success")}
         disabled={timeToNextResend > 0}
         action={() => {
@@ -62,12 +62,14 @@ export default function VerificationEmailPage() {
   const t = useTranslations("auth.verification");
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-      <div className="max-w-md mx-auto p-6 bg-white rounded-lg shadow-md">
-        <h1 className="text-2xl font-bold mb-4">{t("title")}</h1>
+    <div className="min-h-screen flex items-center justify-center bg-background px-4">
+      <div className="max-w-md w-full p-8 bg-card rounded-xl shadow-sm border border-border">
+        <h1 className="text-2xl font-bold mb-4 text-foreground">
+          {t("title")}
+        </h1>
         <EmailVerification email={email} />
         <div className="text-center mt-4">
-          <p className="text-sm text-gray-500">{t("footer")}</p>
+          <p className="text-sm text-muted-foreground">{t("footer")}</p>
         </div>
       </div>
     </div>

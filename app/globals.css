@@ -79,37 +79,37 @@
 }
 
 .dark {
-  --background: oklch(0.15 0.05 264);
+  --background: oklch(0.12 0.04 264);
   --foreground: oklch(0.95 0.02 264);
-  --card: oklch(0.12 0.04 264);
+  --card: oklch(0.18 0.05 264);
   --card-foreground: oklch(0.95 0.02 264);
-  --popover: oklch(0.12 0.04 264);
+  --popover: oklch(0.18 0.05 264);
   --popover-foreground: oklch(0.95 0.02 264);
   --primary: oklch(0.65 0.18 264);
-  --primary-foreground: oklch(0.15 0.05 264);
-  --secondary: oklch(0.2 0.05 264);
+  --primary-foreground: oklch(0.12 0.04 264);
+  --secondary: oklch(0.22 0.06 264);
   --secondary-foreground: oklch(0.95 0.02 264);
-  --muted: oklch(0.18 0.04 264);
+  --muted: oklch(0.25 0.06 264);
   --muted-foreground: oklch(0.65 0.08 264);
-  --accent: oklch(0.22 0.06 264);
+  --accent: oklch(0.28 0.07 264);
   --accent-foreground: oklch(0.95 0.02 264);
   --destructive: oklch(0.704 0.191 22.216);
-  --border: oklch(0.25 0.05 264);
-  --input: oklch(0.25 0.05 264);
-  --ring: oklch(0.55 0.15 264);
+  --border: oklch(0.28 0.06 264);
+  --input: oklch(0.28 0.06 264);
+  --ring: oklch(0.65 0.18 264);
   --chart-1: oklch(0.488 0.243 264.376);
   --chart-2: oklch(0.696 0.17 162.48);
   --chart-3: oklch(0.769 0.188 70.08);
   --chart-4: oklch(0.627 0.265 303.9);
   --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.12 0.04 264);
+  --sidebar: oklch(0.15 0.04 264);
   --sidebar-foreground: oklch(0.95 0.02 264);
   --sidebar-primary: oklch(0.65 0.18 264);
-  --sidebar-primary-foreground: oklch(0.15 0.05 264);
-  --sidebar-accent: oklch(0.22 0.06 264);
+  --sidebar-primary-foreground: oklch(0.12 0.04 264);
+  --sidebar-accent: oklch(0.25 0.06 264);
   --sidebar-accent-foreground: oklch(0.95 0.02 264);
-  --sidebar-border: oklch(0.25 0.05 264);
-  --sidebar-ring: oklch(0.55 0.15 264);
+  --sidebar-border: oklch(0.28 0.06 264);
+  --sidebar-ring: oklch(0.65 0.18 264);
 }
 
 /* default shadcn theme
@@ -229,36 +229,5 @@
   }
   body {
     @apply bg-background text-foreground;
-  }
-}
-
-/* Custom Indigo-based Styles */
-@layer utilities {
-  /* Fondo de página con gradiente */
-  .bg-page {
-    @apply bg-gradient-to-br from-indigo-50 to-indigo-100 dark:from-indigo-950 dark:to-indigo-900;
-  }
-
-  /* Tarjeta con sombra */
-  .bg-card {
-    @apply bg-indigo-50 dark:bg-indigo-950 shadow-sm;
-  }
-
-  /* Textos */
-  .text-primary {
-    @apply text-indigo-900 dark:text-indigo-50;
-  }
-
-  .text-secondary {
-    @apply text-indigo-600 dark:text-indigo-300;
-  }
-
-  .text-tertiary {
-    @apply text-indigo-500 dark:text-indigo-400;
-  }
-
-  /* Bordes sutiles */
-  .border-subtle {
-    @apply border-indigo-200 dark:border-indigo-800;
   }
 }
