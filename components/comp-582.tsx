@@ -161,16 +161,17 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button
-            onClick={() => (window.location.href = "/app")}
-            className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
-          >
-            Try App
-          </Button>
           {/* Theme toggle */}
           <ThemeToggle />
           {/* Language selector */}
           <LanguageSwitcher />
+
+          <Button
+            onClick={() => (window.location.href = "/app")}
+            className="text-sm  text-black cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 hover:text-white"
+          >
+            Try App
+          </Button>
           {/* User menu */}
           {!loading &&
             (session?.user ? (
@@ -178,7 +179,7 @@ export default function Navbar() {
             ) : (
               <Button
                 onClick={() => (window.location.href = "/signin")}
-                className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
+                className="text-sm bg-indigo-600 text-white hover:bg-indigo- cursor-pointer"
               >
                 Sign In
               </Button>
