@@ -1,7 +1,7 @@
 "use client";
 
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Modal } from "@/components/ui/modal";
 import { PaymentMethodSelector } from "./payment-method-selector";
@@ -14,6 +14,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
+import { authClient } from "@/lib/auth-client";
 
 interface PlanCardProps {
   plan: (typeof PLANS)[keyof typeof PLANS];
@@ -39,24 +40,11 @@ export function PricingCards() {
     type: "subscription" | "credit_pack";
     id: string;
   } | null>(null);
-  const [userPlan, setUserPlan] = useState<string | null>(null);
   const isDevelopment = process.env.NEXT_PUBLIC_PAYMENT_MODE === "development";
 
-  // Fetch user's current plan
-  useEffect(() => {
-    async function fetchUserPlan() {
-      try {
-        const response = await fetch("/api/auth/get-session");
-        const data = await response.json();
-        if (data?.user?.plan) {
-          setUserPlan(data.user.plan);
-        }
-      } catch (error) {
-        console.error("Error fetching user plan:", error);
-      }
-    }
-    fetchUserPlan();
-  }, []);
+  // Get user's current plan from authClient
+  const { data: session } = authClient.useSession();
+  const userPlan = session?.user?.plan || null;
 
   // Filtrar planes activos (que tengan price IDs configurados o estemos en dev)
   const activePlans = Object.entries(PLANS).filter(([key, plan]) => {
@@ -247,7 +235,8 @@ function PlanCard({
       ? Math.round(plan.price.annual / 12)
       : price;
 
-  const isCurrentPlan = currentUserPlan?.toUpperCase() === plan.id.toUpperCase();
+  const isCurrentPlan =
+    currentUserPlan?.toUpperCase() === plan.id.toUpperCase();
 
   return (
     <Card
@@ -283,7 +272,8 @@ function PlanCard({
             <span className="text-sm text-foreground">
               <strong>{plan.credits.monthly}</strong>{" "}
               {t("plans.free.features.credits")}
-              {plan.credits.rollover && ` (${t("plans.free.features.rollover")})`}
+              {plan.credits.rollover &&
+                ` (${t("plans.free.features.rollover")})`}
             </span>
           </li>
           {plan.features.map((feature: string, idx: number) => (
@@ -303,15 +293,15 @@ function PlanCard({
             isCurrentPlan
               ? "bg-primary/10 text-primary cursor-not-allowed border border-primary/20"
               : isPopular
-              ? "bg-primary text-primary-foreground hover:bg-primary/90"
-              : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
+                ? "bg-primary text-primary-foreground hover:bg-primary/90"
+                : "bg-secondary text-secondary-foreground hover:bg-secondary/80"
           }`}
         >
           {isCurrentPlan
             ? t("buttons.currentPlan")
             : plan.id === "free"
-            ? t("buttons.getStarted")
-            : t("buttons.choosePlan")}
+              ? t("buttons.getStarted")
+              : t("buttons.choosePlan")}
         </button>
       </CardFooter>
     </Card>

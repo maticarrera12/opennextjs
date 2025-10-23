@@ -223,7 +223,6 @@
 }
  */
 
-
 @layer base {
   * {
     @apply border-border outline-ring/50;
@@ -244,7 +243,6 @@
   .bg-card {
     @apply bg-indigo-50 dark:bg-indigo-950 shadow-sm;
   }
-
 
   /* Textos */
   .text-primary {

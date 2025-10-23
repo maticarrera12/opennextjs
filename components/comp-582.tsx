@@ -161,24 +161,28 @@ export default function Navbar() {
         </div>
         {/* Right side */}
         <div className="flex items-center gap-2">
-          <Button onClick={() => (window.location.href = "/app")}
+          <Button
+            onClick={() => (window.location.href = "/app")}
             className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
-            >Try App</Button>
+          >
+            Try App
+          </Button>
           {/* Theme toggle */}
           <ThemeToggle />
           {/* Language selector */}
           <LanguageSwitcher />
           {/* User menu */}
-          {session == null ? (
-            <Button
-              onClick={() => (window.location.href = "/signin")}
-              className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
-            >
-              Sign In
-            </Button>
-          ) : (
-            <UserMenu />
-          )}
+          {!loading &&
+            (session?.user ? (
+              <UserMenu />
+            ) : (
+              <Button
+                onClick={() => (window.location.href = "/signin")}
+                className="text-sm bg-indigo-600 text-white hover:bg-indigo-700"
+              >
+                Sign In
+              </Button>
+            ))}
         </div>
       </div>
     </header>
