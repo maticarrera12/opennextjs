@@ -42,6 +42,8 @@ export default function UserMenu() {
     return null;
   }
 
+  const userPlan = (session.user as { plan?: string })?.plan || "FREE";
+
   return (
     <DropdownMenu>
       <DropdownMenuTrigger asChild>
@@ -64,12 +66,15 @@ export default function UserMenu() {
         align="end"
         sideOffset={8}
       >
-        <DropdownMenuLabel className="flex min-w-0 flex-col">
+        <DropdownMenuLabel className="flex min-w-0 flex-col gap-0.5">
           <span className="truncate text-sm font-medium text-foreground">
             {session.user.name}
           </span>
           <span className="truncate text-xs font-normal text-muted-foreground">
             {session.user.email}
+          </span>
+          <span className="truncate text-xs font-semibold text-primary">
+            {userPlan} Plan
           </span>
         </DropdownMenuLabel>
         <DropdownMenuSeparator />

@@ -44,7 +44,7 @@ export function PricingCards() {
 
   // Get user's current plan from authClient
   const { data: session } = authClient.useSession();
-  const userPlan = session?.user?.plan || null;
+  const userPlan = (session?.user as { plan?: string })?.plan || null;
 
   // Filtrar planes activos (que tengan price IDs configurados o estemos en dev)
   const activePlans = Object.entries(PLANS).filter(([key, plan]) => {
@@ -64,11 +64,24 @@ export function PricingCards() {
       window.location.href = "/app";
       return;
     }
+
+    // Check if user is authenticated
+    if (!session?.user) {
+      window.location.href = `/${locale}/signin`;
+      return;
+    }
+
     setSelectedPlan({ type: "subscription", id: plan.id });
     setIsModalOpen(true);
   };
 
   const handleBuyCredits = (packKey: string) => {
+    // Check if user is authenticated
+    if (!session?.user) {
+      window.location.href = `/${locale}/signin`;
+      return;
+    }
+
     const pack = CREDIT_PACKS[packKey as keyof typeof CREDIT_PACKS];
     setSelectedPlan({ type: "credit_pack", id: pack.id });
     setIsModalOpen(true);
@@ -93,6 +106,11 @@ export function PricingCards() {
       const data = await response.json();
 
       if (!response.ok) {
+        // If unauthorized, redirect to signin
+        if (response.status === 401 || data.error === "Unauthorized") {
+          window.location.href = `/${locale}/signin`;
+          return;
+        }
         throw new Error(data.error || "Failed to create checkout");
       }
 
