@@ -23,8 +23,8 @@ import { useRouter, useSearchParams } from "next/navigation";
 import Link from "next/link";
 import { ResetPasswordInput, resetPasswordSchema } from "@/lib/schemas";
 import { authClient } from "@/lib/auth-client";
-import PasswordInput from "@/components/password-input";
 import { useTranslations } from "next-intl";
+import PasswordInput from "@/components/auth/password-input";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
