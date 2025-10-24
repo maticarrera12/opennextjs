@@ -1,10 +1,12 @@
 "use client";
 import React from "react";
 import { PricingCards } from "@/components/pricing/pricing-cards";
+import BentoShowcase from "@/components/bento/bento-showcase";
 
 const page = () => {
   return (
-    <div className="w-full min-h-screen bg-gray-50">
+    <div className="w-full bg-background">
+      <BentoShowcase />
       <PricingCards />
     </div>
   );

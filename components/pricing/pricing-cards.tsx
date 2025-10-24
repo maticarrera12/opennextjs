@@ -1,7 +1,7 @@
 "use client";
 
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useTranslations, useLocale } from "next-intl";
 import { Modal } from "@/components/ui/modal";
 import { PaymentMethodSelector } from "./payment-method-selector";
@@ -42,30 +42,37 @@ export function PricingCards() {
   } | null>(null);
   const isDevelopment = process.env.NEXT_PUBLIC_PAYMENT_MODE === "development";
 
-  // Get user's current plan from authClient
-  const { data: session } = authClient.useSession();
+  // Agregamos control del montaje para evitar mismatch
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
+
+  // Obtener sesión de usuario
+  const { data: session, isPending } = authClient.useSession();
   const userPlan = (session?.user as { plan?: string })?.plan || null;
+
+  // Si el cliente aún no montó o está cargando sesión, no renderizamos nada
+  if (!mounted || isPending) {
+    return (
+      <div className="flex items-center justify-center h-screen">
+        <p className="text-muted-foreground">Loading...</p>
+      </div>
+    );
+  }
 
   // Filtrar planes activos (que tengan price IDs configurados o estemos en dev)
   const activePlans = Object.entries(PLANS).filter(([key, plan]) => {
     if (key === "FREE") return true; // Free siempre visible
-
-    // En desarrollo, mostrar todos
     if (isDevelopment) return true;
-
-    // En producción, solo mostrar si tiene price IDs configurados
     return plan.stripe[interval] || plan.lemonSqueezy[interval];
   });
 
   const handleChoosePlan = (planKey: string) => {
     const plan = PLANS[planKey as keyof typeof PLANS];
     if (plan.id === "free") {
-      // Free plan - just redirect to app
       window.location.href = "/app";
       return;
     }
 
-    // Check if user is authenticated
     if (!session?.user) {
       window.location.href = `/${locale}/signin`;
       return;
@@ -76,7 +83,6 @@ export function PricingCards() {
   };
 
   const handleBuyCredits = (packKey: string) => {
-    // Check if user is authenticated
     if (!session?.user) {
       window.location.href = `/${locale}/signin`;
       return;
@@ -106,7 +112,6 @@ export function PricingCards() {
       const data = await response.json();
 
       if (!response.ok) {
-        // If unauthorized, redirect to signin
         if (response.status === 401 || data.error === "Unauthorized") {
           window.location.href = `/${locale}/signin`;
           return;
@@ -126,7 +131,6 @@ export function PricingCards() {
           ? error.message
           : "Failed to create checkout session";
 
-      // Show a styled alert for development mode errors
       if (errorMessage.includes("Development mode:")) {
         alert(`⚠️ Configuration Required\n\n${errorMessage}`);
       } else {

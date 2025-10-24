@@ -9,10 +9,10 @@ import {
   UsersIcon,
 } from "lucide-react";
 
-import Logo from "@/components/logo";
-import ThemeToggle from "@/components/theme-toggle";
-import UserMenu from "@/components/user-menu";
-import { LanguageSwitcher } from "@/components/languaje-switcher";
+import Logo from "@/components/navbar/logo";
+import ThemeToggle from "@/components/navbar/theme-toggle";
+import UserMenu from "@/components/navbar/user-menu";
+import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -168,7 +168,7 @@ export default function Navbar() {
 
           <Button
             onClick={() => (window.location.href = "/app")}
-            className="text-sm  text-black cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 hover:text-white"
+            className="text-sm  cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
           >
             Try App
           </Button>
