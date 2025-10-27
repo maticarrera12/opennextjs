@@ -129,5 +129,66 @@
       "subtitle": "Selecciona cómo deseas pagar",
       "comingSoon": "Próximamente"
     }
+  },
+  "waitlist": {
+    "form": {
+      "title": "Únete a la Lista de Espera",
+      "subtitle": "Sé de los primeros en experimentar el futuro de la",
+      "subtitleHighlight": "creación de marcas con IA",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tucorreo@ejemplo.com",
+      "name": "Nombre",
+      "nameOptional": "(opcional)",
+      "namePlaceholder": "Tu nombre",
+      "submit": "Unirme a la Lista",
+      "earlyAccess": "Obtén acceso anticipado y actualizaciones exclusivas",
+      "alreadyJoined": "¿Ya te uniste? Revisa tu estado →",
+      "referred": "¡Has sido referido! Comenzarás con un impulso en la fila.",
+      "errors": {
+        "invalidEmail": "Correo electrónico inválido",
+        "nameLength": "El nombre debe tener al menos 2 caracteres",
+        "required": "Este campo es requerido"
+      }
+    },
+    "success": {
+      "title": "¡Estás en la lista!",
+      "position": "Posición",
+      "referrals": "Referidos",
+      "inLine": "en la fila",
+      "skipTheLineTitle": "Salta la Fila",
+      "skipTheLineSubtitle": "¡Comparte tu enlace de referido y avanza más rápido!",
+      "referralCodeLabel": "Tu Código de Referido",
+      "copyLink": "Copiar Enlace",
+      "copied": "¡Copiado!",
+      "share": "Compartir",
+      "proTip": "Consejo:",
+      "proTipMessage": "¡Por cada amigo que se una usando tu enlace, ambos avanzarán en la fila!",
+      "checkEmail": "Revisa tu correo para ver tu mensaje de bienvenida y enlace de referido.",
+      "notify": "¡Te notificaremos cuando sea tu turno!"
+    },
+    "lookup": {
+      "title": "Revisa tu Estado",
+      "subtitle": "Ingresa tu correo o código de referido",
+      "placeholder": "email@ejemplo.com o ABC12345",
+      "cancel": "Cancelar",
+      "submit": "Revisar Estado",
+      "welcomeBack": "¡Bienvenido de nuevo!",
+      "notFound": "No encontrado. Por favor verifica tu correo o código de referido.",
+      "enterValue": "Por favor ingresa tu correo o código de referido"
+    },
+    "features": {
+      "earlyAccess": {
+        "title": "Acceso Anticipado",
+        "description": "Sé el primero en probar nuevas características"
+      },
+      "community": {
+        "title": "Comunidad Exclusiva",
+        "description": "Conéctate con adoptantes tempranos"
+      },
+      "referrals": {
+        "title": "Recompensas por Referidos",
+        "description": "Avanza invitando amigos"
+      }
+    }
   }
 }

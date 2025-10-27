@@ -8,6 +8,7 @@ import {
   UserPenIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
+import Link from "next/link";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -79,9 +80,11 @@ export default function UserMenu() {
         </DropdownMenuLabel>
         <DropdownMenuSeparator />
         <DropdownMenuGroup>
-          <DropdownMenuItem>
-            <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
-            <span>{t("menu.option1")}</span>
+          <DropdownMenuItem asChild>
+            <Link href="/app/settings/account/profile">
+              <BoltIcon size={16} className="opacity-60" aria-hidden="true" />
+              <span>{t("menu.option1")}</span>
+            </Link>
           </DropdownMenuItem>
           <DropdownMenuItem>
             <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />

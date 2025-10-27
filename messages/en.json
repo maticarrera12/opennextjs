@@ -129,5 +129,66 @@
       "subtitle": "Select how you'd like to pay",
       "comingSoon": "Coming Soon"
     }
+  },
+  "waitlist": {
+    "form": {
+      "title": "Join the Waitlist",
+      "subtitle": "Be among the first to experience the future of",
+      "subtitleHighlight": "AI-powered brand creation",
+      "email": "Email",
+      "emailPlaceholder": "your@email.com",
+      "name": "Name",
+      "nameOptional": "(optional)",
+      "namePlaceholder": "Your name",
+      "submit": "Join the Waitlist",
+      "earlyAccess": "Get early access and exclusive updates",
+      "alreadyJoined": "Already joined? Check your status →",
+      "referred": "You've been referred! You'll start with a boost in the queue.",
+      "errors": {
+        "invalidEmail": "Invalid email address",
+        "nameLength": "Name must be at least 2 characters",
+        "required": "This field is required"
+      }
+    },
+    "success": {
+      "title": "You're on the list!",
+      "position": "Position",
+      "referrals": "Referrals",
+      "inLine": "in line",
+      "skipTheLineTitle": "Skip the Line",
+      "skipTheLineSubtitle": "Share your referral link and move up faster!",
+      "referralCodeLabel": "Your Referral Code",
+      "copyLink": "Copy Link",
+      "copied": "Copied!",
+      "share": "Share",
+      "proTip": "Pro tip:",
+      "proTipMessage": "For every friend who joins using your link, you'll both move up in the queue!",
+      "checkEmail": "Check your email for your welcome message and referral link.",
+      "notify": "We'll notify you when it's your turn!"
+    },
+    "lookup": {
+      "title": "Check Your Status",
+      "subtitle": "Enter your email or referral code",
+      "placeholder": "email@example.com or ABC12345",
+      "cancel": "Cancel",
+      "submit": "Check Status",
+      "welcomeBack": "Welcome back!",
+      "notFound": "Not found. Please check your email or referral code.",
+      "enterValue": "Please enter your email or referral code"
+    },
+    "features": {
+      "earlyAccess": {
+        "title": "Early Access",
+        "description": "Be first to try new features"
+      },
+      "community": {
+        "title": "Exclusive Community",
+        "description": "Connect with early adopters"
+      },
+      "referrals": {
+        "title": "Referral Rewards",
+        "description": "Skip ahead by inviting friends"
+      }
+    }
   }
 }
