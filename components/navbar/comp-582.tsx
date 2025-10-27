@@ -167,10 +167,10 @@ export default function Navbar() {
           <LanguageSwitcher />
 
           <Button
-            onClick={() => (window.location.href = "/app")}
+            onClick={() => (window.location.href = "/waitlist")}
             className="text-sm  cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
           >
-            Try App
+            Waitlist
           </Button>
           {/* User menu */}
           {!loading &&

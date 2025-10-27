@@ -348,3 +348,20 @@ enum PlanInterval {
   MONTHLY
   YEARLY
 }
+
+
+// ============================================
+// Waitlist
+// ============================================
+
+model WaitlistUser {
+  id            String   @id @default(cuid())
+  email         String   @unique
+  name          String?
+  referralCode  String   @unique
+  referredById  String?
+  referredBy    WaitlistUser? @relation("Referrals", fields: [referredById], references: [id])
+  referrals     WaitlistUser[] @relation("Referrals")
+  invited       Boolean  @default(false)
+  createdAt     DateTime @default(now())
+}

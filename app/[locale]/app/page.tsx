@@ -6,7 +6,6 @@ const page = () => {
     <div className='flex flex-col items-center justify-center'>
     <h1>App de muestra para testing</h1>
     <CreditBalance/>
-
     </div>
   )
 }

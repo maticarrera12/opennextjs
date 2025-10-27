@@ -7,10 +7,23 @@ import { sendEmailVerificationEmail } from "./emails/emailVerification";
 
 const prisma = new PrismaClient();
 export const auth = betterAuth({
+  baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   session: {
     cookieCache: {
       enabled: true,
       cookieCacheMaxAge: 60 * 5,
+    },
+  },
+  user: {
+    additionalFields: {
+      credits: {
+        type: "number",
+        required: false,
+      },
+      plan: {
+        type: "string",
+        required: false,
+      },
     },
   },
   database: prismaAdapter(prisma, { provider: "postgresql" }),
