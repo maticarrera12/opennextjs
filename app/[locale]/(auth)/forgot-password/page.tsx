@@ -22,7 +22,7 @@ import {
 } from "@/lib/schemas/auth.schema";
 import { useRouter } from "next/navigation";
 
-export function ForgotPassword() {
+function ForgotPassword() {
   const router = useRouter();
   const t = useTranslations("auth.forgotPassword");
   const form = useForm<ForgotPasswordInput>({
