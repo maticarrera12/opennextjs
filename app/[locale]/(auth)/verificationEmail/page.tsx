@@ -44,7 +44,7 @@ function EmailVerification({ email }: { email: string }) {
           startEmailVerificationCountdown();
           return authClient.sendVerificationEmail({
             email,
-            callbackURL: "/",
+            callbackURL: "/verify-email-success",
           });
         }}
       >

@@ -4,17 +4,37 @@ import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
 import { sendPasswordResetEmail } from "./emails/sendPasswordResetEmail";
 import { sendEmailVerificationEmail } from "./emails/emailVerification";
-
+import { sendChangeEmailVerification } from "./emails/sendChangeEmailVerification";
+import { sendDeleteAccountVerification } from "./emails/sendDeleteAccountVerification";
 const prisma = new PrismaClient();
 export const auth = betterAuth({
   baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   session: {
     cookieCache: {
       enabled: true,
-      cookieCacheMaxAge: 60 * 5,
+      maxAge: 60 * 5,
     },
   },
   user: {
+    changeEmail: {
+      enabled: true,
+      sendChangeEmailVerification: async ({ user, url, newEmail }) => {
+        await sendChangeEmailVerification({
+          user,
+          newEmail,
+          url,
+        });
+      },
+    },
+    deleteUser: {
+      enabled: true,
+      sendDeleteAccountVerification: async ({ user, url }) => {
+        await sendDeleteAccountVerification({
+          user,
+          url,
+        });
+      },
+    },
     additionalFields: {
       credits: {
         type: "number",
@@ -30,6 +50,7 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
+    requireEmailVerificationForReset: false,
     sendResetPassword: async ({ user, url }) => {
       await sendPasswordResetEmail({ user, url });
     },
@@ -37,6 +58,7 @@ export const auth = betterAuth({
   emailVerification: {
     autoSignInAfterVerification: true,
     sendOnSignUp: true,
+    callbackURL: "/verify-email-success",
     sendVerificationEmail: async ({ user, url }) => {
       await sendEmailVerificationEmail({ user, url });
     },
@@ -53,3 +75,6 @@ export const auth = betterAuth({
   },
   plugins: [nextCookies()],
 });
+
+// Exportar prisma para uso manual si es necesario
+export { prisma };

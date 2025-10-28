@@ -190,5 +190,26 @@
         "description": "Avanza invitando amigos"
       }
     }
+  },
+  "settings": {
+    "title": "Configuración",
+    "sections": {
+      "account": "Cuenta",
+      "preferences": "Preferencias",
+      "billing": "Facturación",
+      "developers": "Desarrolladores",
+      "organization": "Organización"
+    },
+    "menu": {
+      "profile": "Perfil",
+      "security": "Seguridad",
+      "notifications": "Notificaciones",
+      "appearance": "Apariencia",
+      "planPayments": "Plan y Pagos",
+      "apiKeys": "Claves API",
+      "members": "Miembros",
+      "invitations": "Invitaciones",
+      "logout": "Cerrar Sesión"
+    }
   }
 }

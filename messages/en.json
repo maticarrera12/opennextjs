@@ -190,5 +190,26 @@
         "description": "Skip ahead by inviting friends"
       }
     }
+  },
+  "settings": {
+    "title": "Settings",
+    "sections": {
+      "account": "Account",
+      "preferences": "Preferences",
+      "billing": "Billing",
+      "developers": "Developers",
+      "organization": "Organization"
+    },
+    "menu": {
+      "profile": "Profile",
+      "security": "Security",
+      "notifications": "Notifications",
+      "appearance": "Appearance",
+      "planPayments": "Plan & Payments",
+      "apiKeys": "API Keys",
+      "members": "Members",
+      "invitations": "Invitations",
+      "logout": "Log Out"
+    }
   }
 }

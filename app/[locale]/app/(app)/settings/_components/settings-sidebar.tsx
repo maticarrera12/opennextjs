@@ -11,96 +11,118 @@ import {
   KeyIcon,
   UsersIcon,
   MenuIcon,
+  LogOutIcon,
 } from "lucide-react";
 import { useState } from "react";
 import { motion } from "framer-motion";
-
-const sidebarSections = [
-  {
-    label: "Account",
-    items: [
-      {
-        name: "Profile",
-        href: "/app/settings/account/profile",
-        icon: UserIcon,
-      },
-      {
-        name: "Security",
-        href: "/app/settings/account/security",
-        icon: LockIcon,
-      },
-      {
-        name: "Notifications",
-        href: "/app/settings/account/notifications",
-        icon: BellIcon,
-      },
-    ],
-  },
-  {
-    label: "Preferences",
-    items: [
-      {
-        name: "Appearance",
-        href: "/app/settings/preferences/appearance",
-        icon: PaletteIcon,
-      },
-    ],
-  },
-  {
-    label: "Billing",
-    items: [
-      {
-        name: "Plan & Payments",
-        href: "/app/settings/billing",
-        icon: CreditCardIcon,
-      },
-    ],
-  },
-  {
-    label: "Developers",
-    items: [{ name: "API Keys", href: "/app/settings/api", icon: KeyIcon }],
-  },
-  {
-    label: "Organization",
-    items: [
-      {
-        name: "Members",
-        href: "/app/settings/organization/members",
-        icon: UsersIcon,
-      },
-      {
-        name: "Invitations",
-        href: "/app/settings/organization/invites",
-        icon: UsersIcon,
-      },
-    ],
-  },
-];
+import { useTranslations } from "next-intl";
+import { authClient } from "@/lib/auth-client";
 
 export default function SettingsSidebar() {
   const pathname = usePathname();
   const [isOpen, setIsOpen] = useState(false);
   const [isHovered, setIsHovered] = useState(false);
+  const t = useTranslations("settings");
+
+  const sidebarSections = [
+    {
+      label: t("sections.account"),
+      items: [
+        {
+          name: t("menu.profile"),
+          href: "/app/settings/account/profile",
+          icon: UserIcon,
+        },
+        {
+          name: t("menu.security"),
+          href: "/app/settings/account/security",
+          icon: LockIcon,
+        },
+        {
+          name: t("menu.notifications"),
+          href: "/app/settings/account/notifications",
+          icon: BellIcon,
+        },
+      ],
+    },
+    {
+      label: t("sections.preferences"),
+      items: [
+        {
+          name: t("menu.appearance"),
+          href: "/app/settings/preferences/appearance",
+          icon: PaletteIcon,
+        },
+      ],
+    },
+    {
+      label: t("sections.billing"),
+      items: [
+        {
+          name: t("menu.planPayments"),
+          href: "/app/settings/billing",
+          icon: CreditCardIcon,
+        },
+      ],
+    },
+    {
+      label: t("sections.developers"),
+      items: [
+        { name: t("menu.apiKeys"), href: "/app/settings/api", icon: KeyIcon },
+      ],
+    },
+    {
+      label: t("sections.organization"),
+      items: [
+        {
+          name: t("menu.members"),
+          href: "/app/settings/organization/members",
+          icon: UsersIcon,
+        },
+        {
+          name: t("menu.invitations"),
+          href: "/app/settings/organization/invites",
+          icon: UsersIcon,
+        },
+      ],
+    },
+  ];
+
+  const handleSignOut = async () => {
+    await authClient.signOut({
+      fetchOptions: {
+        onSuccess: () => {
+          window.location.href = "/";
+        },
+      },
+    });
+  };
 
   return (
     <>
-      {/* Toggle mobile */}
-      <button
-        onClick={() => setIsOpen(!isOpen)}
-        className="fixed top-4 left-4 z-50 rounded-lg border bg-card p-2 shadow-sm md:hidden"
-      >
-        <MenuIcon size={20} />
-      </button>
+      {/* Navbar mobile - barra superior con fondo */}
+      <div className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center border-b border-border bg-background px-4 shadow-sm md:hidden">
+        {!isOpen && (
+          <button
+            onClick={() => setIsOpen(true)}
+            className="rounded-lg p-2 hover:bg-accent transition-colors"
+          >
+            <MenuIcon size={20} />
+          </button>
+        )}
+        <span className="ml-3 text-lg font-semibold">{t("title")}</span>
+      </div>
 
       {/* Sidebar fija, alto completo; solo cambia el ancho */}
       <motion.aside
         onMouseEnter={() => setIsHovered(true)}
         onMouseLeave={() => setIsHovered(false)}
         initial={false}
-        animate={{ width: isHovered ? 240 : 80 }}
+        animate={{ width: isHovered || isOpen ? 240 : 80 }}
         transition={{ duration: 0.12, ease: "easeInOut" }}
         className={cn(
-          "fixed left-0 top-0 z-40 h-screen w-20 border-r bg-card shadow-lg",
+          "fixed left-0 z-40 h-screen w-20 border-r bg-card shadow-lg",
+          "top-14 md:top-0",
           "md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
@@ -113,10 +135,10 @@ export default function SettingsSidebar() {
               <span
                 className={cn(
                   "block text-lg font-semibold text-foreground whitespace-nowrap transition-all duration-75",
-                  isHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+                  isHovered || isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"
                 )}
               >
-                Settings
+                {t("title")}
               </span>
             </div>
 
@@ -127,7 +149,9 @@ export default function SettingsSidebar() {
                   <span
                     className={cn(
                       "block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground whitespace-nowrap transition-all duration-75",
-                      isHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+                      isHovered || isOpen
+                        ? "opacity-100 w-auto"
+                        : "opacity-0 w-0"
                     )}
                   >
                     {section.label}
@@ -143,6 +167,7 @@ export default function SettingsSidebar() {
                       <Link
                         key={item.name}
                         href={item.href}
+                        onClick={() => setIsOpen(false)}
                         className={cn(
                           "grid h-9 place-items-center rounded-md text-sm transition-colors",
                           "hover:bg-accent/50 hover:text-foreground",
@@ -168,7 +193,9 @@ export default function SettingsSidebar() {
                         <span
                           className={cn(
                             "justify-self-start whitespace-nowrap overflow-hidden transition-all duration-75",
-                            isHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+                            isHovered || isOpen
+                              ? "opacity-100 w-auto"
+                              : "opacity-0 w-0"
                           )}
                         >
                           {item.name}
@@ -181,21 +208,48 @@ export default function SettingsSidebar() {
             ))}
           </div>
 
-          {/* Footer opcional con el mismo patrón (reserva altura) */}
+          {/* Logout button */}
           <div className="px-3 py-3 border-t">
-            <div className="h-5">
+            <button
+              onClick={() => {
+                setIsOpen(false);
+                handleSignOut();
+              }}
+              className={cn(
+                "grid h-9 w-full place-items-center rounded-md text-sm transition-colors",
+                "hover:bg-destructive/10 hover:text-destructive"
+              )}
+              style={{
+                display: "grid",
+                gridTemplateColumns: "24px 1fr",
+                gap: "12px",
+                paddingInline: "8px",
+              }}
+            >
+              <LogOutIcon
+                size={18}
+                className="justify-self-start text-muted-foreground hover:text-destructive"
+              />
               <span
                 className={cn(
-                  "text-xs text-muted-foreground whitespace-nowrap transition-all duration-75",
-                  isHovered ? "opacity-100 w-auto" : "opacity-0 w-0"
+                  "justify-self-start whitespace-nowrap overflow-hidden transition-all duration-75",
+                  isHovered || isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"
                 )}
               >
-                v1.0.0
+                {t("menu.logout")}
               </span>
-            </div>
+            </button>
           </div>
         </div>
       </motion.aside>
+
+      {/* Overlay para mobile */}
+      {isOpen && (
+        <div
+          onClick={() => setIsOpen(false)}
+          className="fixed inset-0 top-14 z-30 bg-black/50 md:hidden"
+        />
+      )}
     </>
   );
 }
