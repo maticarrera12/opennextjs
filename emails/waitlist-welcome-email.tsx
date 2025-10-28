@@ -66,7 +66,7 @@ export const WaitlistWelcomeEmail = ({
             {/* Referral Code Box */}
             <Section style={referralBox}>
               <Text style={referralLabel}>Your Referral Code:</Text>
-              <Text style={referralCode}>{referralCode}</Text>
+              <Text style={referralCodeStyle}>{referralCode}</Text>
             </Section>
 
             {/* CTA Button */}
@@ -197,7 +197,7 @@ const referralLabel = {
   letterSpacing: "0.5px",
 };
 
-const referralCode = {
+const referralCodeStyle = {
   fontSize: "32px",
   fontWeight: "700",
   color: "#6366f1",
