@@ -321,5 +321,21 @@
         "answer": "Answer questions that your users might have."
       }
     }
+  },
+  "footer": {
+    "contact": {
+      "title": "Contact",
+      "email": "support@acme.com"
+    },
+    "help": {
+      "title": "Help",
+      "faq": "FAQ"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy"
+    },
+    "copyright": "© {year} Acme, All rights reserved"
   }
 }
