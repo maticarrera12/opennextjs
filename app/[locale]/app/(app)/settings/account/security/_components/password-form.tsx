@@ -30,8 +30,10 @@ import { Checkbox } from "@/components/ui/checkbox";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { authClient } from "@/lib/auth-client";
 import { toast } from "sonner";
+import { useTranslations } from "next-intl";
 
 export function PasswordForm() {
+  const t = useTranslations("settings.security.password");
   const [showCurrentPassword, setShowCurrentPassword] = useState(false);
   const [showNewPassword, setShowNewPassword] = useState(false);
   const [showPasswordRequirements, setShowPasswordRequirements] =
@@ -46,23 +48,23 @@ export function PasswordForm() {
     },
   });
 
-async function handlePasswordChange(data: ProfileUpdatePasswordInput) {
-  await authClient.changePassword(data,{
-    onError: (error) => {
-      toast.error(error.error.message || "Failed to change password");
-    },
-    onSuccess: () => {
-      toast.success("Password changed successfully");
-    },
-  })
-  form.reset();
-}
+  async function handlePasswordChange(data: ProfileUpdatePasswordInput) {
+    await authClient.changePassword(data, {
+      onError: (error) => {
+        toast.error(error.error.message || t("messages.changeFailed"));
+      },
+      onSuccess: () => {
+        toast.success(t("messages.changeSuccess"));
+      },
+    });
+    form.reset();
+  }
 
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Password</CardTitle>
-        <CardDescription>Change your password</CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <Form {...form}>
@@ -76,12 +78,12 @@ async function handlePasswordChange(data: ProfileUpdatePasswordInput) {
               name="currentPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Current Password</FormLabel>
+                  <FormLabel>{t("currentPassword")}</FormLabel>
                   <FormControl>
                     <div className="relative">
                       <Input
                         type={showCurrentPassword ? "text" : "password"}
-                        placeholder="Enter current password"
+                        placeholder={t("currentPasswordPlaceholder")}
                         className="pr-10"
                         {...field}
                       />
@@ -111,13 +113,13 @@ async function handlePasswordChange(data: ProfileUpdatePasswordInput) {
               name="newPassword"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>New Password</FormLabel>
+                  <FormLabel>{t("newPassword")}</FormLabel>
                   <FormControl>
                     <div className="space-y-0">
                       <div className="relative">
                         <Input
                           type={showNewPassword ? "text" : "password"}
-                          placeholder="Enter new password"
+                          placeholder={t("newPasswordPlaceholder")}
                           className="pr-10"
                           {...field}
                           onFocus={() => setShowPasswordRequirements(true)}
@@ -158,7 +160,7 @@ async function handlePasswordChange(data: ProfileUpdatePasswordInput) {
                     />
                   </FormControl>
                   <div className="space-y-1 leading-none">
-                    <FormLabel>Revoke other sessions</FormLabel>
+                    <FormLabel>{t("revokeOtherSessions")}</FormLabel>
                   </div>
                   <FormMessage />
                 </FormItem>
@@ -168,7 +170,7 @@ async function handlePasswordChange(data: ProfileUpdatePasswordInput) {
             <div className="flex justify-end">
               <Button type="submit" disabled={form.formState.isSubmitting}>
                 <LoadingSwap isLoading={form.formState.isSubmitting}>
-                  Change Password
+                  {t("changePassword")}
                 </LoadingSwap>
               </Button>
             </div>

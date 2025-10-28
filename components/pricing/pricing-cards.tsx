@@ -40,7 +40,6 @@ export function PricingCards() {
     type: "subscription" | "credit_pack";
     id: string;
   } | null>(null);
-  const isDevelopment = process.env.NEXT_PUBLIC_PAYMENT_MODE === "development";
 
   // Agregamos control del montaje para evitar mismatch
   const [mounted, setMounted] = useState(false);
@@ -59,10 +58,9 @@ export function PricingCards() {
     );
   }
 
-  // Filtrar planes activos (que tengan price IDs configurados o estemos en dev)
+  // Filtrar planes activos (que tengan price IDs configurados)
   const activePlans = Object.entries(PLANS).filter(([key, plan]) => {
     if (key === "FREE") return true; // Free siempre visible
-    if (isDevelopment) return true;
     return plan.stripe[interval] || plan.lemonSqueezy[interval];
   });
 
@@ -131,11 +129,7 @@ export function PricingCards() {
           ? error.message
           : "Failed to create checkout session";
 
-      if (errorMessage.includes("Development mode:")) {
-        alert(`⚠️ Configuration Required\n\n${errorMessage}`);
-      } else {
-        alert(`❌ Error: ${errorMessage}`);
-      }
+      alert(`❌ Error: ${errorMessage}`);
 
       setIsModalOpen(false);
     }
@@ -183,16 +177,6 @@ export function PricingCards() {
             </div>
           </div>
         </div>
-
-        {/* Development Mode Warning */}
-        {isDevelopment && (
-          <div className="mb-8 p-4 bg-yellow-50 dark:bg-yellow-950 border border-yellow-200 dark:border-yellow-800 rounded-lg">
-            <p className="text-sm text-yellow-800 dark:text-yellow-200 text-center">
-              ⚠️ <strong>{t("developmentMode.title")}</strong>{" "}
-              {t("developmentMode.message")}
-            </p>
-          </div>
-        )}
 
         {/* Plan Cards */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">

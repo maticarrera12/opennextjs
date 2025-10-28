@@ -17,6 +17,7 @@ import { authClient } from "@/lib/auth-client";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { toast } from "sonner";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 interface PersonalInfoFormProps {
   user: {
@@ -26,6 +27,7 @@ interface PersonalInfoFormProps {
 }
 
 export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
+  const t = useTranslations("settings.profile.personalInfo");
   const form = useForm<ProfileUpdateInput>({
     resolver: zodResolver(profileUpdateSchema),
     defaultValues: {
@@ -35,6 +37,7 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
   });
   const router = useRouter();
   const { isSubmitting } = form.formState;
+
   async function handleUpdateProfile(data: ProfileUpdateInput) {
     const promises = [
       authClient.updateUser({
@@ -56,27 +59,26 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
     const emailResult = res[1] ?? { error: null };
 
     if (updateUserResult.error) {
-      toast.error(updateUserResult.error.message || "Failed to update profile");
+      toast.error(updateUserResult.error.message || t("messages.updateFailed"));
     } else if (emailResult.error) {
       toast.error(
-        emailResult.error.message || "Failed to send email verification"
+        emailResult.error.message || t("messages.emailVerificationFailed")
       );
     } else {
       if (data.email !== user.email) {
-        toast.success("Email verification sent to new email");
+        toast.success(t("messages.emailVerificationSent"));
       } else {
-        toast.success("Profile updated successfully");
+        toast.success(t("messages.updateSuccess"));
       }
       router.refresh();
     }
   }
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Personal Information</CardTitle>
-        <CardDescription>
-          Update your personal details and contact information
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <form
@@ -85,19 +87,19 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
         >
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
-              <Label htmlFor="name">Full Name</Label>
+              <Label htmlFor="name">{t("fullName")}</Label>
               <Input
                 id="name"
-                placeholder="Enter your name"
+                placeholder={t("namePlaceholder")}
                 {...form.register("name")}
               />
             </div>
             <div className="space-y-2">
-              <Label htmlFor="email">Email</Label>
+              <Label htmlFor="email">{t("email")}</Label>
               <Input
                 id="email"
                 type="email"
-                placeholder="Enter your email"
+                placeholder={t("emailPlaceholder")}
                 {...form.register("email")}
               />
             </div>
@@ -108,7 +110,9 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
               disabled={isSubmitting}
               className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
             >
-              <LoadingSwap isLoading={isSubmitting}>Save Changes</LoadingSwap>
+              <LoadingSwap isLoading={isSubmitting}>
+                {t("saveChanges")}
+              </LoadingSwap>
             </Button>
           </div>
         </form>

@@ -10,6 +10,7 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { Pencil } from "lucide-react";
+import { useTranslations } from "next-intl";
 
 interface ProfilePictureSectionProps {
   user: {
@@ -24,13 +25,13 @@ export function ProfilePictureSection({
   user,
   plan,
 }: ProfilePictureSectionProps) {
+  const t = useTranslations("settings.profile.profilePicture");
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Profile Picture</CardTitle>
-        <CardDescription>
-          Update your profile picture and role badge
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent className="space-y-6">
         <div className="flex items-center gap-6">
@@ -49,10 +50,10 @@ export function ProfilePictureSection({
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Badge variant="secondary" className="text-sm">
-                {plan} Plan
+                {plan} {t("plan")}
               </Badge>
               <Badge variant="outline" className="text-sm">
-                Member
+                {t("member")}
               </Badge>
             </div>
           </div>

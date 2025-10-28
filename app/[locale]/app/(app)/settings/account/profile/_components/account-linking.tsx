@@ -8,10 +8,9 @@ import {
   SUPPORTED_OAUTH_PROVIDERS_DETAILS,
   type SupportedOAuthProviders,
 } from "@/lib/o-auth-providers";
-
-
 import { Plus, Shield, Trash2 } from "lucide-react";
 import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
 
 type Account = Awaited<ReturnType<typeof auth.api.listUserAccounts>>[number];
 
@@ -20,15 +19,17 @@ export function AccountLinking({
 }: {
   currentAccounts: Account[];
 }) {
+  const t = useTranslations("settings.profile.linkedAccounts");
+
   return (
     <div className="space-y-6">
       <div className="space-y-2">
-        <h3 className="text-lg font-medium">Linked Accounts</h3>
+        <h3 className="text-lg font-medium">{t("title")}</h3>
 
         {currentAccounts.length === 0 ? (
           <Card>
             <CardContent className="py-8 text-center text-secondary-muted">
-              No linked accounts found
+              {t("noAccounts")}
             </CardContent>
           </Card>
         ) : (
@@ -45,7 +46,7 @@ export function AccountLinking({
       </div>
 
       <div className="space-y-2">
-        <h3 className="text-lg font-medium">Link Other Accounts</h3>
+        <h3 className="text-lg font-medium">{t("linkOther")}</h3>
         <div className="grid gap-3">
           {SUPPORTED_OAUTH_PROVIDERS.filter(
             (provider) =>
@@ -67,6 +68,7 @@ function AccountCard({
   account?: Account;
 }) {
   const router = useRouter();
+  const t = useTranslations("settings.profile.linkedAccounts");
 
   const providerDetails = SUPPORTED_OAUTH_PROVIDERS_DETAILS[
     provider as SupportedOAuthProviders
@@ -109,11 +111,12 @@ function AccountCard({
               <p className="font-medium">{providerDetails.name}</p>
               {account == null ? (
                 <p className="text-sm text-muted-foreground">
-                  Connect your {providerDetails.name} account for easier sign-in
+                  {t("connectAccount", { provider: providerDetails.name })}
                 </p>
               ) : (
                 <p className="text-sm text-muted-foreground">
-                  Linked on {new Date(account.createdAt).toLocaleDateString()}
+                  {t("linkedOn")}{" "}
+                  {new Date(account.createdAt).toLocaleDateString()}
                 </p>
               )}
             </div>
@@ -125,7 +128,7 @@ function AccountCard({
               action={linkAccount}
             >
               <Plus />
-              Link
+              {t("link")}
             </BetterAuthActionButton>
           ) : (
             <BetterAuthActionButton
@@ -134,7 +137,7 @@ function AccountCard({
               action={unlinkAccount}
             >
               <Trash2 />
-              Unlink
+              {t("unlink")}
             </BetterAuthActionButton>
           )}
         </div>

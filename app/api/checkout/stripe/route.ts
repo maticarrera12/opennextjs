@@ -63,12 +63,9 @@ export async function POST(req: NextRequest) {
         interval === "annual" ? plan.stripe.annual : plan.stripe.monthly;
 
       if (!priceId || priceId === "") {
-        const isDev = process.env.NEXT_PUBLIC_PAYMENT_MODE === "development";
         return NextResponse.json(
           {
-            error: isDev
-              ? `Development mode: Please configure STRIPE_PRICE_ID_${plan.name.toUpperCase()}_${interval.toUpperCase()} in your .env file. Visit https://dashboard.stripe.com/test/products to create price IDs.`
-              : "Price ID not configured for this plan",
+            error: "Price ID not configured for this plan",
           },
           { status: 400 }
         );
@@ -107,12 +104,9 @@ export async function POST(req: NextRequest) {
       const priceId = pack.stripe.priceId;
 
       if (!priceId || priceId === "") {
-        const isDev = process.env.NEXT_PUBLIC_PAYMENT_MODE === "development";
         return NextResponse.json(
           {
-            error: isDev
-              ? "Development mode: Please configure STRIPE_PRICE_ID_PACK in your .env file. Visit https://dashboard.stripe.com/test/products to create a price ID."
-              : "Price ID not configured for this pack",
+            error: "Price ID not configured for this pack",
           },
           { status: 400 }
         );

@@ -53,12 +53,12 @@ export const PLANS = {
       "Priority generation queue",
     ],
     stripe: {
-      monthly: process.env.STRIPE_PRICE_ID_PRO_MONTHLY || "",
-      annual: process.env.STRIPE_PRICE_ID_PRO_ANNUAL || "",
+      monthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_MONTHLY || "",
+      annual: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PRO_ANNUAL || "",
     },
     lemonSqueezy: {
-      monthly: process.env.LS_VARIANT_ID_PRO_MONTHLY || "",
-      annual: process.env.LS_VARIANT_ID_PRO_ANNUAL || "",
+      monthly: process.env.NEXT_PUBLIC_LS_VARIANT_ID_PRO_MONTHLY || "",
+      annual: process.env.NEXT_PUBLIC_LS_VARIANT_ID_PRO_ANNUAL || "",
     },
   },
 
@@ -86,12 +86,12 @@ export const PLANS = {
       "Priority support",
     ],
     stripe: {
-      monthly: process.env.STRIPE_PRICE_ID_BUSINESS_MONTHLY || "",
-      annual: process.env.STRIPE_PRICE_ID_BUSINESS_ANNUAL || "",
+      monthly: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_BUSINESS_MONTHLY || "",
+      annual: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_BUSINESS_ANNUAL || "",
     },
     lemonSqueezy: {
-      monthly: process.env.LS_VARIANT_ID_BUSINESS_MONTHLY || "",
-      annual: process.env.LS_VARIANT_ID_BUSINESS_ANNUAL || "",
+      monthly: process.env.NEXT_PUBLIC_LS_VARIANT_ID_BUSINESS_MONTHLY || "",
+      annual: process.env.NEXT_PUBLIC_LS_VARIANT_ID_BUSINESS_ANNUAL || "",
     },
   },
 } as const;
@@ -109,10 +109,10 @@ export const CREDIT_PACKS = {
     savings: 0,
     description: "One-time credit purchase",
     stripe: {
-      priceId: process.env.STRIPE_PRICE_ID_PACK || "",
+      priceId: process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_PACK || "",
     },
     lemonSqueezy: {
-      variantId: process.env.LS_VARIANT_ID_PACK || "",
+      variantId: process.env.NEXT_PUBLIC_LS_VARIANT_ID_PACK || "",
     },
   },
 

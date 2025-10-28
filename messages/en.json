@@ -77,10 +77,6 @@
       "annual": "Annual",
       "savePercent": "Save 16%"
     },
-    "developmentMode": {
-      "title": "Development Mode:",
-      "message": "Payments are disabled. Configure your Stripe/Lemon Squeezy API keys in production to enable real payments."
-    },
     "plans": {
       "free": {
         "name": "Free",
@@ -101,12 +97,10 @@
     "buttons": {
       "getStarted": "Get Started",
       "subscribe": "Subscribe",
-      "configureToEnable": "Configure to Enable",
       "choosePlan": "Choose Plan",
       "buyCredits": "Buy Credits",
       "currentPlan": "Current Plan"
     },
-    "notConfigured": "Not configured - add price IDs to .env",
     "creditPacks": {
       "title": "Or Buy Credit Packs",
       "credits": "credits",
@@ -118,11 +112,6 @@
         "oneTimePayment": "One-time payment",
         "useAnytime": "Use anytime"
       }
-    },
-    "alerts": {
-      "devMode": "Development mode: Configure payment provider to enable subscriptions",
-      "notConfigured": "This plan is not configured yet. Please add price IDs in your .env file",
-      "devModePurchase": "Development mode: Configure payment provider to enable purchases"
     },
     "paymentModal": {
       "title": "Choose Payment Method",
@@ -210,6 +199,101 @@
       "members": "Members",
       "invitations": "Invitations",
       "logout": "Log Out"
+    },
+    "profile": {
+      "title": "Profile",
+      "subtitle": "Manage your account settings and preferences",
+      "profilePicture": {
+        "title": "Profile Picture",
+        "description": "Update your profile picture and role badge",
+        "plan": "Plan",
+        "member": "Member"
+      },
+      "personalInfo": {
+        "title": "Personal Information",
+        "description": "Update your personal details and contact information",
+        "fullName": "Full Name",
+        "namePlaceholder": "Enter your name",
+        "email": "Email",
+        "emailPlaceholder": "Enter your email",
+        "saveChanges": "Save Changes",
+        "messages": {
+          "updateFailed": "Failed to update profile",
+          "emailVerificationFailed": "Failed to send email verification",
+          "emailVerificationSent": "Email verification sent to new email",
+          "updateSuccess": "Profile updated successfully"
+        }
+      },
+      "subscriptionPlan": {
+        "title": "Subscription Plan",
+        "description": "Manage your subscription and billing",
+        "currentPlan": "Current Plan",
+        "freeTier": "Free tier with basic features",
+        "paidTier": "tier with all features",
+        "managePlan": "Manage Plan"
+      },
+      "dangerZone": {
+        "title": "Danger Zone",
+        "description": "Irreversible actions that will affect your account",
+        "deleteAccount": "Delete Account",
+        "deleteDescription": "Permanently delete your account and all associated data",
+        "deleteSuccess": "Account deletion initiated. Please check your email for a confirmation link."
+      },
+      "linkedAccounts": {
+        "title": "Linked Accounts",
+        "noAccounts": "No linked accounts found",
+        "linkOther": "Link Other Accounts",
+        "connectAccount": "Connect your {provider} account for easier sign-in",
+        "linkedOn": "Linked on",
+        "link": "Link",
+        "unlink": "Unlink"
+      }
+    },
+    "security": {
+      "password": {
+        "title": "Password",
+        "description": "Change your password",
+        "currentPassword": "Current Password",
+        "currentPasswordPlaceholder": "Enter current password",
+        "newPassword": "New Password",
+        "newPasswordPlaceholder": "Enter new password",
+        "revokeOtherSessions": "Revoke other sessions",
+        "changePassword": "Change Password",
+        "messages": {
+          "changeFailed": "Failed to change password",
+          "changeSuccess": "Password changed successfully"
+        }
+      },
+      "setPassword": {
+        "title": "Set Password",
+        "description": "We will send you an email to set a new password for your account",
+        "sendEmail": "Send set password Email",
+        "emailSent": "Email sent"
+      },
+      "sessions": {
+        "currentSession": "Current Session",
+        "otherSessions": "Other Active Sessions",
+        "noOtherSessions": "No other active sessions",
+        "revokeOtherSessions": "Revoke Other Sessions",
+        "created": "Created",
+        "expires": "Expires",
+        "sessionRevoked": "Session revoked",
+        "unknownDevice": "Unknown Device"
+      }
     }
+  },
+  "hero": {
+    "heading": {
+      "part1": "Concise Heading that Describes",
+      "highlight": "the benefit",
+      "part2": "of your product"
+    },
+    "description": {
+      "part1": "Descriptive content to describe",
+      "highlight": "what",
+      "part2": "the product is."
+    },
+    "cta": "Get Started",
+    "imagePlaceholder": "Replace image"
   }
 }

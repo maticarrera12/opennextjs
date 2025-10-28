@@ -1,13 +1,13 @@
-import Navbar from '@/components/navbar/comp-582'
-import React from 'react'
+import Navbar from "@/components/navbar/comp-582";
+import React from "react";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
   return (
     <>
-    <Navbar />
-    <div>{children}</div>
+      <Navbar />
+      <div className="pt-16">{children}</div>
     </>
-  )
-}
+  );
+};
 
-export default layout
+export default layout;

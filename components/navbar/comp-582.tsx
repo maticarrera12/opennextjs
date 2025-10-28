@@ -59,7 +59,7 @@ export default function Navbar() {
   const { data: session, isPending: loading } = authClient.useSession();
 
   return (
-    <header className="border-b px-4 md:px-6">
+    <header className="fixed top-0 left-0 right-0 z-50 border-b px-4 md:px-6 bg-background">
       <div className="flex h-16 items-center justify-between gap-4">
         {/* Left side */}
         <div className="flex flex-1 items-center gap-2">

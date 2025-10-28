@@ -8,15 +8,16 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";
+import { useTranslations } from "next-intl";
 
 export function SetPasswordButton({ email }: { email: string }) {
+  const t = useTranslations("settings.security.setPassword");
+
   return (
     <Card>
       <CardHeader>
-        <CardTitle>Set Password</CardTitle>
-        <CardDescription>
-          We will send you an email to set a new password for your account
-        </CardDescription>
+        <CardTitle>{t("title")}</CardTitle>
+        <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
         <BetterAuthActionButton
@@ -27,10 +28,10 @@ export function SetPasswordButton({ email }: { email: string }) {
             });
             return { error: result.error };
           }}
-          successMessage="Email sent"
+          successMessage={t("emailSent")}
           variant="outline"
         >
-          Send set password Email
+          {t("sendEmail")}
         </BetterAuthActionButton>
       </CardContent>
     </Card>
