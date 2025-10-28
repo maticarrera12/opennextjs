@@ -295,5 +295,31 @@
     },
     "cta": "Comenzar",
     "imagePlaceholder": "Reemplazar imagen"
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Preguntas frecuentes",
+    "questions": {
+      "q1": {
+        "question": "¿Qué pregunta podrían tener tus usuarios?",
+        "answer": "Responde las preguntas que tus usuarios puedan tener."
+      },
+      "q2": {
+        "question": "¿Qué pregunta podrían tener tus usuarios?",
+        "answer": "Responde las preguntas que tus usuarios puedan tener."
+      },
+      "q3": {
+        "question": "¿Qué pregunta podrían tener tus usuarios?",
+        "answer": "Responde las preguntas que tus usuarios puedan tener."
+      },
+      "q4": {
+        "question": "¿Qué pregunta podrían tener tus usuarios?",
+        "answer": "Responde las preguntas que tus usuarios puedan tener."
+      },
+      "q5": {
+        "question": "¿Qué pregunta podrían tener tus usuarios?",
+        "answer": "Responde las preguntas que tus usuarios puedan tener."
+      }
+    }
   }
 }

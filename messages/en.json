@@ -295,5 +295,31 @@
     },
     "cta": "Get Started",
     "imagePlaceholder": "Replace image"
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Frequently asked questions",
+    "questions": {
+      "q1": {
+        "question": "What question might your users have?",
+        "answer": "Answer questions that your users might have."
+      },
+      "q2": {
+        "question": "What question might your users have?",
+        "answer": "Answer questions that your users might have."
+      },
+      "q3": {
+        "question": "What question might your users have?",
+        "answer": "Answer questions that your users might have."
+      },
+      "q4": {
+        "question": "What question might your users have?",
+        "answer": "Answer questions that your users might have."
+      },
+      "q5": {
+        "question": "What question might your users have?",
+        "answer": "Answer questions that your users might have."
+      }
+    }
   }
 }
