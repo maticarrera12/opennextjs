@@ -1,5 +1,5 @@
 import Navbar from "@/components/navbar/comp-582";
-import Footer from "@/app/[locale]/(marketing)/_components/footer";
+import Footer from "@/components/footer/footer";
 import React from "react";
 
 const layout = ({ children }: { children: React.ReactNode }) => {
