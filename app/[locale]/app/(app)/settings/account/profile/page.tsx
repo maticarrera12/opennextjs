@@ -1,6 +1,5 @@
 import { auth } from "@/lib/auth";
 import { headers } from "next/headers";
-import { redirect } from "next/navigation";
 import { ProfileHeader } from "./_components/profile-header";
 import { ProfilePictureSection } from "./_components/profile-picture-section";
 import { PersonalInfoForm } from "./_components/personal-info-form";
@@ -11,15 +10,15 @@ import { Card, CardContent } from "@/components/ui/card";
 
 const page = async () => {
   const session = await auth.api.getSession({ headers: await headers() });
-  if (!session?.user) {
-    return redirect("/signin");
-  }
-
-  const user = session.user;
+  const user = session!.user;
   const userPlan = (user as { plan?: string })?.plan || "FREE";
 
-  const accounts = await auth.api.listUserAccounts({ headers: await headers() });
-  const nonCredentialsAccounts = (accounts || []).filter((account) => account.providerId !== "credentials");
+  const accounts = await auth.api.listUserAccounts({
+    headers: await headers(),
+  });
+  const nonCredentialsAccounts = (accounts || []).filter(
+    (account) => account.providerId !== "credentials"
+  );
 
   return (
     <div className="space-y-6">
@@ -29,7 +28,7 @@ const page = async () => {
 
       <Card>
         <CardContent>
-      <AccountLinking currentAccounts={nonCredentialsAccounts} />
+          <AccountLinking currentAccounts={nonCredentialsAccounts} />
         </CardContent>
       </Card>
       <PlanSection plan={userPlan} />

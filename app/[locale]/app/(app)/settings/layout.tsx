@@ -1,10 +1,19 @@
 import SettingsSidebar from "./_components/settings-sidebar";
+import { auth } from "@/lib/auth";
+import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
-export default function SettingsLayout({
+export default async function SettingsLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user) {
+    redirect("/signin");
+  }
+
   return (
     <div className="flex min-h-screen bg-muted/30">
       <SettingsSidebar />
