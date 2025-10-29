@@ -1,10 +1,16 @@
-import { Layout } from "nextra-theme-docs";
+import { Layout, Navbar, Footer } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
-import Navbar from "@/components/navbar/comp-582";
-import Footer from "@/components/footer/footer";
-import { ThemeProvider } from "@/components/navbar/theme-provider";
+
+const navbar = (
+  <Navbar
+    logo={<span className="font-bold">Legal Docs</span>}
+    projectLink="https://github.com/maticarrera12/open_next"
+  />
+);
+
+const footer = <Footer>{new Date().getFullYear()} © OpenNextJS.</Footer>;
 
 export default async function LegalLayout({
   children,
@@ -17,20 +23,14 @@ export default async function LegalLayout({
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
       <body>
-        <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
-          <Navbar />
-          <div className="pt-16">
-            <Layout
-              navbar={null}
-              pageMap={pageMap}
-              docsRepositoryBase="https://github.com/maticarrera12/open_next"
-              footer={null}
-            >
-              {children}
-            </Layout>
-          </div>
-          <Footer />
-        </ThemeProvider>
+        <Layout
+          navbar={navbar}
+          pageMap={pageMap}
+          docsRepositoryBase="https://github.com/maticarrera12/open_next"
+          footer={footer}
+        >
+          {children}
+        </Layout>
       </body>
     </html>
   );
