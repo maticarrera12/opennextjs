@@ -1,15 +1,8 @@
 "use client";
-import { useId, useState } from "react";
-import {
-  FileTextIcon,
-  GlobeIcon,
-  HomeIcon,
-  LayersIcon,
-  Link,
-  UsersIcon,
-} from "lucide-react";
+import { useState } from "react";
+import { FileTextIcon, GlobeIcon, HomeIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import { cn } from "@/lib/utils";
+import Link from "next/link";
 
 import Logo from "@/components/navbar/logo";
 import ThemeToggle from "@/components/navbar/theme-toggle";
@@ -26,21 +19,48 @@ import { authClient } from "@/lib/auth-client";
 
 // Navigation links
 const navigationLinks = [
-  { href: "/", label: "Home", icon: HomeIcon },
-  { href: "/#pricing", label: "Pricing", icon: GlobeIcon },
+  { href: "/", label: "Home", icon: HomeIcon, scrollTo: "top" },
+  { href: "#pricing", label: "Pricing", icon: GlobeIcon, scrollTo: "pricing" },
   { href: "/docs", label: "Docs", icon: FileTextIcon },
 ];
 
-// Language options
-const languages = [
-  { value: "en", label: "En" },
-  { value: "es", label: "Es" },
-];
-
 export default function Navbar() {
-  const id = useId();
   const { data: session, isPending: loading } = authClient.useSession();
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
+  const handleNavigation = (
+    e: React.MouseEvent<HTMLAnchorElement>,
+    link: (typeof navigationLinks)[0]
+  ) => {
+    // Siempre cerrar el menú mobile al hacer clic
+    setIsMobileMenuOpen(false);
+
+    // Si tiene scrollTo, hacer scroll suave en lugar de navegación
+    if (link.scrollTo) {
+      e.preventDefault();
+
+      if (link.scrollTo === "top") {
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      } else {
+        const element = document.getElementById(link.scrollTo);
+        if (element) {
+          const headerOffset = 64; // altura de la navbar (h-16 = 4rem = 64px)
+          const elementPosition = element.getBoundingClientRect().top;
+          const offsetPosition =
+            elementPosition + window.pageYOffset - headerOffset;
+
+          window.scrollTo({
+            top: offsetPosition,
+            behavior: "smooth",
+          });
+        }
+      }
+    }
+    // Si no tiene scrollTo, dejar que el navegador maneje la navegación normal
+  };
 
   return (
     <>
@@ -85,7 +105,18 @@ export default function Navbar() {
               </Button>
               <div className="flex items-center gap-6">
                 {/* Logo */}
-                <a href="/" className="text-primary hover:text-primary/90">
+                <a
+                  href="/"
+                  onClick={(e) =>
+                    handleNavigation(e, {
+                      href: "/",
+                      label: "Home",
+                      icon: HomeIcon,
+                      scrollTo: "top",
+                    })
+                  }
+                  className="text-primary hover:text-primary/90 cursor-pointer"
+                >
                   <Logo />
                 </a>
                 {/* Desktop navigation - text links */}
@@ -93,12 +124,13 @@ export default function Navbar() {
                   <NavigationMenuList className="gap-1">
                     {navigationLinks.map((link) => (
                       <NavigationMenuItem key={link.label}>
-                        <NavigationMenuLink
+                        <a
                           href={link.href}
+                          onClick={(e) => handleNavigation(e, link)}
                           className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                         >
                           {link.label}
-                        </NavigationMenuLink>
+                        </a>
                       </NavigationMenuItem>
                     ))}
                   </NavigationMenuList>
@@ -166,7 +198,7 @@ export default function Navbar() {
                       <a
                         key={link.label}
                         href={link.href}
-                        onClick={() => setIsMobileMenuOpen(false)}
+                        onClick={(e) => handleNavigation(e, link)}
                         className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-foreground transition-colors"
                       >
                         <Icon size={18} className="text-muted-foreground" />

@@ -137,7 +137,7 @@ export function PricingCards() {
   };
 
   return (
-    <div className="w-full py-16 bg-background">
+    <div id="pricing" className="w-full py-16 bg-background">
       <div className="max-w-6xl mx-auto px-4">
         <div className="text-center mb-12">
           <h2 className="text-4xl font-bold text-foreground mb-4">
