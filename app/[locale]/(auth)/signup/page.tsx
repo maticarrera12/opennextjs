@@ -21,8 +21,8 @@ import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { authClient } from "@/lib/auth-client";
 import { Separator } from "@/components/ui/separator";
-import SocialAuthButtons from "@/components/auth/social-auth-buttons";
-  import PasswordInput from "@/components/auth/password-input";
+import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
+import PasswordInput from "@/app/[locale]/(auth)/_components/password-input";
 
 export default function SignUpPage() {
   const [error, setError] = useState("");

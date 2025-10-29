@@ -24,7 +24,7 @@ import Link from "next/link";
 import { ResetPasswordInput, resetPasswordSchema } from "@/lib/schemas";
 import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
-import PasswordInput from "@/components/auth/password-input";
+import PasswordInput from "@/app/[locale]/(auth)/_components/password-input";
 
 export default function ResetPasswordPage() {
   const router = useRouter();

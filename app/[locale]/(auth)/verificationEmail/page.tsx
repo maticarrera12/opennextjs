@@ -1,6 +1,6 @@
 "use client";
 import React, { useEffect, useRef, useState } from "react";
-import BetterAuthActionButton from "@/components/auth/better-auth-action-button";
+import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
 import { authClient } from "@/lib/auth-client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";

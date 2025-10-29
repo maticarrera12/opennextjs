@@ -1,7 +1,7 @@
 "use client";
 
 import React from "react";
-import { Button } from "../../../../../components/ui/button";
+import { Button } from "../../../../components/ui/button";
 // import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -26,13 +26,21 @@ const Hero = () => {
               </span>{" "}
               {t("description.part2")}
             </p>
-            <div className="flex justify-center lg:justify-start">
+            <div className="flex justify-center gap-4 lg:justify-start">
               <Button
                 onClick={() => (window.location.href = "/app")}
-                className="text-base px-8 py-6 bg-blue-600 hover:bg-blue-700 text-white"
+                className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
                 size="lg"
               >
                 {t("cta")}
+              </Button>
+
+              <Button
+                onClick={() => (window.location.href = "/docs")}
+                className="h-14 px-8 rounded-md cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
+                size="lg"
+              >
+                Docs
               </Button>
             </div>
           </div>

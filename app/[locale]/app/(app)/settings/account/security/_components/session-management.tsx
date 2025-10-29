@@ -1,5 +1,5 @@
 "use client";
-import BetterAuthActionButton from "@/components/auth/better-auth-action-button";
+import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
 import { Badge } from "@/components/ui/badge";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { authClient } from "@/lib/auth-client";

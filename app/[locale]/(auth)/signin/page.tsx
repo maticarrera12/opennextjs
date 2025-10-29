@@ -22,8 +22,7 @@ import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { authClient } from "@/lib/auth-client";
 import { Separator } from "@/components/ui/separator";
-import SocialAuthButtons from "@/components/auth/social-auth-buttons";
-
+import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
