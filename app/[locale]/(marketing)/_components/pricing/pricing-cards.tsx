@@ -15,6 +15,7 @@ import {
 } from "@/components/ui/card";
 import { Check } from "lucide-react";
 import { authClient } from "@/lib/auth-client";
+import { PricingSkeleton } from "./pricing-skeleton";
 
 interface PlanCardProps {
   plan: (typeof PLANS)[keyof typeof PLANS];
@@ -49,13 +50,9 @@ export function PricingCards() {
   const { data: session, isPending } = authClient.useSession();
   const userPlan = (session?.user as { plan?: string })?.plan || null;
 
-  // Si el cliente aún no montó o está cargando sesión, no renderizamos nada
+  // Si el cliente aún no montó o está cargando sesión, mostramos el skeleton
   if (!mounted || isPending) {
-    return (
-      <div className="flex items-center justify-center h-screen">
-        <p className="text-muted-foreground">Loading...</p>
-      </div>
-    );
+    return <PricingSkeleton />;
   }
 
   // Filtrar planes activos (que tengan price IDs configurados)
