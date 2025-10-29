@@ -1,5 +1,5 @@
 "use client";
-import { useId } from "react";
+import { useId, useState } from "react";
 import {
   FileTextIcon,
   GlobeIcon,
@@ -8,6 +8,8 @@ import {
   Link,
   UsersIcon,
 } from "lucide-react";
+import { motion, AnimatePresence } from "framer-motion";
+import { cn } from "@/lib/utils";
 
 import Logo from "@/components/navbar/logo";
 import ThemeToggle from "@/components/navbar/theme-toggle";
@@ -20,32 +22,13 @@ import {
   NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import {
-  Popover,
-  PopoverContent,
-  PopoverTrigger,
-} from "@/components/ui/popover";
-import {
-  Select,
-  SelectContent,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import {
-  Tooltip,
-  TooltipContent,
-  TooltipProvider,
-  TooltipTrigger,
-} from "@/components/ui/tooltip";
 import { authClient } from "@/lib/auth-client";
 
-// Navigation links with icons for desktop icon-only navigation
+// Navigation links
 const navigationLinks = [
-  { href: "#", label: "Dashboard", icon: HomeIcon, active: true },
-  { href: "#", label: "Projects", icon: LayersIcon },
-  { href: "#", label: "Documentation", icon: FileTextIcon },
-  { href: "#", label: "Team", icon: UsersIcon },
+  { href: "/", label: "Home", icon: HomeIcon },
+  { href: "/#pricing", label: "Pricing", icon: GlobeIcon },
+  { href: "/docs", label: "Docs", icon: FileTextIcon },
 ];
 
 // Language options
@@ -57,19 +40,22 @@ const languages = [
 export default function Navbar() {
   const id = useId();
   const { data: session, isPending: loading } = authClient.useSession();
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   return (
-    <header className="fixed top-0 left-0 right-0 z-50 border-b px-4 md:px-6 bg-background">
-      <div className="flex h-16 items-center justify-between gap-4">
-        {/* Left side */}
-        <div className="flex flex-1 items-center gap-2">
-          {/* Mobile menu trigger */}
-          <Popover>
-            <PopoverTrigger asChild>
+    <>
+      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background">
+        <div className="max-w-7xl mx-auto px-4 md:px-6">
+          <div className="flex h-16 items-center justify-between gap-4">
+            {/* Left side */}
+            <div className="flex flex-1 items-center gap-2">
+              {/* Mobile menu trigger */}
               <Button
+                onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
                 className="group size-8 md:hidden"
                 variant="ghost"
                 size="icon"
+                aria-expanded={isMobileMenuOpen}
               >
                 <svg
                   className="pointer-events-none"
@@ -97,95 +83,103 @@ export default function Navbar() {
                   />
                 </svg>
               </Button>
-            </PopoverTrigger>
-            <PopoverContent align="start" className="w-36 p-1 md:hidden">
-              <NavigationMenu className="max-w-none *:w-full">
-                <NavigationMenuList className="flex-col items-start gap-0 md:gap-2">
-                  {navigationLinks.map((link, index) => {
-                    const Icon = link.icon;
-                    return (
-                      <NavigationMenuItem key={index} className="w-full">
+              <div className="flex items-center gap-6">
+                {/* Logo */}
+                <a href="/" className="text-primary hover:text-primary/90">
+                  <Logo />
+                </a>
+                {/* Desktop navigation - text links */}
+                <NavigationMenu className="hidden md:flex">
+                  <NavigationMenuList className="gap-1">
+                    {navigationLinks.map((link) => (
+                      <NavigationMenuItem key={link.label}>
                         <NavigationMenuLink
                           href={link.href}
-                          className="flex-row items-center gap-2 py-1.5"
-                          active={link.active}
+                          className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                         >
-                          <Icon
-                            size={16}
-                            className="text-muted-foreground"
-                            aria-hidden="true"
-                          />
-                          <span>{link.label}</span>
+                          {link.label}
                         </NavigationMenuLink>
                       </NavigationMenuItem>
-                    );
-                  })}
-                </NavigationMenuList>
-              </NavigationMenu>
-            </PopoverContent>
-          </Popover>
-          <div className="flex items-center gap-6">
-            {/* Logo */}
-            <a href="#" className="text-primary hover:text-primary/90">
-              <Logo />
-            </a>
-            {/* Desktop navigation - icon only */}
-            <NavigationMenu className="hidden md:flex">
-              <NavigationMenuList className="gap-2">
-                <TooltipProvider>
-                  {navigationLinks.map((link) => (
-                    <NavigationMenuItem key={link.label}>
-                      <Tooltip>
-                        <TooltipTrigger asChild>
-                          <NavigationMenuLink
-                            href={link.href}
-                            className="flex size-8 items-center justify-center p-1.5"
-                          >
-                            <link.icon size={20} aria-hidden="true" />
-                            <span className="sr-only">{link.label}</span>
-                          </NavigationMenuLink>
-                        </TooltipTrigger>
-                        <TooltipContent
-                          side="bottom"
-                          className="px-2 py-1 text-xs"
-                        >
-                          <p>{link.label}</p>
-                        </TooltipContent>
-                      </Tooltip>
-                    </NavigationMenuItem>
-                  ))}
-                </TooltipProvider>
-              </NavigationMenuList>
-            </NavigationMenu>
+                    ))}
+                  </NavigationMenuList>
+                </NavigationMenu>
+              </div>
+            </div>
+            {/* Right side */}
+            <div className="flex items-center gap-2">
+              {/* Theme toggle */}
+              <ThemeToggle />
+              {/* Language selector */}
+              <LanguageSwitcher />
+
+              <Button
+                onClick={() => (window.location.href = "/waitlist")}
+                className="text-sm  cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
+              >
+                Waitlist
+              </Button>
+              {/* User menu */}
+              {!loading &&
+                (session?.user ? (
+                  <UserMenu />
+                ) : (
+                  <Button
+                    onClick={() => (window.location.href = "/signin")}
+                    className="text-sm bg-indigo-600 text-white hover:bg-indigo- cursor-pointer"
+                  >
+                    Sign In
+                  </Button>
+                ))}
+            </div>
           </div>
         </div>
-        {/* Right side */}
-        <div className="flex items-center gap-2">
-          {/* Theme toggle */}
-          <ThemeToggle />
-          {/* Language selector */}
-          <LanguageSwitcher />
+      </header>
 
-          <Button
-            onClick={() => (window.location.href = "/waitlist")}
-            className="text-sm  cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
-          >
-            Waitlist
-          </Button>
-          {/* User menu */}
-          {!loading &&
-            (session?.user ? (
-              <UserMenu />
-            ) : (
-              <Button
-                onClick={() => (window.location.href = "/signin")}
-                className="text-sm bg-indigo-600 text-white hover:bg-indigo- cursor-pointer"
-              >
-                Sign In
-              </Button>
-            ))}
-        </div>
-      </div>
-    </header>
+      {/* Mobile sidebar menu */}
+      <AnimatePresence>
+        {isMobileMenuOpen && (
+          <>
+            {/* Overlay */}
+            <motion.div
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              onClick={() => setIsMobileMenuOpen(false)}
+              className="fixed inset-0 top-16 z-40 bg-black/50 md:hidden"
+            />
+
+            {/* Sidebar */}
+            <motion.aside
+              initial={{ x: "-100%" }}
+              animate={{ x: 0 }}
+              exit={{ x: "-100%" }}
+              transition={{ duration: 0.3, ease: "easeInOut" }}
+              className="fixed left-0 top-16 z-50 h-[calc(100vh-4rem)] w-64 border-r bg-background shadow-lg md:hidden"
+            >
+              <div className="flex h-full flex-col p-4">
+                {/* Navigation links */}
+                <nav className="flex flex-col gap-2">
+                  {navigationLinks.map((link) => {
+                    const Icon = link.icon;
+                    return (
+                      <a
+                        key={link.label}
+                        href={link.href}
+                        onClick={() => setIsMobileMenuOpen(false)}
+                        className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-foreground transition-colors"
+                      >
+                        <Icon size={18} className="text-muted-foreground" />
+                        <span>{link.label}</span>
+                      </a>
+                    );
+                  })}
+                </nav>
+              </div>
+            </motion.aside>
+          </>
+        )}
+      </AnimatePresence>
+    </>
   );
 }

@@ -10,7 +10,6 @@ import {
   CreditCardIcon,
   KeyIcon,
   UsersIcon,
-  MenuIcon,
   LogOutIcon,
 } from "lucide-react";
 import { useState } from "react";
@@ -102,14 +101,37 @@ export default function SettingsSidebar() {
     <>
       {/* Navbar mobile - barra superior con fondo */}
       <div className="fixed top-0 left-0 right-0 z-50 flex h-14 items-center border-b border-border bg-background px-4 shadow-sm md:hidden">
-        {!isOpen && (
-          <button
-            onClick={() => setIsOpen(true)}
-            className="rounded-lg p-2 hover:bg-accent transition-colors"
+        <button
+          onClick={() => setIsOpen(!isOpen)}
+          className="group rounded-lg p-2 hover:bg-accent transition-colors"
+          aria-expanded={isOpen}
+        >
+          <svg
+            className="pointer-events-none"
+            width={20}
+            height={20}
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+            xmlns="http://www.w3.org/2000/svg"
           >
-            <MenuIcon size={20} />
-          </button>
-        )}
+            <path
+              d="M4 12L20 12"
+              className="origin-center -translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-x-0 group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[315deg]"
+            />
+            <path
+              d="M4 12H20"
+              className="origin-center transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.8)] group-aria-expanded:rotate-45"
+            />
+            <path
+              d="M4 12H20"
+              className="origin-center translate-y-[7px] transition-all duration-300 ease-[cubic-bezier(.5,.85,.25,1.1)] group-aria-expanded:translate-y-0 group-aria-expanded:rotate-[135deg]"
+            />
+          </svg>
+        </button>
         <span className="ml-3 text-lg font-semibold">{t("title")}</span>
       </div>
 
@@ -175,13 +197,15 @@ export default function SettingsSidebar() {
                             ? "bg-accent text-foreground font-medium"
                             : "text-muted-foreground"
                         )}
-                        style={{
-                          // Grid con 2 columnas: ícono fijo (24px + gap), label flexible.
-                          display: "grid",
-                          gridTemplateColumns: "24px 1fr",
-                          gap: "12px",
-                          paddingInline: "8px",
-                        }}
+                        style={
+                          {
+                            // Grid con 2 columnas: ícono fijo (24px + gap), label flexible.
+                            display: "grid",
+                            gridTemplateColumns: "24px 1fr",
+                            gap: "12px",
+                            paddingInline: "8px",
+                          } as React.CSSProperties
+                        }
                       >
                         {/* Ícono: celda fija, no se mueve */}
                         <Icon
@@ -219,12 +243,14 @@ export default function SettingsSidebar() {
                 "grid h-9 w-full place-items-center rounded-md text-sm transition-colors",
                 "hover:bg-destructive/10 hover:text-destructive"
               )}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "24px 1fr",
-                gap: "12px",
-                paddingInline: "8px",
-              }}
+              style={
+                {
+                  display: "grid",
+                  gridTemplateColumns: "24px 1fr",
+                  gap: "12px",
+                  paddingInline: "8px",
+                } as React.CSSProperties
+              }
             >
               <LogOutIcon
                 size={18}
