@@ -3,7 +3,7 @@ import { useMDXComponents as getDocsComponents } from "nextra-theme-docs";
 
 export function useMDXComponents(components: MDXComponents): MDXComponents {
   return {
-    ...getDocsComponents(components),
+    ...getDocsComponents(components as any),
     ...components,
-  };
+  } as MDXComponents;
 }
