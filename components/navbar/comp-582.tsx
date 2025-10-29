@@ -2,7 +2,6 @@
 import { useState } from "react";
 import { FileTextIcon, GlobeIcon, HomeIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
-import Link from "next/link";
 
 import Logo from "@/components/navbar/logo";
 import ThemeToggle from "@/components/navbar/theme-toggle";
@@ -12,7 +11,6 @@ import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
   NavigationMenuItem,
-  NavigationMenuLink,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
 import { authClient } from "@/lib/auth-client";
@@ -29,7 +27,7 @@ export default function Navbar() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleNavigation = (
-    e: React.MouseEvent<HTMLAnchorElement>,
+    e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>,
     link: (typeof navigationLinks)[0]
   ) => {
     // Siempre cerrar el menú mobile al hacer clic
@@ -105,8 +103,7 @@ export default function Navbar() {
               </Button>
               <div className="flex items-center gap-6">
                 {/* Logo */}
-                <a
-                  href="/"
+                <button
                   onClick={(e) =>
                     handleNavigation(e, {
                       href: "/",
@@ -115,10 +112,10 @@ export default function Navbar() {
                       scrollTo: "top",
                     })
                   }
-                  className="text-primary hover:text-primary/90 cursor-pointer"
+                  className="text-primary hover:text-primary/90 cursor-pointer bg-transparent border-none p-0"
                 >
                   <Logo />
-                </a>
+                </button>
                 {/* Desktop navigation - text links */}
                 <NavigationMenu className="hidden md:flex">
                   <NavigationMenuList className="gap-1">
