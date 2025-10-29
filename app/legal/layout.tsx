@@ -2,10 +2,12 @@ import { Layout, Navbar, Footer } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
 import "nextra-theme-docs/style.css";
+import "./legal.css";
 
 const navbar = (
   <Navbar
-    logo={<span className="font-bold">Legal Docs</span>}
+    logo={<span className="font-bold">OpenNextJS - Legal</span>}
+    logoLink="/"
     projectLink="https://github.com/maticarrera12/open_next"
   />
 );
@@ -22,7 +24,7 @@ export default async function LegalLayout({
   return (
     <html lang="en" dir="ltr" suppressHydrationWarning>
       <Head />
-      <body>
+      <body suppressHydrationWarning>
         <Layout
           navbar={navbar}
           pageMap={pageMap}
