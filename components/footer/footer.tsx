@@ -47,20 +47,20 @@ export default function Footer() {
             <h3 className="mb-4 text-sm font-semibold">{t("legal.title")}</h3>
             <ul className="space-y-2">
               <li>
-                <a
+                <Link
                   href="/legal/terms-of-service"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {t("legal.terms")}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
+                <Link
                   href="/legal/privacy-policy"
                   className="text-sm text-muted-foreground hover:text-foreground transition-colors"
                 >
                   {t("legal.privacy")}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
