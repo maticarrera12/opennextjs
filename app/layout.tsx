@@ -13,6 +13,10 @@ export default async function RootLayout({
     return children;
   }
 
-  // Para otras rutas, renderizar normalmente
-  return children;
+  // Para otras rutas, root layout debe proveer <html> y <body>
+  return (
+    <html lang="en">
+      <body>{children}</body>
+    </html>
+  );
 }

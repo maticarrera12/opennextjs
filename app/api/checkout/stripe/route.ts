@@ -81,7 +81,7 @@ export async function POST(req: NextRequest) {
             quantity: 1,
           },
         ],
-        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/app/billing?success=true`,
+        success_url: `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/payment?success=true`,
         cancel_url: `${process.env.NEXT_PUBLIC_APP_URL}/${locale}/pricing?canceled=true`,
         metadata: {
           userId: session.user.id,
