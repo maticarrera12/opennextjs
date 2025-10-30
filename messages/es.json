@@ -322,6 +322,22 @@
       }
     }
   },
+  "footer": {
+    "contact": {
+      "title": "Contacto",
+      "email": "support@acme.com"
+    },
+    "help": {
+      "title": "Ayuda",
+      "faq": "Preguntas frecuentes"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos del servicio",
+      "privacy": "Política de privacidad"
+    },
+    "copyright": "© {year} OpenNextJS, Todos los derechos reservados"
+  },
   "app": {
     "title": "App",
     "sections": {

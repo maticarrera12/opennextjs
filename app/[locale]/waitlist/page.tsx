@@ -5,6 +5,7 @@ import { useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
+import { waitlistSchema } from "@/lib/schemas/waitlist.schema";
 import {
   Form,
   FormControl,
@@ -18,11 +19,6 @@ import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
 import { toast } from "sonner";
 import { Copy, Check, Share2, Users, Sparkles, RefreshCw } from "lucide-react";
-
-const waitlistSchema = z.object({
-  email: z.string().email({ message: "Invalid email address" }),
-  name: z.string().min(2, "Name must be at least 2 characters").optional(),
-});
 
 type WaitlistForm = z.infer<typeof waitlistSchema>;
 

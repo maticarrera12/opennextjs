@@ -1,5 +1,5 @@
 import { prisma } from "@/lib/prisma";
-import { waitlistSchema } from "@/lib/validations/waitlist";
+import { waitlistSchema } from "@/lib/schemas/waitlist.schema";
 import { customAlphabet } from "nanoid";
 import { z } from "zod";
 import { NextResponse } from "next/server";
