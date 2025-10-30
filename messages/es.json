@@ -321,5 +321,20 @@
         "answer": "Responde las preguntas que tus usuarios puedan tener."
       }
     }
+  },
+  "app": {
+    "title": "App",
+    "sections": {
+      "main": "Principal",
+      "account": "Cuenta"
+    },
+    "menu": {
+      "dashboard": "Panel",
+      "createBrand": "Crear Marca",
+      "myBrands": "Mis Marcas",
+      "favorites": "Favoritos",
+      "settings": "Configuración",
+      "logout": "Cerrar Sesión"
+    }
   }
 }

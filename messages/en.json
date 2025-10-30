@@ -337,5 +337,20 @@
       "privacy": "Privacy Policy"
     },
     "copyright": "© {year} OpenNextJS, All rights reserved"
+  },
+  "app": {
+    "title": "App",
+    "sections": {
+      "main": "Main",
+      "account": "Account"
+    },
+    "menu": {
+      "dashboard": "Dashboard",
+      "createBrand": "Create Brand",
+      "myBrands": "My Brands",
+      "favorites": "Favorites",
+      "settings": "Settings",
+      "logout": "Log Out"
+    }
   }
 }

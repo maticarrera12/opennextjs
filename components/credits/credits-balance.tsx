@@ -36,35 +36,35 @@ export function CreditBalance() {
   }
 
   if (loading || !credits) {
-    return <div className="animate-pulse h-20 bg-gray-200 rounded-lg" />;
+    return <div className="h-24 rounded-md bg-muted animate-pulse" />;
   }
 
   const percentage = (credits.balance / credits.monthlyAllocation) * 100;
   const isLow = percentage < 20;
 
   return (
-    <div className="bg-white rounded-lg shadow p-6">
-      <div className="flex items-center justify-between mb-4">
-        <h3 className="text-lg font-semibold text-gray-900">Credit Balance</h3>
-        <span className="text-sm text-gray-500">{credits.plan} Plan</span>
+    <div className="rounded-md border border-border bg-card p-3 min-h-24">
+      <div className="mb-2 flex items-center justify-between">
+        <h3 className="text-sm font-medium text-foreground">Credit Balance</h3>
+        <span className="text-xs text-muted-foreground">{credits.plan}</span>
       </div>
 
       {/* Balance Display */}
-      <div className="mb-4">
+      <div className="mb-2">
         <div className="flex items-baseline justify-between">
-          <span className="text-4xl font-bold text-gray-900">
+          <span className="text-2xl font-semibold text-foreground">
             {credits.balance}
           </span>
-          <span className="text-sm text-gray-500">
-            / {credits.monthlyAllocation} credits
+          <span className="text-xs text-muted-foreground">
+            / {credits.monthlyAllocation}
           </span>
         </div>
 
         {/* Progress Bar */}
-        <div className="mt-2 w-full bg-gray-200 rounded-full h-2">
+        <div className="mt-1 h-1.5 w-full rounded-full bg-muted">
           <div
-            className={`h-2 rounded-full transition-all ${
-              isLow ? "bg-red-500" : "bg-blue-500"
+            className={`h-1.5 rounded-full transition-all ${
+              isLow ? "bg-destructive" : "bg-primary"
             }`}
             style={{ width: `${Math.min(percentage, 100)}%` }}
           />
@@ -72,16 +72,18 @@ export function CreditBalance() {
       </div>
 
       {/* Usage Stats */}
-      <div className="space-y-2 text-sm text-gray-600">
+      <div className="space-y-1 text-xs text-muted-foreground">
         <div className="flex justify-between">
           <span>Used this month:</span>
-          <span className="font-medium">{credits.usedThisMonth} credits</span>
+          <span className="font-medium text-foreground">
+            {credits.usedThisMonth}
+          </span>
         </div>
 
         {credits.resetDate && (
           <div className="flex justify-between">
             <span>Resets on:</span>
-            <span className="font-medium">
+            <span className="font-medium text-foreground">
               {new Date(credits.resetDate).toLocaleDateString()}
             </span>
           </div>
@@ -90,24 +92,22 @@ export function CreditBalance() {
 
       {/* Low Balance Warning */}
       {isLow && (
-        <div className="mt-4 p-3 bg-red-50 border border-red-200 rounded-md">
-          <p className="text-sm text-red-800">
-            ⚠️ You&apos;re running low on credits!
-          </p>
+        <div className="mt-2 rounded-md border border-destructive/30 bg-destructive/10 p-2">
+          <p className="text-xs text-destructive">Low balance</p>
         </div>
       )}
 
       {/* Actions */}
-      <div className="mt-4 flex gap-2">
+      <div className="mt-3 flex gap-2">
         <Link
           href="/pricing"
-          className="flex-1 text-center px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition"
+          className="flex-1 rounded-md bg-primary px-3 py-1.5 text-center text-xs font-medium text-primary-foreground hover:opacity-90"
         >
           Buy Credits
         </Link>
         <Link
           href="/dashboard/billing"
-          className="px-4 py-2 border border-gray-300 rounded-md hover:bg-gray-50 transition"
+          className="rounded-md border border-border px-3 py-1.5 text-xs hover:bg-accent"
         >
           View Usage
         </Link>
