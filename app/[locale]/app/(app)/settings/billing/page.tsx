@@ -5,6 +5,12 @@ import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+interface PaymentMetadata {
+  cardBrand?: string;
+  cardLast4?: string;
+  [key: string]: unknown;
+}
+
 function formatCurrency(amount: number, currency = "USD") {
   return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
     amount
@@ -78,11 +84,11 @@ const BillingPage = async () => {
   const remaining = Math.max(0, monthlyCredits - usedThisMonth);
 
   const lastPayment = purchases.find((p) => {
-    const md = p.metadata as any;
+    const md = p.metadata as PaymentMetadata | null;
     return md?.cardBrand && md?.cardLast4;
   });
 
-  function formatCardLabel(md: any) {
+  function formatCardLabel(md: PaymentMetadata | null | undefined) {
     if (!md) return null;
     const brand = md.cardBrand;
     const last4 = md.cardLast4;
@@ -90,7 +96,7 @@ const BillingPage = async () => {
     return `${brand.charAt(0).toUpperCase() + brand.slice(1)} •••• ${last4}`;
   }
 
-  const lastPaymentLabel = formatCardLabel(lastPayment?.metadata as any);
+  const lastPaymentLabel = formatCardLabel(lastPayment?.metadata as PaymentMetadata | null);
 
   return (
     <div className="mx-auto max-w-7xl px-8 py-12">
@@ -258,7 +264,7 @@ const BillingPage = async () => {
                   </thead>
                   <tbody>
                     {purchases.map((p) => {
-                      const md = p.metadata as any;
+                      const md = p.metadata as PaymentMetadata | null;
                       const cardLabel =
                         md?.cardBrand && md?.cardLast4
                           ? `${md.cardBrand.charAt(0).toUpperCase() + md.cardBrand.slice(1)} •••• ${md.cardLast4}`
