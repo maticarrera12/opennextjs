@@ -806,7 +806,15 @@ async function handleInvoicePaid(invoice: StripeInvoiceExtended) {
   let cardBrand: string | undefined;
   let cardLast4: string | undefined;
 
-  const pi = expandedInvoice.payment_intent as Stripe.PaymentIntent | null;
+  // TypeScript doesn't know payment_intent is expanded, so we need to cast
+  const paymentIntent = (expandedInvoice as Stripe.Invoice & {
+    payment_intent?: string | Stripe.PaymentIntent | null;
+  }).payment_intent;
+
+  const pi =
+    typeof paymentIntent === "string" || !paymentIntent
+      ? null
+      : (paymentIntent as Stripe.PaymentIntent);
   if (pi && pi.payment_method) {
     const pm =
       typeof pi.payment_method === "string"
