@@ -4,12 +4,7 @@ import { prisma } from "@/lib/prisma";
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-interface PaymentMetadata {
-  cardBrand?: string;
-  cardLast4?: string;
-  [key: string]: unknown;
-}
+import type { PaymentMetadata } from "@/types/payment";
 
 function formatCurrency(amount: number, currency = "USD") {
   return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(

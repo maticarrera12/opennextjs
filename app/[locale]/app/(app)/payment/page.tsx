@@ -5,6 +5,7 @@ import { prisma } from "@/lib/prisma";
 import { headers } from "next/headers";
 import { auth } from "@/lib/auth";
 import Link from "next/link";
+import type { PaymentMetadata } from "@/types/payment";
 
 function formatCurrency(amount: number, currency = "USD") {
   return new Intl.NumberFormat("en-US", { style: "currency", currency }).format(
@@ -26,7 +27,7 @@ function formatDateSafe(date?: Date | string | null) {
 const page = async ({
   searchParams,
 }: {
-  searchParams?: { success?: string; error?: string };
+  searchParams?: Promise<{ success?: string; error?: string }>;
 }) => {
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session?.user) {
@@ -64,8 +65,7 @@ const page = async ({
     },
   });
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const md = purchase?.metadata as any;
+  const md = purchase?.metadata as PaymentMetadata | null;
   const cardLabel =
     md?.cardBrand && md?.cardLast4
       ? `${md.cardBrand.charAt(0).toUpperCase() + md.cardBrand.slice(1)} •••• ${md.cardLast4}`
@@ -75,8 +75,9 @@ const page = async ({
   const planStatus = user?.planStatus || "ACTIVE";
   const renewal = formatDateSafe(user?.currentPeriodEnd);
 
-  const success = searchParams?.success;
-  const errorMsg = searchParams?.error;
+  const resolvedSearchParams = await searchParams;
+  const success = resolvedSearchParams?.success;
+  const errorMsg = resolvedSearchParams?.error;
 
   return (
     <div className="mx-auto max-w-2xl px-6 py-20 text-center">
