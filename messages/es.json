@@ -7,6 +7,7 @@
       "option3": "Documentación",
       "option4": "Marcadores",
       "option5": "Editar Perfil",
+      "adminPanel": "Panel de Administración",
       "logout": "Cerrar Sesión"
     }
   },
@@ -350,6 +351,19 @@
       "myBrands": "Mis Marcas",
       "favorites": "Favoritos",
       "settings": "Configuración",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "sections": {
+      "main": "Principal"
+    },
+    "menu": {
+      "overview": "Vista General",
+      "usersAnalytics": "Analíticas de Usuarios",
+      "revenueBilling": "Ingresos y Facturación",
+      "productUsage": "Uso del Producto (IA y Assets)",
       "logout": "Cerrar Sesión"
     }
   }

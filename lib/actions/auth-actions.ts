@@ -1,16 +1,13 @@
 "use server";
-import { auth } from "../auth";
+import { auth, prisma, assignAdminRole } from "../auth";
 import { headers } from "next/headers";
 import { signInSchema, signUpSchema } from "../schemas";
 
 export const signUp = async (email: string, password: string, name: string) => {
   const validated = signUpSchema.safeParse({ email, password, name });
-
   if (!validated.success) {
     return {
-      error: {
-        message: validated.error.issues[0].message,
-      },
+      error: { message: validated.error.issues[0].message },
       user: null,
     };
   }
@@ -24,7 +21,16 @@ export const signUp = async (email: string, password: string, name: string) => {
     },
   });
 
-  return result;
+  if (!result.user || ("error" in result && result.error)) {
+    return {
+      error: { message: "Sign up failed" },
+      user: null,
+    };
+  }
+  // Asignar rol ADMIN si el email está en ADMIN_EMAILS
+  await assignAdminRole(result.user.id, result.user.email);
+
+  return { error: null, user: result.user };
 };
 
 export const signIn = async (email: string, password: string) => {
@@ -46,6 +52,11 @@ export const signIn = async (email: string, password: string) => {
       callbackURL: "/",
     },
   });
+
+  // Asignar rol ADMIN si el email está en ADMIN_EMAILS (útil si se agrega después)
+  if (result.user) {
+    await assignAdminRole(result.user.id, result.user.email);
+  }
 
   return result;
 };

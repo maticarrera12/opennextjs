@@ -7,6 +7,25 @@ import { sendEmailVerificationEmail } from "./emails/emailVerification";
 import { sendChangeEmailVerification } from "./emails/sendChangeEmailVerification";
 import { sendDeleteAccountVerification } from "./emails/sendDeleteAccountVerification";
 const prisma = new PrismaClient();
+
+async function assignAdminRole(userId: string, email: string) {
+  const adminEmails =
+    process.env.ADMIN_EMAILS?.split(",").map((e) => e.trim().toLowerCase()) ||
+    [];
+  const isAdmin = adminEmails.includes(email.toLowerCase());
+
+  if (isAdmin) {
+    try {
+      await prisma.user.update({
+        where: { id: userId },
+        data: { role: "ADMIN" },
+      });
+    } catch (error) {
+      console.error("Error updating user role:", error);
+    }
+  }
+}
+
 export const auth = betterAuth({
   baseURL: process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000",
   session: {
@@ -50,7 +69,6 @@ export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
     requireEmailVerification: true,
-    requireEmailVerificationForReset: false,
     sendResetPassword: async ({ user, url }) => {
       await sendPasswordResetEmail({ user, url });
     },
@@ -73,8 +91,9 @@ export const auth = betterAuth({
       clientSecret: process.env.GOOGLE_CLIENT_SECRET as string,
     },
   },
+
   plugins: [nextCookies()],
 });
 
-// Exportar prisma para uso manual si es necesario
-export { prisma };
+// Exportar prisma y helper para uso manual
+export { prisma, assignAdminRole };

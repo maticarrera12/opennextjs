@@ -6,7 +6,8 @@ import { headers } from "next/headers";
 import { ThemeProvider } from "@/components/navbar/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
 import { auth } from "@/lib/auth";
-
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -30,7 +31,6 @@ export default async function LocaleLayout({
   params: Promise<{ locale: string }>;
 }) {
   const { locale } = await params;
-  // ✅ Cargar mensajes en server layout
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
   const session = await auth.api.getSession({
@@ -46,6 +46,8 @@ export default async function LocaleLayout({
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}
             <Toaster position="top-right" richColors />
+            <Analytics />
+            <SpeedInsights />
           </ThemeProvider>
         </NextIntlClientProvider>
       </body>

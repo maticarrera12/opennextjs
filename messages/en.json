@@ -7,6 +7,7 @@
       "option3": "Documentation",
       "option4": "Bookmarks",
       "option5": "Edit Profile",
+      "adminPanel": "Admin Panel",
       "logout": "Log Out"
     }
   },
@@ -350,6 +351,19 @@
       "myBrands": "My Brands",
       "favorites": "Favorites",
       "settings": "Settings",
+      "logout": "Log Out"
+    }
+  },
+  "admin": {
+    "title": "Admin Panel",
+    "sections": {
+      "main": "Main"
+    },
+    "menu": {
+      "overview": "Overview",
+      "usersAnalytics": "Users Analytics",
+      "revenueBilling": "Revenue & Billing",
+      "productUsage": "Product Usage (IA & Assets)",
       "logout": "Log Out"
     }
   }

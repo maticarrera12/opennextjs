@@ -6,9 +6,12 @@ import {
   LogOutIcon,
   PinIcon,
   UserPenIcon,
+  ShieldIcon,
 } from "lucide-react";
 import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { usePathname } from "next/navigation";
+import { useEffect, useState } from "react";
 
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
@@ -26,6 +29,21 @@ import { authClient } from "@/lib/auth-client";
 export default function UserMenu() {
   const { data: session } = authClient.useSession();
   const t = useTranslations("userMenu");
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1] || "en";
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  // Verificar rol ADMIN
+  useEffect(() => {
+    if (session?.user) {
+      fetch("/api/admin/check-role")
+        .then((res) => res.json())
+        .then((data) => {
+          setIsAdmin(data.isAdmin || false);
+        })
+        .catch(() => setIsAdmin(false));
+    }
+  }, [session]);
 
   // Handle sign out with redirect
   const handleSignOut = async () => {
@@ -86,10 +104,18 @@ export default function UserMenu() {
               <span>{t("menu.option1")}</span>
             </Link>
           </DropdownMenuItem>
-          <DropdownMenuItem>
-            <Layers2Icon size={16} className="opacity-60" aria-hidden="true" />
-            <span>{t("menu.option2")}</span>
-          </DropdownMenuItem>
+          {isAdmin && (
+            <DropdownMenuItem asChild>
+              <Link href={`/${locale}/dashboard`}>
+                <ShieldIcon
+                  size={16}
+                  className="opacity-60"
+                  aria-hidden="true"
+                />
+                <span>{t("menu.adminPanel")}</span>
+              </Link>
+            </DropdownMenuItem>
+          )}
           <DropdownMenuItem>
             <BookOpenIcon size={16} className="opacity-60" aria-hidden="true" />
             <span>{t("menu.option3")}</span>

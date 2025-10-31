@@ -1,12 +1,13 @@
 "use client";
-import React from "react";
+import React, { useState } from "react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { cn } from "@/lib/utils";
-import { LogOutIcon, ArrowLeftIcon, type LucideIcon } from "lucide-react";
-import { useState } from "react";
 import { motion } from "framer-motion";
+import { cn } from "@/lib/utils";
 import { authClient } from "@/lib/auth-client";
+import { LogOutIcon, ArrowLeftIcon, type LucideIcon } from "lucide-react";
+import ThemeToggle from "@/components/navbar/theme-toggle";
+import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
 
 export interface SidebarItem {
   name: string;
@@ -24,6 +25,7 @@ interface AppSidebarProps {
   sections: SidebarSection[];
   logoutLabel: string;
   topContent?: React.ReactNode;
+  bottomContent?: React.ReactNode;
   backHref?: string;
   onBack?: () => void;
 }
@@ -33,6 +35,7 @@ export default function AppSidebar({
   sections,
   logoutLabel,
   topContent,
+  bottomContent,
   backHref,
   onBack,
 }: AppSidebarProps) {
@@ -69,7 +72,6 @@ export default function AppSidebar({
             strokeWidth="2"
             strokeLinecap="round"
             strokeLinejoin="round"
-            xmlns="http://www.w3.org/2000/svg"
           >
             <path
               d="M4 12L20 12"
@@ -102,8 +104,9 @@ export default function AppSidebar({
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
       >
-        <div className="flex h-full flex-col justify-between overflow-hidden">
-          <div className="px-3 py-4">
+        <div className="flex h-full flex-col">
+          {/* -------- TOP AREA (scrollable) -------- */}
+          <div className="flex-1 overflow-y-auto px-3 py-4 scrollbar-hide">
             {/* Back button */}
             {(backHref || onBack) && (
               <div className="mb-3">
@@ -114,14 +117,12 @@ export default function AppSidebar({
                       "grid h-9 place-items-center rounded-md text-sm transition-colors",
                       "hover:bg-accent/50 hover:text-foreground"
                     )}
-                    style={
-                      {
-                        display: "grid",
-                        gridTemplateColumns: "24px 1fr",
-                        gap: "12px",
-                        paddingInline: "8px",
-                      } as React.CSSProperties
-                    }
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "24px 1fr",
+                      gap: "12px",
+                      paddingInline: "8px",
+                    }}
                   >
                     <ArrowLeftIcon size={18} className="justify-self-start" />
                   </Link>
@@ -132,20 +133,19 @@ export default function AppSidebar({
                       "grid h-9 w-full place-items-center rounded-md text-sm transition-colors",
                       "hover:bg-accent/50 hover:text-foreground"
                     )}
-                    style={
-                      {
-                        display: "grid",
-                        gridTemplateColumns: "24px 1fr",
-                        gap: "12px",
-                        paddingInline: "8px",
-                      } as React.CSSProperties
-                    }
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "24px 1fr",
+                      gap: "12px",
+                      paddingInline: "8px",
+                    }}
                   >
                     <ArrowLeftIcon size={18} className="justify-self-start" />
                   </button>
                 )}
               </div>
             )}
+
             {/* Título */}
             <div className="mb-4 h-6">
               <span
@@ -158,7 +158,7 @@ export default function AppSidebar({
               </span>
             </div>
 
-            {/* Contenido adicional (ej: credit-balance) */}
+            {/* Contenido adicional superior */}
             {topContent && (
               <div
                 className={cn(
@@ -211,14 +211,12 @@ export default function AppSidebar({
                             ? "bg-accent text-foreground font-medium"
                             : "text-muted-foreground"
                         )}
-                        style={
-                          {
-                            display: "grid",
-                            gridTemplateColumns: "24px 1fr",
-                            gap: "12px",
-                            paddingInline: "8px",
-                          } as React.CSSProperties
-                        }
+                        style={{
+                          display: "grid",
+                          gridTemplateColumns: "24px 1fr",
+                          gap: "12px",
+                          paddingInline: "8px",
+                        }}
                       >
                         <Icon
                           size={18}
@@ -242,39 +240,72 @@ export default function AppSidebar({
             ))}
           </div>
 
-          {/* Logout button */}
-          <div className="px-3 py-3 border-t">
-            <button
-              onClick={() => {
-                setIsOpen(false);
-                handleSignOut();
-              }}
-              className={cn(
-                "grid h-9 w-full place-items-center rounded-md text-sm transition-colors",
-                "hover:bg-destructive/10 hover:text-destructive"
-              )}
-              style={
-                {
+          {/* -------- BOTTOM AREA -------- */}
+          <div className="border-t">
+            {/* Theme toggle y language switcher (siempre visibles) */}
+            <div className="px-3 py-2">
+              <div
+                className={cn(
+                  "flex items-center justify-center gap-2 w-full",
+                  isHovered || isOpen
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none",
+                  "transition-opacity duration-75"
+                )}
+              >
+                <ThemeToggle />
+                <div className="h-6 w-px bg-border shrink-0" />
+                <LanguageSwitcher />
+              </div>
+            </div>
+
+            {/* Bottom content adicional (si se proporciona) */}
+            {bottomContent && (
+              <div
+                className={cn(
+                  "px-3 py-2",
+                  isHovered || isOpen
+                    ? "opacity-100 pointer-events-auto"
+                    : "opacity-0 pointer-events-none",
+                  "transition-opacity duration-75"
+                )}
+              >
+                {bottomContent}
+              </div>
+            )}
+
+            {/* Logout */}
+            <div className="px-3 py-1.5">
+              <button
+                onClick={() => {
+                  setIsOpen(false);
+                  handleSignOut();
+                }}
+                className={cn(
+                  "grid h-9 w-full place-items-center rounded-md text-sm transition-colors",
+                  "hover:bg-destructive/10 hover:text-destructive"
+                )}
+                style={{
                   display: "grid",
                   gridTemplateColumns: "24px 1fr",
                   gap: "12px",
                   paddingInline: "8px",
-                } as React.CSSProperties
-              }
-            >
-              <LogOutIcon
-                size={18}
-                className="justify-self-start text-muted-foreground hover:text-destructive"
-              />
-              <span
-                className={cn(
-                  "justify-self-start whitespace-nowrap overflow-hidden transition-all duration-75",
-                  isHovered || isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"
-                )}
+                }}
               >
-                {logoutLabel}
-              </span>
-            </button>
+                <LogOutIcon
+                  size={18}
+                  className="justify-self-start text-muted-foreground hover:text-destructive"
+                />
+                <span
+                  className={cn(
+                    "justify-self-start whitespace-nowrap overflow-hidden transition-all duration-75",
+                    isHovered || isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"
+                  )}
+                >
+                  {logoutLabel}
+                </span>
+              </button>
+            </div>
           </div>
         </div>
       </motion.aside>
