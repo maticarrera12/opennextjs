@@ -439,7 +439,7 @@ export async function POST(req: NextRequest) {
   try {
     const body = await req.text();
 
-    const signature = headers().get("stripe-signature")!;
+    const signature = (await headers()).get("stripe-signature")!;
 
     // Verify webhook signature
     let event: Stripe.Event;
