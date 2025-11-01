@@ -568,7 +568,6 @@ async function handleSubscriptionUpdate(
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const subscriptionAny = subscription as any;
 
-  // Mantengo tu cálculo manual de periodos (paso 4 NO aplicado)
   const billingAnchor =
     subscriptionAny.billing_cycle_anchor ||
     subscriptionAny.created ||
