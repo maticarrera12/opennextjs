@@ -285,16 +285,16 @@
   },
   "hero": {
     "heading": {
-      "part1": "Título Conciso que Describe",
-      "highlight": "el beneficio",
-      "part2": "de tu producto"
+      "part1": "Crea tu próxima",
+      "highlight": "SaaS",
+      "part2": "en minutos, no en semanas"
     },
     "description": {
-      "part1": "Contenido descriptivo para describir",
-      "highlight": "qué",
-      "part2": "es el producto."
+      "part1": "Comienza con una base completa y confiable, creada con",
+      "highlight": "tecnologías modernas",
+      "part2": "que te ahorran horas de configuración y te permiten lanzar más rápido."
     },
-    "cta": "Comenzar",
+    "cta": "Waitlist",
     "imagePlaceholder": "Reemplazar imagen"
   },
   "faq": {
@@ -323,10 +323,66 @@
       }
     }
   },
+  "hoursSaved": {
+    "title": {
+      "part1": "Ahorra más de",
+      "part2": "de desarrollo"
+    },
+    "subtitle": "Todo lo que un SaaS moderno necesita, preconfigurado y listo para escalar 🚀",
+    "features": {
+      "auth": {
+        "title": "Autenticación & Roles",
+        "hours": "30 h",
+        "desc": "Registro, OAuth, JWT, roles y user impersonation listos."
+      },
+      "payments": {
+        "title": "Pagos & Planes",
+        "hours": "35 h",
+        "desc": "Stripe, Lemon Squeezy, créditos y planes integrados."
+      },
+      "admin": {
+        "title": "Administración & Dashboard",
+        "hours": "20 h",
+        "desc": "Panel de control, usuarios, métricas y retención."
+      },
+      "superAdmin": {
+        "title": "Super Admin Dashboard",
+        "hours": "10 h",
+        "desc": "Panel avanzado con control total y métricas globales."
+      },
+      "infrastructure": {
+        "title": "Infraestructura & Base de Datos",
+        "hours": "25 h",
+        "desc": "Prisma, Neon, migraciones, seeds y entorno seguro."
+      },
+      "ui": {
+        "title": "UI & Componentes",
+        "hours": "15 h",
+        "desc": "Sistema visual con shadcn/ui, Tailwind, dark mode y diseño responsive."
+      },
+      "ux": {
+        "title": "UX & Animaciones",
+        "hours": "15 h",
+        "desc": "Transiciones suaves con Framer Motion y GSAP, interacción fluida y microdetalles."
+      },
+      "legal": {
+        "title": "Legal Pages & Docs (MDX)",
+        "hours": "8 h",
+        "desc": "Docs con Nextra, Terms, Privacy y navegación automática."
+      },
+      "analytics": {
+        "title": "Analytics & Monitoring",
+        "hours": "6 h",
+        "desc": "Integración base para PostHog, LogSnag o GA4 con métricas de usuarios y uso."
+      }
+    },
+    "cta": "Comenzar ahora →",
+    "hoursSaved": "ahorradas"
+  },
   "footer": {
     "contact": {
       "title": "Contacto",
-      "email": "support@acme.com"
+      "email": "mcarreradev12@gmail.com"
     },
     "help": {
       "title": "Ayuda",

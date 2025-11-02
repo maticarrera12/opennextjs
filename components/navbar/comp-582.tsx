@@ -18,7 +18,7 @@ import { authClient } from "@/lib/auth-client";
 // Navigation links
 const navigationLinks = [
   { href: "/", label: "Home", icon: HomeIcon, scrollTo: "top" },
-  { href: "#pricing", label: "Pricing", icon: GlobeIcon, scrollTo: "pricing" },
+
   { href: "/docs", label: "Docs", icon: FileTextIcon },
 ];
 
@@ -141,12 +141,12 @@ export default function Navbar() {
               {/* Language selector */}
               <LanguageSwitcher />
 
-              <Button
+              {/* <Button
                 onClick={() => (window.location.href = "/waitlist")}
                 className="text-sm  cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
               >
                 Waitlist
-              </Button>
+              </Button> */}
               {/* User menu */}
               {!loading &&
                 (session?.user ? (
