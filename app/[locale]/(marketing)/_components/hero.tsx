@@ -17,16 +17,16 @@ const Hero = () => {
           {/* Content Section */}
           <div className="text-center space-y-6 max-w-3xl">
             <h1
-              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight inline-block px-6 py-3 rounded-lg -skew-x-3 transform rotate-[-1deg]"
-              style={{
-                background:
-                  "linear-gradient(to right, rgba(251, 146, 60, 0.3), rgba(59, 130, 246, 0.4), rgba(236, 72, 153, 0.3))",
-              }}
+              className="
+    hero-gradient-title
+    text-3xl sm:text-4xl md:text-5xl font-bold leading-tight 
+    inline-block px-6 py-3 rounded-lg -skew-x-3 transform rotate-[-1deg]
+  "
             >
-              {t("heading.part1")}{" "}
-              <span className="text-primary">{t("heading.highlight")}</span>{" "}
+              {t("heading.part1")} <span>{t("heading.highlight")}</span>{" "}
               {t("heading.part2")}
             </h1>
+
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               {t("description.part1")}{" "}
               <span className="font-semibold">
