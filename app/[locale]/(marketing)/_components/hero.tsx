@@ -1,7 +1,9 @@
 "use client";
 
 import React from "react";
-import { Button } from "../../../../components/ui/button";
+import Link from "next/link";
+import { ArrowRightIcon } from "lucide-react";
+import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 // import Image from "next/image";
 import { useTranslations } from "next-intl";
 
@@ -9,44 +11,50 @@ const Hero = () => {
   const t = useTranslations("hero");
 
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8">
-      <div className="container max-w-7xl mx-auto">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          {/* Left Column - Content */}
-          <div className="text-center lg:text-left space-y-6">
-            <h1 className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-none">
+    <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8">
+      <div className="container max-w-6xl mx-auto">
+        <div className="flex flex-col items-center space-y-12 py-20">
+          {/* Content Section */}
+          <div className="text-center space-y-6 max-w-3xl">
+            <h1
+              className="text-3xl sm:text-4xl md:text-5xl font-bold leading-tight inline-block px-6 py-3 rounded-lg -skew-x-3 transform rotate-[-1deg]"
+              style={{
+                background:
+                  "linear-gradient(to right, rgba(251, 146, 60, 0.3), rgba(59, 130, 246, 0.4), rgba(236, 72, 153, 0.3))",
+              }}
+            >
               {t("heading.part1")}{" "}
-              <span className="text-blue-600">{t("heading.highlight")}</span>{" "}
+              <span className="text-primary">{t("heading.highlight")}</span>{" "}
               {t("heading.part2")}
             </h1>
-            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto lg:mx-0">
+            <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               {t("description.part1")}{" "}
               <span className="font-semibold">
                 {t("description.highlight")}
               </span>{" "}
               {t("description.part2")}
             </p>
-            <div className="flex justify-center gap-4 lg:justify-start">
-              <Button
-                onClick={() => (window.location.href = "/app")}
-                className="h-14 px-8 bg-blue-600 hover:bg-blue-700 text-white rounded-md"
-                size="lg"
-              >
-                {t("cta")}
-              </Button>
+            <div className="flex items-center justify-center gap-4 pt-4">
+              <AnimatedButton
+                label={t("cta")}
+                route="/app"
+                animate={true}
+                animateOnScroll={true}
+                delay={0.2}
+              />
 
-              <Button
-                onClick={() => (window.location.href = "/docs")}
-                className="h-14 px-8 rounded-md cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"
-                size="lg"
+              <Link
+                href="/docs"
+                className="group flex items-center gap-2 h-14 px-8 rounded-md bg-transparent text-foreground transition-all duration-200 hover:-translate-y-1"
               >
-                Docs
-              </Button>
+                <span>Docs</span>
+                <ArrowRightIcon size={20} />
+              </Link>
             </div>
           </div>
 
-          {/* Right Column - Image */}
-          <div className="relative w-full aspect-[4/3] bg-muted rounded-lg flex items-center justify-center">
+          {/* Image Section */}
+          <div className="relative w-full max-w-5xl aspect-[4/3] bg-muted rounded-lg flex items-center justify-center">
             <div className="absolute inset-0 flex items-center justify-center">
               <p className="text-2xl font-bold text-muted-foreground">
                 {t("imagePlaceholder")}
