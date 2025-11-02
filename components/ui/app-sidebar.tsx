@@ -98,8 +98,8 @@ export default function AppSidebar({
         animate={{ width: isHovered || isOpen ? 240 : 80 }}
         transition={{ duration: 0.12, ease: "easeInOut" }}
         className={cn(
-          "fixed left-0 z-40 h-screen w-20 border-r bg-card shadow-lg",
-          "top-14 md:top-0",
+          "z-40 h-screen border-r bg-card shadow-lg shrink-0",
+          "fixed left-0 top-14 md:relative md:top-0",
           "md:translate-x-0",
           isOpen ? "translate-x-0" : "-translate-x-full md:translate-x-0"
         )}
