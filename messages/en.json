@@ -302,24 +302,28 @@
     "subtitle": "Frequently asked questions",
     "questions": {
       "q1": {
-        "question": "What question might your users have?",
-        "answer": "Answer questions that your users might have."
+        "question": "🚀 What is OpenNextJS?",
+        "answer": "OpenNextJS is an open-source fullstack boilerplate based on Next.js + TypeScript, created to accelerate the development of SaaS, dashboards, and modern applications. It includes authentication, payments, storage, analytics, integrated documentation, and a fully customizable foundation."
       },
       "q2": {
-        "question": "What question might your users have?",
-        "answer": "Answer questions that your users might have."
+        "question": "🧩 What's included?",
+        "answer": "OpenNextJS comes with everything you need to build a real product:\n\n• Modern authentication (email, OAuth, roles and permissions)\n• Payments and plans with Stripe or Lemon Squeezy\n• Database with Prisma and Neon\n• Administration dashboard\n• Documentation with Nextra (MDX)\n• Emails with Resend and React Email\n• Security with Cloudflare Turnstile\n• Integrated analytics (PostHog / GA4)\n• Theme system with dark/light mode and full customization support"
       },
       "q3": {
-        "question": "What question might your users have?",
-        "answer": "Answer questions that your users might have."
+        "question": "🎨 Can I customize the theme?",
+        "answer": "Absolutely. OpenNextJS is built with ShadCN/UI, Tailwind, and a modular Theme Provider. You can change:\n\n• Colors, typographies, and global layout\n• Transitions and animations (Framer Motion)\n• Reusable components (Cards, Inputs, Charts, etc.)\n• Documentation theme (Nextra)\n• Dark mode and custom variants\n\nThe entire visual system is designed to easily adapt to your brand or product."
       },
       "q4": {
-        "question": "What question might your users have?",
-        "answer": "Answer questions that your users might have."
+        "question": "⚙️ Why use OpenNextJS?",
+        "answer": "🔋 Production-ready from the first deploy\n🧠 Clean and scalable architecture (App Router + Server Actions)\n💳 Complete integrations (auth, payments, AI, storage, email, SEO)\n🌍 Ready-to-use internationalization (next-intl)\n🧱 Modular and extensible: activate only the modules you need\n💡 Open source and free"
       },
       "q5": {
-        "question": "What question might your users have?",
-        "answer": "Answer questions that your users might have."
+        "question": "💬 Who is it designed for?",
+        "answer": "OpenNextJS is ideal for:\n\n• Developers who want to launch a SaaS or MVP quickly\n• Teams looking for a solid foundation to scale\n• Creators who value good design + clean code\n• Those who want to learn a modern Next.js architecture"
+      },
+      "q6": {
+        "question": "🧭 What can I build with OpenNextJS?",
+        "answer": "• SaaS with plans and credits\n• Dashboards with roles and analytics\n• Landing pages with integrated SEO\n• Apps with AI and storage\n• Administrative panels and multitenancy"
       }
     }
   },
@@ -382,7 +386,7 @@
   "footer": {
     "contact": {
       "title": "Contact",
-      "email": "smcarreradev12@gmail.com"
+      "email": "mcarreradev12@gmail.com"
     },
     "help": {
       "title": "Help",

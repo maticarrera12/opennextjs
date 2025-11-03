@@ -25,6 +25,18 @@ const Faq = () => {
       question: t("questions.q3.question"),
       answer: t("questions.q3.answer"),
     },
+    {
+      question: t("questions.q4.question"),
+      answer: t("questions.q4.answer"),
+    },
+    {
+      question: t("questions.q5.question"),
+      answer: t("questions.q5.answer"),
+    },
+    {
+      question: t("questions.q6.question"),
+      answer: t("questions.q6.answer"),
+    },
   ];
 
   return (
@@ -47,7 +59,7 @@ const Faq = () => {
               <AccordionTrigger className="text-left text-lg font-semibold hover:no-underline py-6">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-6">
+              <AccordionContent className="text-muted-foreground pb-6 whitespace-pre-line">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

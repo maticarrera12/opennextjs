@@ -19,7 +19,7 @@ import { authClient } from "@/lib/auth-client";
 const navigationLinks = [
   { href: "/", label: "Home", icon: HomeIcon, scrollTo: "top" },
 
-  { href: "/docs", label: "Docs", icon: FileTextIcon },
+  // { href: "/docs", label: "Docs", icon: FileTextIcon },
 ];
 
 export default function Navbar() {
@@ -154,7 +154,7 @@ export default function Navbar() {
                 ) : (
                   <Button
                     onClick={() => (window.location.href = "/signin")}
-                    className="text-sm bg-indigo-600 text-white hover:bg-indigo- cursor-pointer"
+                    className="text-sm"
                   >
                     Sign In
                   </Button>

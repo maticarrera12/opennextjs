@@ -37,19 +37,19 @@ const Hero = () => {
             <div className="flex items-center justify-center gap-4 pt-4">
               <AnimatedButton
                 label={t("cta")}
-                route="/app"
+                route="/waitlist"
                 animate={true}
                 animateOnScroll={true}
                 delay={0.2}
               />
 
-              <Link
+              {/* <Link
                 href="/docs"
                 className="group flex items-center gap-2 h-14 px-8 rounded-md bg-transparent text-foreground transition-all duration-200 hover:-translate-y-1"
               >
                 <span>Docs</span>
                 <ArrowRightIcon size={20} />
-              </Link>
+              </Link> */}
             </div>
           </div>
 
