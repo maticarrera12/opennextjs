@@ -68,7 +68,7 @@ export default function HoursSavedSection() {
       >
         <h2 className="text-4xl font-bold leading-tight">
           <span className="text-muted-foreground">{t("title.part1")} </span>
-          <span className="bg-gradient-to-r from-primary to-purple-500 text-transparent bg-clip-text">
+          <span className="bg-gradient-to-r from-pink-500 to-purple-600 text-transparent bg-clip-text">
             <CountUp end={164} duration={2.5} />h
           </span>{" "}
           {t("title.part2")}
