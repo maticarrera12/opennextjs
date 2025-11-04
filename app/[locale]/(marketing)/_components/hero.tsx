@@ -6,6 +6,7 @@ import { ArrowRightIcon } from "lucide-react";
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 // import Image from "next/image";
 import { useTranslations } from "next-intl";
+import CloneCommand from "@/components/CloneCommand";
 
 const Hero = () => {
   const t = useTranslations("hero");
@@ -34,7 +35,7 @@ const Hero = () => {
               </span>{" "}
               {t("description.part2")}
             </p>
-            <div className="flex items-center justify-center gap-4 pt-4">
+            <div className="flex-col md:flex-row items-center justify-center gap-4 pt-4">
               <AnimatedButton
                 label={t("cta")}
                 route="/waitlist"
@@ -50,6 +51,7 @@ const Hero = () => {
                 <span>Docs</span>
                 <ArrowRightIcon size={20} />
               </Link> */}
+              <CloneCommand />
             </div>
           </div>
 

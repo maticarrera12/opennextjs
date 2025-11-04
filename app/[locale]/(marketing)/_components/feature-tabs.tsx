@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 import { Card } from "@/components/ui/card";
 import {
@@ -12,27 +13,31 @@ import {
 
 export function FeatureTabs() {
   return (
-    <Tabs defaultValue="auth" className="w-full max-w-2xl mx-auto space-y-6">
+    <Tabs defaultValue="auth" className="w-full max-w-3xl  md:mx-auto space-y-3">
       {/* TAB LIST */}
       <TabsList className="flex w-full justify-between bg-card/60 backdrop-blur-md py-8 px-2 rounded-full border border-border">
         {[
-          { value: "auth", label: "Authentication" },
-          { value: "payments", label: "Payments" },
-          { value: "storage", label: "Storage" },
-          { value: "admin", label: "Admin Dashboard" },
-          { value: "ai", label: "AI & Brand" },
-        ].map((tab) => (
-          <TabsTrigger
-            key={tab.value}
-            value={tab.value}
-            className="flex-1 rounded-full py-6 text-base font-medium transition-all 
-              data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500/40 
-              data-[state=active]:to-violet-700/40 data-[state=active]:text-white 
-              data-[state=active]:shadow-md hover:bg-muted/30"
-          >
-            {tab.label}
-          </TabsTrigger>
-        ))}
+          { value: "auth", label: "Authentication", icon: ShieldCheck },
+          { value: "payments", label: "Payments", icon: CreditCard },
+          { value: "storage", label: "Storage", icon: Cloud },
+          { value: "admin", label: "Admin Dashboard", icon: LayoutDashboard },
+          { value: "ai", label: "AI & Brand", icon: Brain },
+        ].map((tab) => {
+          const Icon = tab.icon;
+          return (
+            <TabsTrigger
+              key={tab.value}
+              value={tab.value}
+              className="flex-1 rounded-full py-6 text-base font-medium transition-all 
+                data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500/40 
+                data-[state=active]:to-violet-700/40 data-[state=active]:text-white 
+                data-[state=active]:shadow-md hover:bg-muted/30 flex items-center justify-center gap-2"
+            >
+              <Icon className="w-5 h-5 md:w-4 md:h-4" />
+              <span className="hidden md:inline">{tab.label}</span>
+            </TabsTrigger>
+          );
+        })}
       </TabsList>
 
       {/* AUTH */}
@@ -114,7 +119,7 @@ function FeatureCard({
   title,
   items,
 }: {
-  icon: any;
+  icon: React.ComponentType<{ className?: string; size?: number }>;
   title: string;
   items: string[];
 }) {
