@@ -356,7 +356,7 @@
       },
       "infrastructure": {
         "title": "Infrastructure & Database",
-        "hours": "25 h",
+        "hours": "4 h",
         "desc": "Prisma, Neon, migrations, seeds and secure environment."
       },
       "ui": {
@@ -381,7 +381,7 @@
       }
     },
     "cta": "Start now →",
-    "hoursSaved": "hours saved"
+    "hoursSaved": "saved"
   },
   "footer": {
     "contact": {
