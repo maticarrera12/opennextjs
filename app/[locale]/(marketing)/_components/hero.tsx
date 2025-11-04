@@ -19,12 +19,13 @@ const Hero = () => {
           <div className="text-center space-y-6 max-w-3xl">
             <h1
               className="
-    hero-gradient-title
+   bg-gradient-to-r from-pink-500 to-purple-600
     text-3xl sm:text-4xl md:text-5xl font-bold leading-tight 
     inline-block px-6 py-3 rounded-lg -skew-x-3 transform rotate-[-1deg]
+    text-gray-900 dark:text-gray-900
   "
             >
-              {t("heading.part1")} <span>{t("heading.highlight")}</span>{" "}
+              {t("heading.part1")} <span className="text-pink-200">{t("heading.highlight")}</span>{" "}
               {t("heading.part2")}
             </h1>
 
@@ -56,7 +57,7 @@ const Hero = () => {
           </div>
 
           {/* Image Section */}
-            <div className="relative w-full max-w-5xl pt-10">
+          <div className="relative w-full max-w-5xl pt-10">
             {/* Blur effect behind image - blob effect above image */}
             <div
               className="absolute left-1/2 -translate-x-1/2 z-0 bg-gradient-to-b from-primary/40 via-primary/20 to-transparent blur-3xl pointer-events-none rounded-full"
@@ -71,7 +72,7 @@ const Hero = () => {
                   {t("imagePlaceholder")}
                 </p>
               </div>
-              </div>
+            </div>
             {/* Uncomment and add your image when ready */}
             {/* <Image
               src="/path-to-your-image.jpg"
