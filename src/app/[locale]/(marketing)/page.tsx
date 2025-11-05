@@ -1,19 +1,20 @@
 "use client";
 import React from "react";
-import BentoShowcase from "@/app/[locale]/(marketing)/_components/bento-showcase";
-import Hero from "@/app/[locale]/(marketing)/_components/hero";
-import Faq from "@/app/[locale]/(marketing)/_components/faq";
-import LogoMarquee from "./_components/logo-marquee";
-import HoursSavedSection from "./_components/hours-saved-section";
+
 import { FeatureTabs } from "./_components/feature-tabs";
+import HoursSavedSection from "./_components/hours-saved-section";
+import LogoMarquee from "./_components/logo-marquee";
 import { TechStackTabs } from "./_components/tech-stack-tabs";
+import BentoShowcase from "@/app/[locale]/(marketing)/_components/bento-showcase";
+import Faq from "@/app/[locale]/(marketing)/_components/faq";
+import Hero from "@/app/[locale]/(marketing)/_components/hero";
 
 const page = () => {
   return (
     <div className="w-full bg-background">
       <Hero />
       <LogoMarquee />
-      <TechStackTabs/>
+      <TechStackTabs />
       <BentoShowcase />
       <HoursSavedSection />
       <FeatureTabs />

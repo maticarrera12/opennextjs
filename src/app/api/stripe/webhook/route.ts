@@ -407,13 +407,14 @@
 //   return null;
 // }
 // app/api/stripe/webhook/route.ts
-import { NextRequest, NextResponse } from "next/server";
+import { PlanStatus } from "@prisma/client";
 import { headers } from "next/headers";
+import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
-import { prisma } from "@/lib/prisma";
+
 import { CreditService } from "@/lib/credits";
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
-import { PlanStatus } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 // Extend Stripe types with missing properties
 interface StripeSubscriptionExtended extends Stripe.Subscription {
@@ -457,24 +458,18 @@ export async function POST(req: NextRequest) {
       // ============================================
       case "customer.subscription.created":
       case "customer.subscription.updated":
-        await handleSubscriptionUpdate(
-          event.data.object as StripeSubscriptionExtended
-        );
+        await handleSubscriptionUpdate(event.data.object as StripeSubscriptionExtended);
         break;
 
       case "customer.subscription.deleted":
-        await handleSubscriptionCanceled(
-          event.data.object as StripeSubscriptionExtended
-        );
+        await handleSubscriptionCanceled(event.data.object as StripeSubscriptionExtended);
         break;
 
       // ============================================
       // ONE-TIME PAYMENTS (Credit Packs)
       // ============================================
       case "checkout.session.completed":
-        await handleCheckoutCompleted(
-          event.data.object as Stripe.Checkout.Session
-        );
+        await handleCheckoutCompleted(event.data.object as Stripe.Checkout.Session);
         break;
 
       case "payment_intent.succeeded":
@@ -508,15 +503,9 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error("❌ Webhook error:", error);
-    console.error(
-      "Error stack:",
-      error instanceof Error ? error.stack : "Unknown"
-    );
+    console.error("Error stack:", error instanceof Error ? error.stack : "Unknown");
     // Devolvemos 500 si algo explotó fuera del switch
-    return NextResponse.json(
-      { error: "Webhook handler failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Webhook handler failed" }, { status: 500 });
   }
 }
 
@@ -529,9 +518,7 @@ export async function GET() {
 // HELPER FUNCTIONS
 // ============================================
 
-async function handleSubscriptionUpdate(
-  subscription: StripeSubscriptionExtended
-) {
+async function handleSubscriptionUpdate(subscription: StripeSubscriptionExtended) {
   console.log("📅 [handleSubscriptionUpdate] Starting...");
   const customerId = subscription.customer as string;
   const priceId = subscription.items.data[0].price.id;
@@ -565,16 +552,12 @@ async function handleSubscriptionUpdate(
 
   console.log("💾 Updating user in database...");
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const subscriptionAny = subscription as any;
 
   const billingAnchor =
-    subscriptionAny.billing_cycle_anchor ||
-    subscriptionAny.created ||
-    subscriptionAny.start_date;
+    subscriptionAny.billing_cycle_anchor || subscriptionAny.created || subscriptionAny.start_date;
 
-  const priceInterval =
-    subscription.items.data[0]?.price?.recurring?.interval || "month";
+  const priceInterval = subscription.items.data[0]?.price?.recurring?.interval || "month";
   const isAnnual = priceInterval === "year";
   const periodInSeconds = isAnnual ? 365 * 24 * 60 * 60 : 30 * 24 * 60 * 60;
 
@@ -582,11 +565,7 @@ async function handleSubscriptionUpdate(
   const periodEnd = billingAnchor ? billingAnchor + periodInSeconds : undefined;
   const cancelAtPeriod = subscriptionAny.cancel_at_period_end || false;
 
-  console.log(
-    "   Billing anchor (period start):",
-    periodStart,
-    new Date(periodStart * 1000)
-  );
+  console.log("   Billing anchor (period start):", periodStart, new Date(periodStart * 1000));
   console.log("   Price interval:", priceInterval, "- isAnnual:", isAnnual);
   console.log(
     "   Calculated period end:",
@@ -595,7 +574,6 @@ async function handleSubscriptionUpdate(
   );
   console.log("   Cancel at period end:", cancelAtPeriod);
 
-  // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const updateData: any = {
     plan,
     planStatus: mapStripeStatus(subscription.status),
@@ -652,9 +630,7 @@ async function handleSubscriptionUpdate(
   console.log("✅ Purchase record created");
 }
 
-async function handleSubscriptionCanceled(
-  subscription: StripeSubscriptionExtended
-) {
+async function handleSubscriptionCanceled(subscription: StripeSubscriptionExtended) {
   const customerId = subscription.customer as string;
 
   const user = await prisma.user.findUnique({
@@ -723,7 +699,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
   // 💼 Credit packs
   if (metadata?.type === "credit_pack") {
     const packId = metadata.packId;
-    const pack = Object.values(CREDIT_PACKS).find((p) => p.id === packId);
+    const pack = Object.values(CREDIT_PACKS).find(p => p.id === packId);
 
     if (!pack) {
       console.error("Unknown credit pack:", packId);
@@ -752,7 +728,7 @@ async function handleCheckoutCompleted(session: Stripe.Checkout.Session) {
         providerPaymentId:
           typeof fullSession.payment_intent === "string"
             ? fullSession.payment_intent
-            : fullSession.payment_intent?.id ?? "",
+            : (fullSession.payment_intent?.id ?? ""),
         providerProductId: metadata.priceId || "",
         status: "COMPLETED",
         metadata: {
@@ -806,9 +782,11 @@ async function handleInvoicePaid(invoice: StripeInvoiceExtended) {
   let cardLast4: string | undefined;
 
   // TypeScript doesn't know payment_intent is expanded, so we need to cast
-  const paymentIntent = (expandedInvoice as Stripe.Invoice & {
-    payment_intent?: string | Stripe.PaymentIntent | null;
-  }).payment_intent;
+  const paymentIntent = (
+    expandedInvoice as Stripe.Invoice & {
+      payment_intent?: string | Stripe.PaymentIntent | null;
+    }
+  ).payment_intent;
 
   const pi =
     typeof paymentIntent === "string" || !paymentIntent
@@ -888,10 +866,7 @@ function mapStripeStatus(status: Stripe.Subscription.Status): PlanStatus {
 // Helper: Get plan from Stripe price ID
 function getPlanFromPriceId(priceId: string): keyof typeof PLANS | null {
   for (const [planName, config] of Object.entries(PLANS)) {
-    if (
-      config.stripe?.monthly === priceId ||
-      config.stripe?.annual === priceId
-    ) {
+    if (config.stripe?.monthly === priceId || config.stripe?.annual === priceId) {
       return planName as keyof typeof PLANS;
     }
   }

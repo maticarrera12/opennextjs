@@ -1,13 +1,14 @@
 "use client";
 
+import { useTranslations } from "next-intl";
 import React from "react";
+
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
 } from "@/components/ui/accordion";
-import { useTranslations } from "next-intl";
 
 const Faq = () => {
   const t = useTranslations("faq");
@@ -41,11 +42,9 @@ const Faq = () => {
 
   return (
     <section className="w-full py-16 md:py-24 bg-background">
-      <div className="container max-w-4xl mx-auto px-4">
+      <div className="container max-w-4xl mx-auto px-4 md:px-0">
         <div className="text-center mb-12">
-          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">
-            {t("title")}
-          </h2>
+          <h2 className="text-4xl md:text-5xl font-bold text-foreground mb-4">{t("title")}</h2>
           <p className="text-lg text-muted-foreground">{t("subtitle")}</p>
         </div>
 

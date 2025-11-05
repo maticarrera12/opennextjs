@@ -1,9 +1,10 @@
-import React from "react";
-import Link from "next/link";
 import { headers } from "next/headers";
-import { auth, prisma } from "@/lib/auth";
+import Link from "next/link";
 import { redirect } from "next/navigation";
+import React from "react";
+
 import AdminSidebar from "./_components/admin-dashboard";
+import { auth, prisma } from "@/lib/auth";
 
 const layout = async ({ children }: { children: React.ReactNode }) => {
   const session = await auth.api.getSession({ headers: await headers() });
@@ -22,9 +23,7 @@ const layout = async ({ children }: { children: React.ReactNode }) => {
     return (
       <div className="flex min-h-screen items-center justify-center">
         <div className="text-center">
-          <h1 className="mb-4 text-2xl font-bold text-foreground">
-            Access Denied
-          </h1>
+          <h1 className="mb-4 text-2xl font-bold text-foreground">Access Denied</h1>
           <p className="mb-4 text-muted-foreground">
             You do not have permission to access this page.
           </p>

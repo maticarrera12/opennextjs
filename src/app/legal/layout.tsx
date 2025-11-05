@@ -1,6 +1,6 @@
-import { Layout, Navbar, Footer } from "nextra-theme-docs";
 import { Head } from "nextra/components";
 import { getPageMap } from "nextra/page-map";
+import { Layout, Navbar, Footer } from "nextra-theme-docs";
 import "nextra-theme-docs/style.css";
 import "./legal.css";
 
@@ -14,11 +14,7 @@ const navbar = (
 
 const footer = <Footer>{new Date().getFullYear()} © OpenNextJS.</Footer>;
 
-export default async function LegalLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
+export default async function LegalLayout({ children }: { children: React.ReactNode }) {
   const pageMap = await getPageMap("/legal");
 
   return (

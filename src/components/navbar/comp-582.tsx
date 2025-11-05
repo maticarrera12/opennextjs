@@ -1,12 +1,11 @@
 "use client";
-import { useState } from "react";
-import { FileTextIcon, GlobeIcon, HomeIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { HomeIcon } from "lucide-react";
+import { useState } from "react";
 
+import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
 import Logo from "@/components/navbar/logo";
 import ThemeToggle from "@/components/navbar/theme-toggle";
-import UserMenu from "@/components/navbar/user-menu";
-import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
 import { Button } from "@/components/ui/button";
 import {
   NavigationMenu,
@@ -47,8 +46,7 @@ export default function Navbar() {
         if (element) {
           const headerOffset = 64; // altura de la navbar (h-16 = 4rem = 64px)
           const elementPosition = element.getBoundingClientRect().top;
-          const offsetPosition =
-            elementPosition + window.pageYOffset - headerOffset;
+          const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
           window.scrollTo({
             top: offsetPosition,
@@ -104,7 +102,7 @@ export default function Navbar() {
               <div className="flex items-center gap-6">
                 {/* Logo */}
                 <button
-                  onClick={(e) =>
+                  onClick={e =>
                     handleNavigation(e, {
                       href: "/",
                       label: "Home",
@@ -119,11 +117,11 @@ export default function Navbar() {
                 {/* Desktop navigation - text links */}
                 <NavigationMenu className="hidden md:flex">
                   <NavigationMenuList className="gap-1">
-                    {navigationLinks.map((link) => (
+                    {navigationLinks.map(link => (
                       <NavigationMenuItem key={link.label}>
                         <a
                           href={link.href}
-                          onClick={(e) => handleNavigation(e, link)}
+                          onClick={e => handleNavigation(e, link)}
                           className="px-4 py-2 text-sm font-medium text-foreground hover:text-primary transition-colors"
                         >
                           {link.label}
@@ -189,13 +187,13 @@ export default function Navbar() {
               <div className="flex h-full flex-col p-4">
                 {/* Navigation links */}
                 <nav className="flex flex-col gap-2">
-                  {navigationLinks.map((link) => {
+                  {navigationLinks.map(link => {
                     const Icon = link.icon;
                     return (
                       <a
                         key={link.label}
                         href={link.href}
-                        onClick={(e) => handleNavigation(e, link)}
+                        onClick={e => handleNavigation(e, link)}
                         className="flex items-center gap-3 rounded-md px-3 py-2 text-sm font-medium text-foreground hover:bg-accent hover:text-foreground transition-colors"
                       >
                         <Icon size={18} className="text-muted-foreground" />

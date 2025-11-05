@@ -1,14 +1,15 @@
 "use client";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { Eye, EyeOff } from "lucide-react";
+import Link from "next/link";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "@/lib/actions/auth-actions";
 import { toast } from "sonner";
-import Link from "next/link";
-import { Eye, EyeOff } from "lucide-react";
-import { useRouter, useSearchParams } from "next/navigation";
-import { signInSchema, type SignInInput } from "@/lib/schemas";
-import { useTranslations } from "next-intl";
+
+import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -18,11 +19,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { authClient } from "@/lib/auth-client";
 import { Separator } from "@/components/ui/separator";
-import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
+import { signIn } from "@/lib/actions/auth-actions";
+import { authClient } from "@/lib/auth-client";
+import { signInSchema, type SignInInput } from "@/lib/schemas";
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -55,15 +56,14 @@ export default function SignInPage() {
         toast.error(t("error"));
       }
     } catch (err) {
-      const errorMessage =
-        err instanceof Error ? err.message : t("unexpectedError");
+      const errorMessage = err instanceof Error ? err.message : t("unexpectedError");
       setError(errorMessage);
       toast.error(errorMessage);
     }
   };
 
   useEffect(() => {
-    authClient.getSession().then((session) => {
+    authClient.getSession().then(session => {
       if (session.data != null) router.push("/");
     });
   }, [router]);
@@ -87,9 +87,7 @@ export default function SignInPage() {
               <Separator />
             </div>
             <div className="relative flex justify-center text-sm">
-              <span className="px-2 bg-card text-muted-foreground">
-                {t("orContinueWith")}
-              </span>
+              <span className="px-2 bg-card text-muted-foreground">{t("orContinueWith")}</span>
             </div>
           </div>
 
@@ -102,10 +100,7 @@ export default function SignInPage() {
 
           {/* Form */}
           <Form {...form}>
-            <form
-              onSubmit={form.handleSubmit(handleSignIn)}
-              className="space-y-4"
-            >
+            <form onSubmit={form.handleSubmit(handleSignIn)} className="space-y-4">
               <FormField
                 control={form.control}
                 name="email"
@@ -183,19 +178,14 @@ export default function SignInPage() {
                 disabled={isSubmitting}
                 className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
               >
-                <LoadingSwap isLoading={isSubmitting}>
-                  {t("submit")}
-                </LoadingSwap>
+                <LoadingSwap isLoading={isSubmitting}>{t("submit")}</LoadingSwap>
               </Button>
             </form>
           </Form>
 
           <p className="mt-6 text-center text-sm text-muted-foreground">
             {t("noAccount")}{" "}
-            <Link
-              href="/signup"
-              className="font-medium text-primary hover:text-primary/80"
-            >
+            <Link href="/signup" className="font-medium text-primary hover:text-primary/80">
               {t("signUp")}
             </Link>
           </p>

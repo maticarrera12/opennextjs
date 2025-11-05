@@ -1,7 +1,9 @@
 "use client";
 
-import React from "react";
+import { GlobeIcon } from "lucide-react";
 import { usePathname, useRouter } from "next/navigation";
+import React from "react";
+
 import {
   Select,
   SelectTrigger,
@@ -9,7 +11,6 @@ import {
   SelectItem,
   SelectValue,
 } from "@/components/ui/select";
-import { GlobeIcon } from "lucide-react";
 
 const languages = [
   { value: "en", label: "English" },
@@ -37,7 +38,7 @@ export function LanguageSwitcher() {
         <SelectValue className="hidden sm:inline-flex" />
       </SelectTrigger>
       <SelectContent className="[&_*[role=option]]:ps-2 [&_*[role=option]]:pe-8 [&_*[role=option]>span]:start-auto [&_*[role=option]>span]:end-2 [&_*[role=option]>span]:flex [&_*[role=option]>span]:items-center [&_*[role=option]>span]:gap-2">
-        {languages.map((lang) => (
+        {languages.map(lang => (
           <SelectItem key={lang.value} value={lang.value}>
             <span className="flex items-center gap-2">
               <span className="truncate">{lang.label}</span>

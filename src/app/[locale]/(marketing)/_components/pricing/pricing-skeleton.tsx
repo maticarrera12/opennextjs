@@ -1,9 +1,4 @@
-import {
-  Card,
-  CardContent,
-  CardFooter,
-  CardHeader,
-} from "@/components/ui/card";
+import { Card, CardContent, CardFooter, CardHeader } from "@/components/ui/card";
 
 export function PricingSkeleton() {
   return (
@@ -22,7 +17,7 @@ export function PricingSkeleton() {
 
         {/* Plan Cards Skeleton */}
         <div className="grid grid-cols-1 md:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {[1, 2, 3].map((i) => (
+          {[1, 2, 3].map(i => (
             <PlanCardSkeleton key={i} isPopular={i === 2} />
           ))}
         </div>
@@ -42,9 +37,7 @@ export function PricingSkeleton() {
 function PlanCardSkeleton({ isPopular }: { isPopular?: boolean }) {
   return (
     <Card
-      className={`relative ${
-        isPopular ? "border-primary shadow-lg ring-2 ring-primary/20" : ""
-      }`}
+      className={`relative ${isPopular ? "border-primary shadow-lg ring-2 ring-primary/20" : ""}`}
     >
       {isPopular && (
         <div className="absolute -top-3 left-1/2 -translate-x-1/2">
@@ -68,7 +61,7 @@ function PlanCardSkeleton({ isPopular }: { isPopular?: boolean }) {
 
       <CardContent className="flex-grow">
         <ul className="space-y-3">
-          {[1, 2, 3, 4].map((i) => (
+          {[1, 2, 3, 4].map(i => (
             <li key={i} className="flex items-center gap-2">
               <div className="h-4 w-4 bg-muted rounded-full animate-pulse flex-shrink-0" />
               <div className="h-4 flex-1 bg-muted rounded animate-pulse" />
@@ -105,7 +98,7 @@ function CreditPackCardSkeleton() {
 
       <CardContent className="flex-grow">
         <ul className="space-y-3">
-          {[1, 2, 3, 4].map((i) => (
+          {[1, 2, 3, 4].map(i => (
             <li key={i} className="flex items-center gap-2">
               <div className="h-4 w-4 bg-muted rounded-full animate-pulse flex-shrink-0" />
               <div className="h-4 flex-1 bg-muted rounded animate-pulse" />

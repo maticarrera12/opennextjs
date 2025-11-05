@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+
 import { AreaChart } from "@/components/AreaChart";
 
 interface ChartDataPoint {
@@ -55,7 +56,7 @@ export const WaitlistMetrics = () => {
   const chartData = data?.chartData || [];
 
   // Transformar datos del API al formato que espera Tremor
-  const tremorData = chartData.map((item) => ({
+  const tremorData = chartData.map(item => ({
     date: formatDate(item.date),
     users: item.total,
   }));
@@ -92,9 +93,7 @@ export const WaitlistMetrics = () => {
             data={tremorData}
             index="date"
             categories={["users"]}
-            valueFormatter={(number: number) =>
-              formatNumber(Math.round(number))
-            }
+            valueFormatter={(number: number) => formatNumber(Math.round(number))}
             yAxisWidth={40}
             startEndOnly={tremorData.length > 7}
             connectNulls

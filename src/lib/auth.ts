@@ -1,17 +1,16 @@
+import { PrismaClient } from "@prisma/client";
 import { betterAuth } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
-import { PrismaClient } from "@prisma/client";
 import { nextCookies } from "better-auth/next-js";
-import { sendPasswordResetEmail } from "./emails/sendPasswordResetEmail";
+
 import { sendEmailVerificationEmail } from "./emails/emailVerification";
 import { sendChangeEmailVerification } from "./emails/sendChangeEmailVerification";
 import { sendDeleteAccountVerification } from "./emails/sendDeleteAccountVerification";
+import { sendPasswordResetEmail } from "./emails/sendPasswordResetEmail";
 const prisma = new PrismaClient();
 
 async function assignAdminRole(userId: string, email: string) {
-  const adminEmails =
-    process.env.ADMIN_EMAILS?.split(",").map((e) => e.trim().toLowerCase()) ||
-    [];
+  const adminEmails = process.env.ADMIN_EMAILS?.split(",").map(e => e.trim().toLowerCase()) || [];
   const isAdmin = adminEmails.includes(email.toLowerCase());
 
   if (isAdmin) {

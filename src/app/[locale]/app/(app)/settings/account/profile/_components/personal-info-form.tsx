@@ -1,23 +1,18 @@
 "use client";
 
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { ProfileUpdateInput, profileUpdateSchema } from "@/lib/schemas";
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { authClient } from "@/lib/auth-client";
-import { LoadingSwap } from "@/components/ui/loading-swap";
-import { toast } from "sonner";
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { LoadingSwap } from "@/components/ui/loading-swap";
+import { authClient } from "@/lib/auth-client";
+import { ProfileUpdateInput, profileUpdateSchema } from "@/lib/schemas";
 
 interface PersonalInfoFormProps {
   user: {
@@ -61,9 +56,7 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
     if (updateUserResult.error) {
       toast.error(updateUserResult.error.message || t("messages.updateFailed"));
     } else if (emailResult.error) {
-      toast.error(
-        emailResult.error.message || t("messages.emailVerificationFailed")
-      );
+      toast.error(emailResult.error.message || t("messages.emailVerificationFailed"));
     } else {
       if (data.email !== user.email) {
         toast.success(t("messages.emailVerificationSent"));
@@ -81,18 +74,11 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
         <CardDescription>{t("description")}</CardDescription>
       </CardHeader>
       <CardContent>
-        <form
-          onSubmit={form.handleSubmit(handleUpdateProfile)}
-          className="space-y-4"
-        >
+        <form onSubmit={form.handleSubmit(handleUpdateProfile)} className="space-y-4">
           <div className="grid gap-4 md:grid-cols-2">
             <div className="space-y-2">
               <Label htmlFor="name">{t("fullName")}</Label>
-              <Input
-                id="name"
-                placeholder={t("namePlaceholder")}
-                {...form.register("name")}
-              />
+              <Input id="name" placeholder={t("namePlaceholder")} {...form.register("name")} />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email">{t("email")}</Label>
@@ -110,9 +96,7 @@ export function PersonalInfoForm({ user }: PersonalInfoFormProps) {
               disabled={isSubmitting}
               className="w-full bg-primary hover:bg-primary/90 text-primary-foreground"
             >
-              <LoadingSwap isLoading={isSubmitting}>
-                {t("saveChanges")}
-              </LoadingSwap>
+              <LoadingSwap isLoading={isSubmitting}>{t("saveChanges")}</LoadingSwap>
             </Button>
           </div>
         </form>

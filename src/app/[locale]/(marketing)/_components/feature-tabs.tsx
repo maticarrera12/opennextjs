@@ -1,22 +1,17 @@
 "use client";
 
-import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
-import {
-  ShieldCheck,
-  CreditCard,
-  Cloud,
-  LayoutDashboard,
-  Brain,
-} from "lucide-react";
+import { ShieldCheck, CreditCard, Cloud, LayoutDashboard, Brain } from "lucide-react";
 import { useTranslations } from "next-intl";
+import React from "react";
+
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 export function FeatureTabs() {
   const t = useTranslations("featureTabs");
 
   return (
-    <Tabs defaultValue="auth" className="w-full max-w-3xl  md:mx-auto space-y-3">
+    <Tabs defaultValue="auth" className="w-full max-w-4xl py-20  md:mx-auto space-y-3">
       {/* TAB LIST */}
       <TabsList className="flex w-full justify-between bg-card/60 backdrop-blur-md py-8 px-2 rounded-full border border-border">
         {[
@@ -25,7 +20,7 @@ export function FeatureTabs() {
           { value: "storage", label: t("tabs.storage"), icon: Cloud },
           { value: "admin", label: t("tabs.admin"), icon: LayoutDashboard },
           { value: "ai", label: t("tabs.ai"), icon: Brain },
-        ].map((tab) => {
+        ].map(tab => {
           const Icon = tab.icon;
           return (
             <TabsTrigger
@@ -81,11 +76,7 @@ export function FeatureTabs() {
 
       {/* AI */}
       <TabsContent value="ai">
-        <FeatureCard
-          icon={Brain}
-          title={t("ai.title")}
-          items={t.raw("ai.items") as string[]}
-        />
+        <FeatureCard icon={Brain} title={t("ai.title")} items={t.raw("ai.items") as string[]} />
       </TabsContent>
     </Tabs>
   );

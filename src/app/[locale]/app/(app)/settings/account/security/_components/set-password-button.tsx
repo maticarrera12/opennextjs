@@ -1,14 +1,9 @@
 "use client";
-import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
+
+import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { authClient } from "@/lib/auth-client";
 
 export function SetPasswordButton({ email }: { email: string }) {
   const t = useTranslations("settings.security.setPassword");

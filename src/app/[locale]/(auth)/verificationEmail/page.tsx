@@ -1,9 +1,10 @@
 "use client";
-import React, { useEffect, useRef, useState } from "react";
-import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
-import { authClient } from "@/lib/auth-client";
 import { useSearchParams } from "next/navigation";
 import { useTranslations } from "next-intl";
+import React, { useEffect, useRef, useState } from "react";
+
+import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
+import { authClient } from "@/lib/auth-client";
 
 function EmailVerification({ email }: { email: string }) {
   const [timeToNextResend, setTimeToNextResend] = useState(5);
@@ -19,7 +20,7 @@ function EmailVerification({ email }: { email: string }) {
 
     clearInterval(interval.current);
     interval.current = setInterval(() => {
-      setTimeToNextResend((t) => {
+      setTimeToNextResend(t => {
         const newT = t - 1;
 
         if (newT <= 0) {
@@ -64,9 +65,7 @@ export default function VerificationEmailPage() {
   return (
     <div className="min-h-screen flex items-center justify-center bg-background px-4">
       <div className="max-w-md w-full p-8 bg-card rounded-xl shadow-sm border border-border">
-        <h1 className="text-2xl font-bold mb-4 text-foreground">
-          {t("title")}
-        </h1>
+        <h1 className="text-2xl font-bold mb-4 text-foreground">{t("title")}</h1>
         <EmailVerification email={email} />
         <div className="text-center mt-4">
           <p className="text-sm text-muted-foreground">{t("footer")}</p>

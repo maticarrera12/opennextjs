@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
 import { Code, Palette, Database, Plug } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import React from "react";
+
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface TechItem {
   name: string;
@@ -65,6 +66,16 @@ export function TechStackTabs() {
         image: "/assets/zod.png",
         description: t("frontend.zod"),
       },
+      {
+        name: "Framer Motion",
+        image: "/assets/framer.png",
+        description: t("frontend.framerMotion"),
+      },
+      {
+        name: "GSAP",
+        image: "/assets/gsap.jpg",
+        description: t("frontend.gsap"),
+      },
     ],
     backend: [
       {
@@ -111,14 +122,24 @@ export function TechStackTabs() {
       },
       {
         name: "Resend",
-        image: "/assets/resend.psvg",
+        image: "/assets/resend.png",
         description: t("integrations.resend"),
+      },
+      {
+        name: "OpenAI",
+        image: "/assets/openai.png",
+        description: t("integrations.openai"),
+      },
+      {
+        name: "Nextra",
+        image: "/assets/nextra.jpeg",
+        description: t("integrations.nextra"),
       },
     ],
   };
 
   return (
-    <Tabs defaultValue="core" className="w-full max-w-3xl md:mx-auto space-y-3">
+    <Tabs defaultValue="core" className="w-full max-w-4xl py-20 md:mx-auto space-y-3">
       {/* TAB LIST */}
       <TabsList className="flex w-full justify-between bg-card/60 backdrop-blur-md py-8 px-2 rounded-full border border-border">
         {[
@@ -126,7 +147,7 @@ export function TechStackTabs() {
           { value: "frontend", label: t("tabs.frontend"), icon: Palette },
           { value: "backend", label: t("tabs.backend"), icon: Database },
           { value: "integrations", label: t("tabs.integrations"), icon: Plug },
-        ].map((tab) => {
+        ].map(tab => {
           const Icon = tab.icon;
           return (
             <TabsTrigger
@@ -202,9 +223,7 @@ function TechCard({ item }: { item: TechItem }) {
             sizes="(max-width: 768px) 36px, 56px"
           />
         </div>
-        <h3 className="text-sm md:text-lg font-semibold text-foreground truncate">
-          {item.name}
-        </h3>
+        <h3 className="text-sm md:text-lg font-semibold text-foreground truncate">{item.name}</h3>
       </div>
       <p className="text-xs md:text-sm text-muted-foreground leading-snug line-clamp-3 md:line-clamp-2 mt-2 min-h-[3rem] md:min-h-[2.5rem]">
         {item.description}

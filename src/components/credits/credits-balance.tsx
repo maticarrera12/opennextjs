@@ -1,8 +1,9 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { useSession } from "@/lib/auth-client";
 import Link from "next/link";
+import { useEffect, useState } from "react";
+
+import { useSession } from "@/lib/auth-client";
 
 interface CreditInfo {
   balance: number;
@@ -52,12 +53,8 @@ export function CreditBalance() {
       {/* Balance Display */}
       <div className="mb-2">
         <div className="flex items-baseline justify-between">
-          <span className="text-2xl font-semibold text-foreground">
-            {credits.balance}
-          </span>
-          <span className="text-xs text-muted-foreground">
-            / {credits.monthlyAllocation}
-          </span>
+          <span className="text-2xl font-semibold text-foreground">{credits.balance}</span>
+          <span className="text-xs text-muted-foreground">/ {credits.monthlyAllocation}</span>
         </div>
 
         {/* Progress Bar */}
@@ -75,9 +72,7 @@ export function CreditBalance() {
       <div className="space-y-1 text-xs text-muted-foreground">
         <div className="flex justify-between">
           <span>Used this month:</span>
-          <span className="font-medium text-foreground">
-            {credits.usedThisMonth}
-          </span>
+          <span className="font-medium text-foreground">{credits.usedThisMonth}</span>
         </div>
 
         {credits.resetDate && (

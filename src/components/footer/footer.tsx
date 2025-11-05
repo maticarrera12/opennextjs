@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import Logo from "@/components/navbar/logo";
 import { useTranslations } from "next-intl";
+
+import Logo from "@/components/navbar/logo";
 
 export default function Footer() {
   const t = useTranslations("footer");
@@ -68,7 +69,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-12 border-t border-border pt-8">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground text-center">
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
         </div>

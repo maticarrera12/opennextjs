@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
+
 import { prisma } from "@/lib/prisma";
 
 /**
@@ -8,10 +9,7 @@ import { prisma } from "@/lib/prisma";
 export async function GET(req: NextRequest) {
   // Only allow in development
   if (process.env.NODE_ENV === "production") {
-    return NextResponse.json(
-      { error: "Not available in production" },
-      { status: 403 }
-    );
+    return NextResponse.json({ error: "Not available in production" }, { status: 403 });
   }
 
   try {
@@ -38,7 +36,7 @@ export async function GET(req: NextRequest) {
       message: "Cron test successful",
       currentTime: now.toISOString(),
       usersToReset: usersToReset.length,
-      users: usersToReset.map((u) => ({
+      users: usersToReset.map(u => ({
         email: u.email,
         plan: u.plan,
         periodEnd: u.currentPeriodEnd,

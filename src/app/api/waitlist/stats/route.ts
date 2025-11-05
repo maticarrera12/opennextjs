@@ -1,5 +1,6 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
   try {
@@ -7,10 +8,7 @@ export async function GET(req: Request) {
     const referralCode = searchParams.get("code");
 
     if (!referralCode) {
-      return NextResponse.json(
-        { error: "Referral code is required" },
-        { status: 400 }
-      );
+      return NextResponse.json({ error: "Referral code is required" }, { status: 400 });
     }
 
     // Buscar usuario por código de referido
@@ -55,9 +53,6 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.error("Error fetching waitlist stats:", error);
-    return NextResponse.json(
-      { error: "Something went wrong" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }

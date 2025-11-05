@@ -1,16 +1,11 @@
 "use client";
 
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Badge } from "@/components/ui/badge";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
 import { Pencil } from "lucide-react";
 import { useTranslations } from "next-intl";
+
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Badge } from "@/components/ui/badge";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 
 interface ProfilePictureSectionProps {
   user: {
@@ -21,10 +16,7 @@ interface ProfilePictureSectionProps {
   plan: string;
 }
 
-export function ProfilePictureSection({
-  user,
-  plan,
-}: ProfilePictureSectionProps) {
+export function ProfilePictureSection({ user, plan }: ProfilePictureSectionProps) {
   const t = useTranslations("settings.profile.profilePicture");
 
   return (
