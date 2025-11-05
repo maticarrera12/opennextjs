@@ -1,16 +1,45 @@
 "use client";
 
 import { useTranslations } from "next-intl";
-import React from "react";
+import React, { useEffect, useRef } from "react";
 
 import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
-
-// import Image from "next/image";
-
 import CloneCommand from "@/components/CloneCommand";
 
 const Hero = () => {
   const t = useTranslations("hero");
+  const videoRef = useRef<React.ElementRef<"video">>(null);
+
+  useEffect(() => {
+    const video = videoRef.current;
+    if (!video) return;
+
+    // Intentar reproducir cuando el video esté listo
+    const playVideo = () => {
+      video.play().catch(() => {
+        // Si falla la reproducción automática, no hacer nada
+      });
+    };
+
+    // Manejar el loop manualmente para asegurar que el video termine completamente
+    const handleEnded = () => {
+      video.currentTime = 0;
+      video.play();
+    };
+
+    video.addEventListener("ended", handleEnded);
+
+    if (video.readyState >= 2) {
+      playVideo();
+    } else {
+      video.addEventListener("canplay", playVideo, { once: true });
+    }
+
+    return () => {
+      video.removeEventListener("ended", handleEnded);
+      video.removeEventListener("canplay", playVideo);
+    };
+  }, []);
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8">
@@ -66,18 +95,15 @@ const Hero = () => {
               }}
             ></div>
             <div className="relative aspect-[4/3] bg-muted rounded-lg flex items-center justify-center overflow-hidden z-10">
-              <div className="absolute inset-0 flex items-center justify-center z-10">
-                <p className="text-2xl font-bold text-muted-foreground">{t("imagePlaceholder")}</p>
-              </div>
+              <video
+                ref={videoRef}
+                src="/video/video-hero.mp4"
+                className="absolute inset-0 w-full h-full object-cover rounded-lg"
+                playsInline
+                muted
+                autoPlay
+              />
             </div>
-            {/* Uncomment and add your image when ready */}
-            {/* <Image
-              src="/path-to-your-image.jpg"
-              alt="Product showcase"
-              fill
-              className="object-cover rounded-lg"
-              priority
-            /> */}
           </div>
         </div>
       </div>
