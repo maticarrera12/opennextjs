@@ -66,6 +66,16 @@ export function TechStackTabs() {
         image: "/assets/zod.png",
         description: t("frontend.zod"),
       },
+      {
+        name: "Framer Motion",
+        image: "/assets/framer.png",
+        description: t("frontend.framerMotion"),
+      },
+      {
+        name: "GSAP",
+        image: "/assets/gsap.jpg",
+        description: t("frontend.gsap"),
+      },
     ],
     backend: [
       {
@@ -115,11 +125,21 @@ export function TechStackTabs() {
         image: "/assets/resend.png",
         description: t("integrations.resend"),
       },
+      {
+        name: "OpenAI",
+        image: "/assets/openai.png",
+        description: t("integrations.openai"),
+      },
+      {
+        name: "Nextra",
+        image: "/assets/nextra.jpeg",
+        description: t("integrations.nextra"),
+      },
     ],
   };
 
   return (
-    <Tabs defaultValue="core" className="w-full max-w-3xl md:mx-auto space-y-3">
+    <Tabs defaultValue="core" className="w-full max-w-4xl py-20 md:mx-auto space-y-3">
       {/* TAB LIST */}
       <TabsList className="flex w-full justify-between bg-card/60 backdrop-blur-md py-8 px-2 rounded-full border border-border">
         {[

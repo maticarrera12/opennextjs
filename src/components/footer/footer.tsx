@@ -69,7 +69,7 @@ export default function Footer() {
 
         {/* Copyright */}
         <div className="mt-12 border-t border-border pt-8">
-          <p className="text-sm text-muted-foreground">
+          <p className="text-sm text-muted-foreground text-center">
             {t("copyright", { year: new Date().getFullYear() })}
           </p>
         </div>

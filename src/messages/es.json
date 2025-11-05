@@ -400,7 +400,7 @@
       "terms": "Términos del servicio",
       "privacy": "Política de privacidad"
     },
-    "copyright": "© {year} OpenNextJS, Todos los derechos reservados"
+    "copyright": "© {year} OpenNextJS, Todos los derechos reservados. Desarrollado para ti por mcarreradev"
   },
   "app": {
     "title": "App",
@@ -448,7 +448,9 @@
       "shadcn": "Componentes de UI accesibles sobre Radix UI y Tailwind.",
       "tailwind": "Framework CSS utility-first para diseñar interfaces rápido.",
       "daisyui": "Componentes y temas preconstruidos para Tailwind CSS.",
-      "zod": "Validación de esquemas TypeScript-first para datos seguros."
+      "zod": "Validación de esquemas TypeScript-first para datos seguros.",
+      "framerMotion": "Biblioteca de animaciones lista para producción para React.",
+      "gsap": "Biblioteca de animaciones de nivel profesional para la web."
     },
     "backend": {
       "zod": "Validación de esquemas TypeScript para servidor y cliente.",
@@ -461,7 +463,9 @@
       "betterAuth": "Autenticación moderna con soporte para múltiples OAuth.",
       "crisp": "Chat en vivo y mensajería para atención al cliente.",
       "posthog": "Análisis de productos con seguimiento de eventos.",
-      "resend": "API de correo electrónico con alta tasa de entrega."
+      "resend": "API de correo electrónico con alta tasa de entrega.",
+      "openai": "Plataforma de IA con modelos de lenguaje poderosos y APIs.",
+      "nextra": "Generador de sitios estáticos para documentación con soporte MDX."
     }
   },
   "featureTabs": {
@@ -516,6 +520,33 @@
         "Sistema de créditos basado en uso con seguimiento.",
         "Almacenamiento persistente mediante el modelo BrandAsset."
       ]
+    }
+  },
+  "bentoShowcase": {
+    "heroCard": {
+      "title": "Lanza Rapido",
+      "subtitle": "Todo lo que necesitas para crear tu SaaS hoy"
+    },
+    "featuresGrid": {
+      "title": "Construido con",
+      "nextjs": "Next.js",
+      "typescript": "TypeScript"
+    },
+    "featureTitle": {
+      "title": "Auth & Pagos",
+      "subtitle": "Integraciones listas para usar"
+    },
+    "timeToMarket": {
+      "title": "150+ Horas Ahorradas",
+      "subtitle": "Pre-configurado y listo para producción"
+    },
+    "techStack": {
+      "title": "Stack Moderno",
+      "subtitle": "Tecnología lista para producción"
+    },
+    "ctaCard": {
+      "title": "Comienza Hoy",
+      "subtitle": "Crea algo increíble"
     }
   }
 }

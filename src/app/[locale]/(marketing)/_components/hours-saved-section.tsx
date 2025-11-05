@@ -57,7 +57,7 @@ export default function HoursSavedSection() {
   ];
 
   return (
-    <section className="mx-auto max-w-6xl px-6 py-20 text-center">
+    <section className="mx-auto max-w-4xl  px-6 md:px-0 py-20 text-center">
       {/* Header */}
       <motion.div
         initial={{ opacity: 0, y: 40 }}

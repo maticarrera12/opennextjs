@@ -400,7 +400,7 @@
       "terms": "Terms of Service",
       "privacy": "Privacy Policy"
     },
-    "copyright": "© {year} OpenNextJS, All rights reserved"
+    "copyright": "© {year} OpenNextJS, All rights reserved. Developed for you by mcarreradev"
   },
   "app": {
     "title": "App",
@@ -448,7 +448,9 @@
       "shadcn": "Accessible UI components built on Radix UI and Tailwind.",
       "tailwind": "Utility-first CSS framework for rapid UI design.",
       "daisyui": "Pre-built components and themes for Tailwind CSS.",
-      "zod": "TypeScript-first schema validation for safe data."
+      "zod": "TypeScript-first schema validation for safe data.",
+      "framerMotion": "Production-ready motion library for React animations.",
+      "gsap": "Professional-grade animation library for web animations."
     },
     "backend": {
       "zod": "TypeScript schema validation for server and client.",
@@ -461,7 +463,9 @@
       "betterAuth": "Modern authentication with support for multiple OAuth providers.",
       "crisp": "Live chat and messaging for customer support.",
       "posthog": "Product analytics with event tracking.",
-      "resend": "Email API for developers with high delivery rates."
+      "resend": "Email API for developers with high delivery rates.",
+      "openai": "AI platform with powerful language models and APIs.",
+      "nextra": "Static site generator for documentation with MDX support."
     }
   },
   "featureTabs": {
@@ -516,6 +520,33 @@
         "Usage-based credit system with tracking.",
         "Persistent storage via the BrandAsset model."
       ]
+    }
+  },
+  "bentoShowcase": {
+    "heroCard": {
+      "title": "Ship Faster",
+      "subtitle": "Everything you need to launch your SaaS today"
+    },
+    "featuresGrid": {
+      "title": "Built with",
+      "nextjs": "Next.js",
+      "typescript": "TypeScript"
+    },
+    "featureTitle": {
+      "title": "Auth & Payments",
+      "subtitle": "Ready to use integrations"
+    },
+    "timeToMarket": {
+      "title": "150+ Hours Saved",
+      "subtitle": "Pre-configured & production-ready"
+    },
+    "techStack": {
+      "title": "Modern Stack",
+      "subtitle": "Production-ready tech"
+    },
+    "ctaCard": {
+      "title": "Get Started Today",
+      "subtitle": "Build something amazing"
     }
   }
 }
