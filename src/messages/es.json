@@ -1,0 +1,521 @@
+{
+  "userMenu": {
+    "profileImage": "Imagen de perfil",
+    "menu": {
+      "option1": "Configuración",
+      "option2": "Proyectos",
+      "option3": "Documentación",
+      "option4": "Marcadores",
+      "option5": "Editar Perfil",
+      "adminPanel": "Panel de Administración",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Bienvenido de nuevo",
+      "subtitle": "Inicia sesión en tu cuenta",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "forgotPassword": "¿Olvidaste tu contraseña?",
+      "submit": "Iniciar Sesión",
+      "noAccount": "¿No tienes una cuenta?",
+      "signUp": "Regístrate",
+      "orContinueWith": "O continúa con",
+      "success": "¡Sesión iniciada exitosamente!",
+      "error": "Correo o contraseña inválidos",
+      "unexpectedError": "Ocurrió un error inesperado",
+      "rememberMe": "Recuérdame"
+    },
+    "signup": {
+      "title": "Crear Cuenta",
+      "subtitle": "Regístrate para comenzar con better-auth",
+      "name": "Nombre Completo",
+      "email": "Correo electrónico",
+      "password": "Contraseña",
+      "submit": "Registrarse",
+      "haveAccount": "¿Ya tienes una cuenta?",
+      "signIn": "Inicia sesión",
+      "orContinueWith": "O continúa con",
+      "success": "¡Cuenta creada exitosamente!",
+      "error": "Error al crear la cuenta. Por favor, intenta de nuevo.",
+      "unexpectedError": "Error de autenticación"
+    },
+    "forgotPassword": {
+      "title": "Olvidé mi Contraseña",
+      "subtitle": "Ingresa tu correo para restablecer tu contraseña",
+      "email": "Correo electrónico",
+      "submit": "Enviar Enlace",
+      "backToSignIn": "Volver a inicio de sesión",
+      "success": "¡Enlace de restablecimiento enviado a tu correo!",
+      "error": "Error al enviar el enlace. Por favor, intenta de nuevo.",
+      "checkEmail": "Revisa tu correo para el enlace de restablecimiento"
+    },
+    "resetPassword": {
+      "title": "Restablecer Contraseña",
+      "subtitle": "Ingresa tu nueva contraseña",
+      "password": "Nueva Contraseña",
+      "confirmPassword": "Confirmar Contraseña",
+      "submit": "Restablecer Contraseña",
+      "success": "¡Contraseña restablecida exitosamente!",
+      "error": "Error al restablecer la contraseña. Por favor, intenta de nuevo.",
+      "passwordsDontMatch": "Las contraseñas no coinciden"
+    },
+    "verification": {
+      "title": "Revisa tu correo",
+      "message": "Te enviamos un enlace de verificación. Por favor, revisa tu correo y haz clic en el enlace para verificar tu cuenta.",
+      "resendButton": "Reenviar Correo",
+      "resendCountdown": "Reenviar Correo ({seconds})",
+      "footer": "Una vez verificado, iniciarás sesión automáticamente.",
+      "success": "¡Correo de verificación enviado!"
+    }
+  },
+  "pricing": {
+    "title": "Precios Simples y Transparentes",
+    "subtitle": "Elige el plan que se ajuste a tus necesidades",
+    "interval": {
+      "monthly": "Mensual",
+      "annual": "Anual",
+      "savePercent": "Ahorra 16%"
+    },
+    "plans": {
+      "free": {
+        "name": "Gratis",
+        "features": {
+          "credits": "créditos por mes",
+          "rollover": "renovación habilitada"
+        }
+      },
+      "pro": {
+        "name": "Pro"
+      },
+      "business": {
+        "name": "Empresarial"
+      }
+    },
+    "perMonth": "/mes",
+    "billedAnnually": "Facturado {price} anualmente",
+    "buttons": {
+      "getStarted": "Comenzar",
+      "subscribe": "Suscribirse",
+      "choosePlan": "Elegir Plan",
+      "buyCredits": "Comprar Créditos",
+      "currentPlan": "Plan Actual"
+    },
+    "creditPacks": {
+      "title": "O Compra Paquetes de Créditos",
+      "credits": "créditos",
+      "savePercent": "Ahorra {percent}%",
+      "buyNow": "Comprar Ahora",
+      "features": {
+        "addedInstantly": "créditos añadidos instantáneamente",
+        "noExpiration": "Sin fecha de expiración",
+        "oneTimePayment": "Pago único",
+        "useAnytime": "Usa cuando quieras"
+      }
+    },
+    "paymentModal": {
+      "title": "Elige Método de Pago",
+      "subtitle": "Selecciona cómo deseas pagar",
+      "comingSoon": "Próximamente"
+    }
+  },
+  "waitlist": {
+    "form": {
+      "title": "Únete a la Lista de Espera",
+      "subtitle": "Sé de los primeros en experimentar el futuro de la",
+      "subtitleHighlight": "creación de marcas con IA",
+      "email": "Correo electrónico",
+      "emailPlaceholder": "tucorreo@ejemplo.com",
+      "name": "Nombre",
+      "nameOptional": "(opcional)",
+      "namePlaceholder": "Tu nombre",
+      "submit": "Unirme a la Lista",
+      "earlyAccess": "Obtén acceso anticipado y actualizaciones exclusivas",
+      "alreadyJoined": "¿Ya te uniste? Revisa tu estado →",
+      "referred": "¡Has sido referido! Comenzarás con un impulso en la fila.",
+      "errors": {
+        "invalidEmail": "Correo electrónico inválido",
+        "nameLength": "El nombre debe tener al menos 2 caracteres",
+        "required": "Este campo es requerido"
+      }
+    },
+    "success": {
+      "title": "¡Estás en la lista!",
+      "position": "Posición",
+      "referrals": "Referidos",
+      "inLine": "en la fila",
+      "skipTheLineTitle": "Salta la Fila",
+      "skipTheLineSubtitle": "¡Comparte tu enlace de referido y avanza más rápido!",
+      "referralCodeLabel": "Tu Código de Referido",
+      "copyLink": "Copiar Enlace",
+      "copied": "¡Copiado!",
+      "share": "Compartir",
+      "proTip": "Consejo:",
+      "proTipMessage": "¡Por cada amigo que se una usando tu enlace, ambos avanzarán en la fila!",
+      "checkEmail": "Revisa tu correo para ver tu mensaje de bienvenida y enlace de referido.",
+      "notify": "¡Te notificaremos cuando sea tu turno!"
+    },
+    "lookup": {
+      "title": "Revisa tu Estado",
+      "subtitle": "Ingresa tu correo o código de referido",
+      "placeholder": "email@ejemplo.com o ABC12345",
+      "cancel": "Cancelar",
+      "submit": "Revisar Estado",
+      "welcomeBack": "¡Bienvenido de nuevo!",
+      "notFound": "No encontrado. Por favor verifica tu correo o código de referido.",
+      "enterValue": "Por favor ingresa tu correo o código de referido"
+    },
+    "features": {
+      "earlyAccess": {
+        "title": "Acceso Anticipado",
+        "description": "Sé el primero en probar nuevas características"
+      },
+      "community": {
+        "title": "Comunidad Exclusiva",
+        "description": "Conéctate con adoptantes tempranos"
+      },
+      "referrals": {
+        "title": "Recompensas por Referidos",
+        "description": "Avanza invitando amigos"
+      }
+    }
+  },
+  "settings": {
+    "title": "Configuración",
+    "sections": {
+      "account": "Cuenta",
+      "preferences": "Preferencias",
+      "billing": "Facturación",
+      "developers": "Desarrolladores",
+      "organization": "Organización"
+    },
+    "menu": {
+      "profile": "Perfil",
+      "security": "Seguridad",
+      "notifications": "Notificaciones",
+      "appearance": "Apariencia",
+      "planPayments": "Plan y Pagos",
+      "apiKeys": "Claves API",
+      "members": "Miembros",
+      "invitations": "Invitaciones",
+      "logout": "Cerrar Sesión"
+    },
+    "profile": {
+      "title": "Perfil",
+      "subtitle": "Gestiona la configuración y preferencias de tu cuenta",
+      "profilePicture": {
+        "title": "Foto de Perfil",
+        "description": "Actualiza tu foto de perfil y distintivo de rol",
+        "plan": "Plan",
+        "member": "Miembro"
+      },
+      "personalInfo": {
+        "title": "Información Personal",
+        "description": "Actualiza tus datos personales e información de contacto",
+        "fullName": "Nombre Completo",
+        "namePlaceholder": "Ingresa tu nombre",
+        "email": "Correo Electrónico",
+        "emailPlaceholder": "Ingresa tu correo",
+        "saveChanges": "Guardar Cambios",
+        "messages": {
+          "updateFailed": "Error al actualizar el perfil",
+          "emailVerificationFailed": "Error al enviar la verificación de correo",
+          "emailVerificationSent": "Verificación de correo enviada al nuevo correo",
+          "updateSuccess": "Perfil actualizado exitosamente"
+        }
+      },
+      "subscriptionPlan": {
+        "title": "Plan de Suscripción",
+        "description": "Gestiona tu suscripción y facturación",
+        "currentPlan": "Plan Actual",
+        "freeTier": "Nivel gratuito con características básicas",
+        "paidTier": "nivel con todas las características",
+        "managePlan": "Gestionar Plan"
+      },
+      "dangerZone": {
+        "title": "Zona de Peligro",
+        "description": "Acciones irreversibles que afectarán tu cuenta",
+        "deleteAccount": "Eliminar Cuenta",
+        "deleteDescription": "Eliminar permanentemente tu cuenta y todos los datos asociados",
+        "deleteSuccess": "Eliminación de cuenta iniciada. Por favor revisa tu correo para el enlace de confirmación."
+      },
+      "linkedAccounts": {
+        "title": "Cuentas Vinculadas",
+        "noAccounts": "No se encontraron cuentas vinculadas",
+        "linkOther": "Vincular Otras Cuentas",
+        "connectAccount": "Conecta tu cuenta de {provider} para iniciar sesión más fácilmente",
+        "linkedOn": "Vinculada el",
+        "link": "Vincular",
+        "unlink": "Desvincular"
+      }
+    },
+    "security": {
+      "password": {
+        "title": "Contraseña",
+        "description": "Cambia tu contraseña",
+        "currentPassword": "Contraseña Actual",
+        "currentPasswordPlaceholder": "Ingresa tu contraseña actual",
+        "newPassword": "Nueva Contraseña",
+        "newPasswordPlaceholder": "Ingresa tu nueva contraseña",
+        "revokeOtherSessions": "Revocar otras sesiones",
+        "changePassword": "Cambiar Contraseña",
+        "messages": {
+          "changeFailed": "Error al cambiar la contraseña",
+          "changeSuccess": "Contraseña cambiada exitosamente"
+        }
+      },
+      "setPassword": {
+        "title": "Establecer Contraseña",
+        "description": "Te enviaremos un correo para establecer una nueva contraseña para tu cuenta",
+        "sendEmail": "Enviar correo para establecer contraseña",
+        "emailSent": "Correo enviado"
+      },
+      "sessions": {
+        "currentSession": "Sesión Actual",
+        "otherSessions": "Otras Sesiones Activas",
+        "noOtherSessions": "No hay otras sesiones activas",
+        "revokeOtherSessions": "Revocar Otras Sesiones",
+        "created": "Creada",
+        "expires": "Expira",
+        "sessionRevoked": "Sesión revocada",
+        "unknownDevice": "Dispositivo Desconocido"
+      }
+    }
+  },
+  "hero": {
+    "heading": {
+      "part1": "Crea tu próxima",
+      "highlight": "SaaS",
+      "part2": "en minutos, no en semanas"
+    },
+    "description": {
+      "part1": "Comienza con una base completa y confiable, creada con",
+      "highlight": "tecnologías modernas",
+      "part2": "que te ahorran horas de configuración y te permiten lanzar más rápido."
+    },
+    "cta": "Waitlist",
+    "imagePlaceholder": "Reemplazar imagen"
+  },
+  "cloneCommand": {
+    "description": "O si quieres probar lo que está disponible hasta ahora:"
+  },
+  "faq": {
+    "title": "FAQ",
+    "subtitle": "Preguntas frecuentes",
+    "questions": {
+      "q1": {
+        "question": "🚀 ¿Qué es OpenNextJS?",
+        "answer": "OpenNextJS es un boilerplate fullstack open source basado en Next.js + TypeScript, creado para acelerar el desarrollo de SaaS, dashboards, y aplicaciones modernas. Incluye autenticación, pagos, almacenamiento, analíticas, documentación integrada y una base totalmente personalizable."
+      },
+      "q2": {
+        "question": "🧩 ¿Qué incluye?",
+        "answer": "OpenNextJS viene con todo lo necesario para construir un producto real:\n\n• Autenticación moderna (email, OAuth, roles y permisos)\n• Pagos y planes con Stripe o Lemon Squeezy\n• Base de datos con Prisma y Neon\n• Dashboard de administración\n• Documentación con Nextra (MDX)\n• Emails con Resend y React Email\n• Seguridad con Cloudflare Turnstile\n• Analíticas integradas (PostHog / GA4)\n• Theme system con dark/light mode y soporte completo de personalización"
+      },
+      "q3": {
+        "question": "🎨 ¿Puedo personalizar el tema?",
+        "answer": "Absolutamente. OpenNextJS está construido con ShadCN/UI, Tailwind y un Theme Provider modular. Podés cambiar:\n\n• Colores, tipografías y layout global\n• Transiciones y animaciones (Framer Motion)\n• Componentes reutilizables (Cards, Inputs, Charts, etc.)\n• Tema de documentación (Nextra)\n• Modo oscuro y variantes personalizadas\n\nTodo el sistema visual está pensado para que se adapte fácilmente a tu marca o producto."
+      },
+      "q4": {
+        "question": "⚙️ ¿Por qué usar OpenNextJS?",
+        "answer": "🔋 Listo para producción desde el primer deploy\n🧠 Arquitectura limpia y escalable (App Router + Server Actions)\n💳 Integraciones completas (auth, pagos, IA, storage, email, SEO)\n🌍 Internacionalización lista (next-intl)\n🧱 Modular y extensible: activá solo los módulos que necesites\n💡 Open source y gratuito"
+      },
+      "q5": {
+        "question": "💬 ¿Para quién está pensado?",
+        "answer": "OpenNextJS es ideal para:\n\n• Desarrolladores que quieren lanzar un SaaS o MVP rápido\n• Equipos que buscan una base sólida para escalar\n• Creadores que valoran buen diseño + código limpio\n• Quienes deseen aprender una arquitectura moderna de Next.js"
+      },
+      "q6": {
+        "question": "🧭 ¿Qué puedo construir con OpenNextJS?",
+        "answer": "• SaaS con planes y créditos\n• Dashboards con roles y analíticas\n• Landing pages con SEO integrado\n• Apps con IA y almacenamiento\n• Paneles administrativos y multitenancy"
+      }
+    }
+  },
+  "hoursSaved": {
+    "title": {
+      "part1": "Ahorra más de",
+      "part2": "de desarrollo"
+    },
+    "subtitle": "Todo lo que un SaaS moderno necesita, preconfigurado y listo para escalar 🚀",
+    "features": {
+      "auth": {
+        "title": "Autenticación & Roles",
+        "hours": "30 h",
+        "desc": "Registro, OAuth, JWT, roles y user impersonation listos."
+      },
+      "payments": {
+        "title": "Pagos & Planes",
+        "hours": "35 h",
+        "desc": "Stripe, Lemon Squeezy, créditos y planes integrados."
+      },
+      "admin": {
+        "title": "Administración & Dashboard",
+        "hours": "20 h",
+        "desc": "Panel de control, usuarios, métricas y retención."
+      },
+      "superAdmin": {
+        "title": "Super Admin Dashboard",
+        "hours": "10 h",
+        "desc": "Panel avanzado con control total y métricas globales."
+      },
+      "infrastructure": {
+        "title": "Infraestructura & Base de Datos",
+        "hours": "6 h",
+        "desc": "Prisma, Neon, migraciones, seeds y entorno seguro."
+      },
+      "ui": {
+        "title": "UI & Componentes",
+        "hours": "15 h",
+        "desc": "Sistema visual con shadcn/ui, Tailwind, dark mode y diseño responsive."
+      },
+      "ux": {
+        "title": "UX & Animaciones",
+        "hours": "15 h",
+        "desc": "Transiciones suaves con Framer Motion y GSAP, interacción fluida y microdetalles."
+      },
+      "legal": {
+        "title": "Legal Pages & Docs (MDX)",
+        "hours": "8 h",
+        "desc": "Docs con Nextra, Terms, Privacy y navegación automática."
+      },
+      "analytics": {
+        "title": "Analytics & Monitoring",
+        "hours": "6 h",
+        "desc": "Integración base para PostHog, LogSnag o GA4 con métricas de usuarios y uso."
+      }
+    },
+    "cta": "Comenzar ahora →",
+    "hoursSaved": "ahorradas"
+  },
+  "footer": {
+    "contact": {
+      "title": "Contacto",
+      "email": "mcarreradev12@gmail.com"
+    },
+    "help": {
+      "title": "Ayuda",
+      "faq": "Preguntas frecuentes"
+    },
+    "legal": {
+      "title": "Legal",
+      "terms": "Términos del servicio",
+      "privacy": "Política de privacidad"
+    },
+    "copyright": "© {year} OpenNextJS, Todos los derechos reservados"
+  },
+  "app": {
+    "title": "App",
+    "sections": {
+      "main": "Principal",
+      "account": "Cuenta"
+    },
+    "menu": {
+      "dashboard": "Panel",
+      "createBrand": "Crear Marca",
+      "myBrands": "Mis Marcas",
+      "favorites": "Favoritos",
+      "settings": "Configuración",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "admin": {
+    "title": "Panel de Administración",
+    "sections": {
+      "main": "Principal"
+    },
+    "menu": {
+      "overview": "Vista General",
+      "usersAnalytics": "Analíticas de Usuarios",
+      "revenueBilling": "Ingresos y Facturación",
+      "productUsage": "Uso del Producto (IA y Assets)",
+      "logout": "Cerrar Sesión"
+    }
+  },
+  "techStack": {
+    "tabs": {
+      "core": "Core",
+      "frontend": "Frontend",
+      "backend": "Backend",
+      "integrations": "Integraciones"
+    },
+    "core": {
+      "nextjs": "Framework React con SSR y optimizaciones automáticas.",
+      "typescript": "JavaScript con tipado estático para mayor seguridad.",
+      "prettier": "Formateador de código automático para estilo consistente.",
+      "eslint": "Análisis estático para detectar problemas en el código.",
+      "husky": "Git hooks para automatizar tareas antes de cada commit."
+    },
+    "frontend": {
+      "shadcn": "Componentes de UI accesibles sobre Radix UI y Tailwind.",
+      "tailwind": "Framework CSS utility-first para diseñar interfaces rápido.",
+      "daisyui": "Componentes y temas preconstruidos para Tailwind CSS.",
+      "zod": "Validación de esquemas TypeScript-first para datos seguros."
+    },
+    "backend": {
+      "zod": "Validación de esquemas TypeScript para servidor y cliente.",
+      "prisma": "ORM moderno para TypeScript con tipado seguro.",
+      "postgresql": "Base de datos relacional robusta y escalable."
+    },
+    "integrations": {
+      "lemonSqueezy": "Plataforma de pagos para SaaS con suscripciones y webhooks.",
+      "stripe": "Plataforma de pagos global para pagos y suscripciones.",
+      "betterAuth": "Autenticación moderna con soporte para múltiples OAuth.",
+      "crisp": "Chat en vivo y mensajería para atención al cliente.",
+      "posthog": "Análisis de productos con seguimiento de eventos.",
+      "resend": "API de correo electrónico con alta tasa de entrega."
+    }
+  },
+  "featureTabs": {
+    "tabs": {
+      "auth": "Autenticación",
+      "payments": "Pagos",
+      "storage": "Almacenamiento",
+      "admin": "Panel de Administración",
+      "ai": "IA y Marca"
+    },
+    "auth": {
+      "title": "Autenticación",
+      "items": [
+        "Autenticación Plug & Play con Better Auth.",
+        "Soporte para Email, OAuth (Google / GitHub) y Magic Links.",
+        "Acceso basado en roles y sesiones seguras.",
+        "Campos de usuario personalizados integrados con Prisma."
+      ]
+    },
+    "payments": {
+      "title": "Pagos",
+      "items": [
+        "Integración con Stripe y Lemon Squeezy.",
+        "Suscripciones, créditos y campañas LTD listas.",
+        "Webhooks automáticos y plan gating.",
+        "Panel de facturación con análisis en tiempo real."
+      ]
+    },
+    "storage": {
+      "title": "Almacenamiento y Cargas",
+      "items": [
+        "Carga de archivos con Vercel Blob o Cloudinary.",
+        "Gestión optimizada de imágenes.",
+        "URLs firmadas y seguras con expiración.",
+        "Cargas de arrastrar y soltar preconfiguradas."
+      ]
+    },
+    "admin": {
+      "title": "Panel de Administración",
+      "items": [
+        "Vista general completa de los datos y usuarios de tu aplicación.",
+        "Seguimiento de suscripciones, uso y análisis en tiempo real.",
+        "Gestiona usuarios, planes, créditos y salud del sistema.",
+        "Construido con Tremor + Shadcn UI para un diseño moderno y limpio."
+      ]
+    },
+    "ai": {
+      "title": "Herramientas de IA y Marca",
+      "items": [
+        "Integración lista para usar con la API de OpenAI.",
+        "Genera texto, imágenes, paletas de colores y más.",
+        "Sistema de créditos basado en uso con seguimiento.",
+        "Almacenamiento persistente mediante el modelo BrandAsset."
+      ]
+    }
+  }
+}
