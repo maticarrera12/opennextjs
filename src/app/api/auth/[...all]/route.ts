@@ -1,25 +1,20 @@
-import { auth, assignAdminRole, prisma } from "@/lib/auth";
 import { toNextJsHandler } from "better-auth/next-js";
 import { NextRequest } from "next/server";
 
+import { auth, assignAdminRole, prisma } from "@/lib/auth";
+
 const handler = toNextJsHandler(auth);
 
-async function handleOAuthCallback(
-  request: NextRequest,
-  method: "GET" | "POST"
-) {
+async function handleOAuthCallback(request: NextRequest, method: "GET" | "POST") {
   const pathname = request.nextUrl.pathname;
 
   // Interceptar callbacks de OAuth
   const isOAuthCallback =
-    pathname.includes("/callback/github") ||
-    pathname.includes("/callback/google");
+    pathname.includes("/callback/github") || pathname.includes("/callback/google");
 
   if (isOAuthCallback) {
     // Ejecutar el handler de Better Auth primero
-    const response = await (method === "GET" ? handler.GET : handler.POST)(
-      request
-    );
+    const response = await (method === "GET" ? handler.GET : handler.POST)(request);
 
     // Después de que Better Auth procese el callback, verificar y asignar rol
     // Hacer esto de forma asíncrona sin bloquear la respuesta
@@ -28,7 +23,7 @@ async function handleOAuthCallback(
       Promise.resolve().then(async () => {
         try {
           // Esperar un poco para que Better Auth complete el proceso de creación de usuario
-          await new Promise((resolve) => setTimeout(resolve, 200));
+          await new Promise(resolve => setTimeout(resolve, 200));
 
           // Intentar obtener la sesión primero
           let session = null;

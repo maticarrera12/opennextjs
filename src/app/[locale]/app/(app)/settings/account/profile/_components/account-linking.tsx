@@ -1,4 +1,8 @@
 "use client";
+import { Plus, Shield, Trash2 } from "lucide-react";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+
 import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
 import { Card, CardContent } from "@/components/ui/card";
 import { auth } from "@/lib/auth";
@@ -8,17 +12,10 @@ import {
   SUPPORTED_OAUTH_PROVIDERS_DETAILS,
   type SupportedOAuthProviders,
 } from "@/lib/o-auth-providers";
-import { Plus, Shield, Trash2 } from "lucide-react";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
 
 type Account = Awaited<ReturnType<typeof auth.api.listUserAccounts>>[number];
 
-export function AccountLinking({
-  currentAccounts,
-}: {
-  currentAccounts: Account[];
-}) {
+export function AccountLinking({ currentAccounts }: { currentAccounts: Account[] }) {
   const t = useTranslations("settings.profile.linkedAccounts");
 
   return (
@@ -34,12 +31,8 @@ export function AccountLinking({
           </Card>
         ) : (
           <div className="space-y-3">
-            {currentAccounts.map((account) => (
-              <AccountCard
-                key={account.id}
-                provider={account.providerId}
-                account={account}
-              />
+            {currentAccounts.map(account => (
+              <AccountCard key={account.id} provider={account.providerId} account={account} />
             ))}
           </div>
         )}
@@ -49,9 +42,8 @@ export function AccountLinking({
         <h3 className="text-lg font-medium">{t("linkOther")}</h3>
         <div className="grid gap-3">
           {SUPPORTED_OAUTH_PROVIDERS.filter(
-            (provider) =>
-              !currentAccounts.find((acc) => acc.providerId === provider)
-          ).map((provider) => (
+            provider => !currentAccounts.find(acc => acc.providerId === provider)
+          ).map(provider => (
             <AccountCard key={provider} provider={provider} />
           ))}
         </div>
@@ -60,13 +52,7 @@ export function AccountLinking({
   );
 }
 
-function AccountCard({
-  provider,
-  account,
-}: {
-  provider: string;
-  account?: Account;
-}) {
+function AccountCard({ provider, account }: { provider: string; account?: Account }) {
   const router = useRouter();
   const t = useTranslations("settings.profile.linkedAccounts");
 
@@ -115,27 +101,18 @@ function AccountCard({
                 </p>
               ) : (
                 <p className="text-sm text-muted-foreground">
-                  {t("linkedOn")}{" "}
-                  {new Date(account.createdAt).toLocaleDateString()}
+                  {t("linkedOn")} {new Date(account.createdAt).toLocaleDateString()}
                 </p>
               )}
             </div>
           </div>
           {account == null ? (
-            <BetterAuthActionButton
-              variant="outline"
-              size="sm"
-              action={linkAccount}
-            >
+            <BetterAuthActionButton variant="outline" size="sm" action={linkAccount}>
               <Plus />
               {t("link")}
             </BetterAuthActionButton>
           ) : (
-            <BetterAuthActionButton
-              variant="destructive"
-              size="sm"
-              action={unlinkAccount}
-            >
+            <BetterAuthActionButton variant="destructive" size="sm" action={unlinkAccount}>
               <Trash2 />
               {t("unlink")}
             </BetterAuthActionButton>

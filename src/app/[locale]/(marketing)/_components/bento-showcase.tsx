@@ -1,8 +1,9 @@
+import React from "react";
+
+import { WaitlistMetrics } from "./waitlist-metrics";
 import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
 import Logo from "@/components/navbar/logo";
 import ThemeToggle from "@/components/navbar/theme-toggle";
-import {WaitlistMetrics} from "./waitlist-metrics";
-import React from "react";
 
 const BentoShowcase = () => {
   return (
@@ -46,9 +47,7 @@ const BentoShowcase = () => {
               <br className="hidden md:block" />
               Showcase
             </h2>
-            <p className="text-xs text-muted-foreground mt-0.5">
-              Discover amazing capabilities
-            </p>
+            <p className="text-xs text-muted-foreground mt-0.5">Discover amazing capabilities</p>
           </div>
 
           {/* Date Card */}
@@ -70,16 +69,12 @@ const BentoShowcase = () => {
 
           {/* Timer Card */}
           <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1 bg-card border border-border rounded-xl flex items-center justify-center">
-            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">
-              24:00
-            </div>
+            <div className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground">24:00</div>
           </div>
 
           {/* Device Preview */}
           <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1 bg-card border border-border rounded-xl flex items-center justify-center p-2 md:p-3 overflow-hidden relative">
-            <span className="text-xs md:text-sm text-muted-foreground">
-              Cool feature
-            </span>
+            <span className="text-xs md:text-sm text-muted-foreground">Cool feature</span>
           </div>
 
           {/* CTA Card */}
@@ -90,13 +85,9 @@ const BentoShowcase = () => {
                 <br />
                 Today
               </h3>
-              <div className="text-xs text-muted-foreground mt-0.5">
-                Build something amazing
-              </div>
+              <div className="text-xs text-muted-foreground mt-0.5">Build something amazing</div>
             </div>
-            <div className="text-3xl md:text-4xl lg:text-5xl opacity-20">
-              🚀
-            </div>
+            <div className="text-3xl md:text-4xl lg:text-5xl opacity-20">🚀</div>
           </div>
         </div>
       </div>

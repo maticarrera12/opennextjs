@@ -1,14 +1,13 @@
 "use client";
-import { useState } from "react";
-import { CheckIcon, CopyIcon } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
+import { CheckIcon, CopyIcon } from "lucide-react";
 import { useTranslations } from "next-intl";
+import { useState } from "react";
 
 export default function CloneCommand() {
   const [copied, setCopied] = useState(false);
   const t = useTranslations("cloneCommand");
-  const command =
-    "git clone https://github.com/maticarrera12/opennextjs_boilerplate";
+  const command = "git clone https://github.com/maticarrera12/opennextjs_boilerplate";
 
   const handleCopy = async () => {
     await navigator.clipboard.writeText(command);

@@ -1,13 +1,14 @@
 "use client";
-import React, { useState } from "react";
+import { motion } from "framer-motion";
+import { LogOutIcon, ArrowLeftIcon, type LucideIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { motion } from "framer-motion";
-import { cn } from "@/lib/utils";
-import { authClient } from "@/lib/auth-client";
-import { LogOutIcon, ArrowLeftIcon, type LucideIcon } from "lucide-react";
-import ThemeToggle from "@/components/navbar/theme-toggle";
+import React, { useState } from "react";
+
 import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
+import ThemeToggle from "@/components/navbar/theme-toggle";
+import { authClient } from "@/lib/auth-client";
+import { cn } from "@/lib/utils";
 
 export interface SidebarItem {
   name: string;
@@ -160,12 +161,7 @@ export default function AppSidebar({
 
             {/* Contenido adicional superior */}
             {topContent && (
-              <div
-                className={cn(
-                  "mb-4",
-                  isHovered || isOpen ? "h-auto" : "h-28 overflow-hidden"
-                )}
-              >
+              <div className={cn("mb-4", isHovered || isOpen ? "h-auto" : "h-28 overflow-hidden")}>
                 <div
                   className={cn(
                     isHovered || isOpen
@@ -180,15 +176,13 @@ export default function AppSidebar({
             )}
 
             {/* Secciones */}
-            {sections.map((section) => (
+            {sections.map(section => (
               <div key={section.label} className="mb-4">
                 <div className="h-5 mb-1">
                   <span
                     className={cn(
                       "block text-[11px] font-semibold uppercase tracking-wider text-muted-foreground whitespace-nowrap transition-all duration-75",
-                      isHovered || isOpen
-                        ? "opacity-100 w-auto"
-                        : "opacity-0 w-0"
+                      isHovered || isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"
                     )}
                   >
                     {section.label}
@@ -196,7 +190,7 @@ export default function AppSidebar({
                 </div>
 
                 <nav className="flex flex-col">
-                  {section.items.map((item) => {
+                  {section.items.map(item => {
                     const isActive = pathname.endsWith(item.href);
                     const Icon = item.icon;
                     return (
@@ -225,9 +219,7 @@ export default function AppSidebar({
                         <span
                           className={cn(
                             "justify-self-start whitespace-nowrap overflow-hidden transition-all duration-75",
-                            isHovered || isOpen
-                              ? "opacity-100 w-auto"
-                              : "opacity-0 w-0"
+                            isHovered || isOpen ? "opacity-100 w-auto" : "opacity-0 w-0"
                           )}
                         >
                           {item.name}

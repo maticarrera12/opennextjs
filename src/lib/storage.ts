@@ -65,7 +65,7 @@ export async function uploadImages(
   userId: string,
   type: "logo" | "avatar"
 ): Promise<Array<{ url: string; path: string; size: number }>> {
-  const uploadPromises = files.map((file) => uploadImage(file, userId, type));
+  const uploadPromises = files.map(file => uploadImage(file, userId, type));
   return Promise.all(uploadPromises);
 }
 
@@ -74,7 +74,7 @@ export async function uploadImages(
  * @param urls - Array of Blob URLs to delete
  */
 export async function deleteImages(urls: string[]): Promise<void> {
-  const deletePromises = urls.map((url) => deleteImage(url));
+  const deletePromises = urls.map(url => deleteImage(url));
   await Promise.all(deletePromises);
 }
 

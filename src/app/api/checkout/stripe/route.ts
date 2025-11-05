@@ -1,8 +1,9 @@
 import { NextRequest, NextResponse } from "next/server";
 import Stripe from "stripe";
+
 import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
+import { prisma } from "@/lib/prisma";
 
 const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
   apiVersion: "2025-09-30.clover",
@@ -59,8 +60,7 @@ export async function POST(req: NextRequest) {
       }
 
       const plan = planEntry[1];
-      const priceId =
-        interval === "annual" ? plan.stripe.annual : plan.stripe.monthly;
+      const priceId = interval === "annual" ? plan.stripe.annual : plan.stripe.monthly;
 
       if (!priceId || priceId === "") {
         return NextResponse.json(
@@ -92,9 +92,7 @@ export async function POST(req: NextRequest) {
       });
     } else if (type === "credit_pack") {
       // Handle credit pack - find pack by id (not key)
-      const packEntry = Object.entries(CREDIT_PACKS).find(
-        ([, p]) => p.id === packId
-      );
+      const packEntry = Object.entries(CREDIT_PACKS).find(([, p]) => p.id === packId);
 
       if (!packEntry) {
         return NextResponse.json({ error: "Invalid pack" }, { status: 400 });
@@ -141,10 +139,7 @@ export async function POST(req: NextRequest) {
     console.error("Stripe checkout error:", error);
     return NextResponse.json(
       {
-        error:
-          error instanceof Error
-            ? error.message
-            : "Failed to create checkout session",
+        error: error instanceof Error ? error.message : "Failed to create checkout session",
       },
       { status: 500 }
     );

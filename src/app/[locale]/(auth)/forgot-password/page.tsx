@@ -1,7 +1,12 @@
 "use client";
 
-import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
+import { useTranslations } from "next-intl";
+import { useForm } from "react-hook-form";
+import { toast } from "sonner";
+
+import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
@@ -11,16 +16,9 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
-import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { useTranslations } from "next-intl";
-import { toast } from "sonner";
 import { authClient } from "@/lib/auth-client";
-import {
-  forgotPasswordSchema,
-  ForgotPasswordInput,
-} from "@/lib/schemas/auth.schema";
-import { useRouter } from "next/navigation";
+import { forgotPasswordSchema, ForgotPasswordInput } from "@/lib/schemas/auth.schema";
 
 function ForgotPassword() {
   const router = useRouter();
@@ -41,7 +39,7 @@ function ForgotPassword() {
         redirectTo: "/reset-password",
       },
       {
-        onError: (error) => {
+        onError: error => {
           toast.error(error.error.message || t("error"));
         },
         onSuccess: () => {
@@ -53,10 +51,7 @@ function ForgotPassword() {
 
   return (
     <Form {...form}>
-      <form
-        className="space-y-4"
-        onSubmit={form.handleSubmit(handleForgotPassword)}
-      >
+      <form className="space-y-4" onSubmit={form.handleSubmit(handleForgotPassword)}>
         <FormField
           control={form.control}
           name="email"
@@ -72,11 +67,7 @@ function ForgotPassword() {
         />
 
         <div className="flex gap-2">
-          <Button
-            type="button"
-            variant="outline"
-            onClick={() => router.push("/signin")}
-          >
+          <Button type="button" variant="outline" onClick={() => router.push("/signin")}>
             {t("backToSignIn")}
           </Button>
           <Button

@@ -1,5 +1,6 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req: Request) {
   try {
@@ -26,10 +27,7 @@ export async function GET(req: Request) {
     });
 
     if (!user) {
-      return NextResponse.json(
-        { error: "Email not found in waitlist" },
-        { status: 404 }
-      );
+      return NextResponse.json({ error: "Email not found in waitlist" }, { status: 404 });
     }
 
     // Calcular posición en la lista
@@ -56,9 +54,6 @@ export async function GET(req: Request) {
     });
   } catch (error) {
     console.error("Error looking up waitlist entry:", error);
-    return NextResponse.json(
-      { error: "Something went wrong" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Something went wrong" }, { status: 500 });
   }
 }

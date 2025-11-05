@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
-import Link from "next/link";
-import { ArrowRightIcon } from "lucide-react";
-import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
-// import Image from "next/image";
 import { useTranslations } from "next-intl";
+import React from "react";
+
+import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
+
+// import Image from "next/image";
+
 import CloneCommand from "@/components/CloneCommand";
 
 const Hero = () => {
@@ -31,9 +32,7 @@ const Hero = () => {
 
             <p className="text-lg md:text-xl text-muted-foreground max-w-2xl mx-auto">
               {t("description.part1")}{" "}
-              <span className="font-semibold">
-                {t("description.highlight")}
-              </span>{" "}
+              <span className="font-semibold">{t("description.highlight")}</span>{" "}
               {t("description.part2")}
             </p>
             <div className="flex-col md:flex-row items-center justify-center gap-4 pt-4">
@@ -68,9 +67,7 @@ const Hero = () => {
             ></div>
             <div className="relative aspect-[4/3] bg-muted rounded-lg flex items-center justify-center overflow-hidden z-10">
               <div className="absolute inset-0 flex items-center justify-center z-10">
-                <p className="text-2xl font-bold text-muted-foreground">
-                  {t("imagePlaceholder")}
-                </p>
+                <p className="text-2xl font-bold text-muted-foreground">{t("imagePlaceholder")}</p>
               </div>
             </div>
             {/* Uncomment and add your image when ready */}

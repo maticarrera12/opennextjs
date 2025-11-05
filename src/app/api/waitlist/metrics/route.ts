@@ -1,5 +1,6 @@
-import { prisma } from "@/lib/prisma";
 import { NextResponse } from "next/server";
+
+import { prisma } from "@/lib/prisma";
 
 export async function GET() {
   try {
@@ -27,7 +28,7 @@ export async function GET() {
     // Agrupar usuarios por fecha (solo día, sin hora)
     const usersByDate = new Map<string, number>();
 
-    users.forEach((user) => {
+    users.forEach(user => {
       const dateKey = new Date(user.createdAt).toISOString().split("T")[0];
       usersByDate.set(dateKey, (usersByDate.get(dateKey) || 0) + 1);
     });
@@ -39,7 +40,7 @@ export async function GET() {
     // Ordenar fechas y crear datos acumulados
     const sortedDates = Array.from(usersByDate.keys()).sort();
 
-    sortedDates.forEach((date) => {
+    sortedDates.forEach(date => {
       const count = usersByDate.get(date) || 0;
       runningTotal += count;
       chartData.push({
@@ -73,4 +74,3 @@ export async function GET() {
     });
   }
 }
-

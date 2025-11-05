@@ -1,10 +1,11 @@
 // app/api/credits/balance/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
+
 import { auth } from "@/lib/auth";
-import { prisma } from "@/lib/prisma";
 import { CreditService } from "@/lib/credits";
 import { PLANS } from "@/lib/credits/constants";
+import { prisma } from "@/lib/prisma";
 
 export async function GET(req: NextRequest) {
   try {
@@ -49,9 +50,6 @@ export async function GET(req: NextRequest) {
     });
   } catch (error) {
     console.error("Failed to get credit balance:", error);
-    return NextResponse.json(
-      { error: "Internal server error" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }

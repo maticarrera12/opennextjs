@@ -1,23 +1,16 @@
 "use client";
 import "./AnimatedButton.css";
-import React, { useRef } from "react";
-
+import { useGSAP } from "@gsap/react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { useGSAP } from "@gsap/react";
-import { useViewTransition } from "../../hooks/useViewTransition";
-
+import React, { useRef } from "react";
 import { IoMdArrowForward } from "react-icons/io";
+
+import { useViewTransition } from "../../hooks/useViewTransition";
 
 gsap.registerPlugin(ScrollTrigger);
 
-const AnimatedButton = ({
-  label,
-  route,
-  animate = true,
-  animateOnScroll = true,
-  delay = 0,
-}) => {
+const AnimatedButton = ({ label, route, animate = true, animateOnScroll = true, delay = 0 }) => {
   const { navigateWithTransition } = useViewTransition();
   const buttonRef = useRef(null);
   const circleRef = useRef(null);
@@ -28,14 +21,14 @@ const AnimatedButton = ({
     try {
       await document.fonts.ready;
       const customFonts = ["Manrope"];
-      const fontCheckPromises = customFonts.map((fontFamily) => {
+      const fontCheckPromises = customFonts.map(fontFamily => {
         return document.fonts.check(`16px ${fontFamily}`);
       });
       await Promise.all(fontCheckPromises);
-      await new Promise((resolve) => setTimeout(resolve, 100));
+      await new Promise(resolve => setTimeout(resolve, 100));
       return true;
     } catch (error) {
-      await new Promise((resolve) => setTimeout(resolve, 200));
+      await new Promise(resolve => setTimeout(resolve, 200));
       return true;
     }
   };
@@ -121,7 +114,7 @@ const AnimatedButton = ({
 
       return () => {
         // Cleanup ScrollTrigger instances
-        ScrollTrigger.getAll().forEach((trigger) => {
+        ScrollTrigger.getAll().forEach(trigger => {
           if (trigger.trigger === buttonRef.current) {
             trigger.kill();
           }
@@ -149,7 +142,7 @@ const AnimatedButton = ({
         href={route}
         className="btn"
         ref={buttonRef}
-        onClick={(e) => {
+        onClick={e => {
           e.preventDefault();
           navigateWithTransition(route);
         }}

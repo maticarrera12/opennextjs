@@ -1,6 +1,7 @@
 "use server";
-import { auth, prisma, assignAdminRole } from "../auth";
 import { headers } from "next/headers";
+
+import { auth, assignAdminRole } from "../auth";
 import { signInSchema, signUpSchema } from "../schemas";
 
 export const signUp = async (email: string, password: string, name: string) => {

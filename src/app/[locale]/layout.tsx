@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import { Toaster } from "sonner";
 import { headers } from "next/headers";
-import { ThemeProvider } from "@/components/navbar/theme-provider";
 import { NextIntlClientProvider } from "next-intl";
+import { Toaster } from "sonner";
+
+import { ThemeProvider } from "@/components/navbar/theme-provider";
 import { auth } from "@/lib/auth";
+
 import { Analytics } from "@vercel/analytics/next";
 import { SpeedInsights } from "@vercel/speed-insights/next";
 const geistSans = Geist({
@@ -39,9 +41,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale}>
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} antialiased`}
-      >
+      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
           <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
             {children}

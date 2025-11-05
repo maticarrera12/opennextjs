@@ -1,9 +1,9 @@
 "use client";
 
 import { motion } from "framer-motion";
-import CountUp from "react-countup";
-import { useTranslations } from "next-intl";
 import Link from "next/link";
+import { useTranslations } from "next-intl";
+import CountUp from "react-countup";
 
 export default function HoursSavedSection() {
   const t = useTranslations("hoursSaved");
@@ -108,10 +108,7 @@ export default function HoursSavedSection() {
         viewport={{ once: true }}
         className="mt-14"
       >
-        <Link
-          href="/waitlist"
-          className="inline-block text-primary font-semibold hover:underline"
-        >
+        <Link href="/waitlist" className="inline-block text-primary font-semibold hover:underline">
           {t("cta")}
         </Link>
       </motion.div>

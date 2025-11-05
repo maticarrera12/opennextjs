@@ -1,11 +1,12 @@
 // app/api/webhooks/lemonsqueezy/route.ts
 
-import { NextRequest, NextResponse } from "next/server";
+import { PlanStatus } from "@prisma/client";
 import crypto from "crypto";
-import { prisma } from "@/lib/prisma";
+import { NextRequest, NextResponse } from "next/server";
+
 import { CreditService } from "@/lib/credits";
 import { PLANS, CREDIT_PACKS } from "@/lib/credits/constants";
-import { PlanStatus } from "@prisma/client";
+import { prisma } from "@/lib/prisma";
 
 const webhookSecret = process.env.LEMONSQUEEZY_WEBHOOK_SECRET!;
 
@@ -60,10 +61,7 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ received: true });
   } catch (error) {
     console.error("Lemon Squeezy webhook error:", error);
-    return NextResponse.json(
-      { error: "Webhook handler failed" },
-      { status: 500 }
-    );
+    return NextResponse.json({ error: "Webhook handler failed" }, { status: 500 });
   }
 }
 
@@ -76,7 +74,6 @@ function verifySignature(body: string, signature: string | null): boolean {
   return crypto.timingSafeEqual(Buffer.from(signature), Buffer.from(digest));
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionUpdate(data: any) {
   const customerId = data.attributes.customer_id.toString();
   const variantId = data.attributes.variant_id.toString();
@@ -102,8 +99,7 @@ async function handleLSSubscriptionUpdate(data: any) {
   }
 
   const planConfig = PLANS[plan];
-  const isNewSubscription =
-    status === "active" && user.subscriptionId !== subscriptionId;
+  const isNewSubscription = status === "active" && user.subscriptionId !== subscriptionId;
 
   // Update user
   await prisma.user.update({
@@ -150,7 +146,6 @@ async function handleLSSubscriptionUpdate(data: any) {
   });
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionCanceled(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -169,7 +164,6 @@ async function handleLSSubscriptionCanceled(data: any) {
   });
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionResumed(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -189,7 +183,6 @@ async function handleLSSubscriptionResumed(data: any) {
   });
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSSubscriptionExpired(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -209,7 +202,6 @@ async function handleLSSubscriptionExpired(data: any) {
   });
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSOrderCreated(data: any) {
   const customerId = data.attributes.customer_id.toString();
   const variantId = data.attributes.first_order_item.variant_id.toString();
@@ -225,9 +217,7 @@ async function handleLSOrderCreated(data: any) {
   }
 
   // Check if it's a credit pack
-  const pack = Object.values(CREDIT_PACKS).find(
-    (p) => p.lemonSqueezy.variantId === variantId
-  );
+  const pack = Object.values(CREDIT_PACKS).find(p => p.lemonSqueezy.variantId === variantId);
 
   if (pack) {
     // Add credits
@@ -258,7 +248,6 @@ async function handleLSOrderCreated(data: any) {
   }
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSPaymentSuccess(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -272,7 +261,6 @@ async function handleLSPaymentSuccess(data: any) {
   await CreditService.monthlyReset(user.id);
 }
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
 async function handleLSPaymentFailed(data: any) {
   const customerId = data.attributes.customer_id.toString();
 
@@ -307,10 +295,7 @@ function mapLSStatus(status: string): PlanStatus {
 
 function getPlanFromVariantId(variantId: string): keyof typeof PLANS | null {
   for (const [planName, config] of Object.entries(PLANS)) {
-    if (
-      config.lemonSqueezy?.monthly === variantId ||
-      config.lemonSqueezy?.annual === variantId
-    ) {
+    if (config.lemonSqueezy?.monthly === variantId || config.lemonSqueezy?.annual === variantId) {
       return planName as keyof typeof PLANS;
     }
   }

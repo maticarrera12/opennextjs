@@ -1,11 +1,12 @@
 "use client";
 
-import React from "react";
-import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import { Card } from "@/components/ui/card";
-import Image from "next/image";
 import { Code, Palette, Database, Plug } from "lucide-react";
+import Image from "next/image";
 import { useTranslations } from "next-intl";
+import React from "react";
+
+import { Card } from "@/components/ui/card";
+import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
 
 interface TechItem {
   name: string;
@@ -111,7 +112,7 @@ export function TechStackTabs() {
       },
       {
         name: "Resend",
-        image: "/assets/resend.psvg",
+        image: "/assets/resend.png",
         description: t("integrations.resend"),
       },
     ],
@@ -126,7 +127,7 @@ export function TechStackTabs() {
           { value: "frontend", label: t("tabs.frontend"), icon: Palette },
           { value: "backend", label: t("tabs.backend"), icon: Database },
           { value: "integrations", label: t("tabs.integrations"), icon: Plug },
-        ].map((tab) => {
+        ].map(tab => {
           const Icon = tab.icon;
           return (
             <TabsTrigger
@@ -202,9 +203,7 @@ function TechCard({ item }: { item: TechItem }) {
             sizes="(max-width: 768px) 36px, 56px"
           />
         </div>
-        <h3 className="text-sm md:text-lg font-semibold text-foreground truncate">
-          {item.name}
-        </h3>
+        <h3 className="text-sm md:text-lg font-semibold text-foreground truncate">{item.name}</h3>
       </div>
       <p className="text-xs md:text-sm text-muted-foreground leading-snug line-clamp-3 md:line-clamp-2 mt-2 min-h-[3rem] md:min-h-[2.5rem]">
         {item.description}

@@ -1,7 +1,8 @@
 // lib/credits/index.ts
+import type { CreditTransactionType, Prisma } from "@prisma/client";
+
 import { prisma } from "../prisma";
 import { PLANS } from "./constants";
-import type { CreditTransactionType, Prisma } from "@prisma/client";
 
 export class CreditService {
   // Check if user has enough credits
@@ -37,7 +38,7 @@ export class CreditService {
 
     try {
       // Use transaction to ensure consistency
-      const result = await prisma.$transaction(async (tx) => {
+      const result = await prisma.$transaction(async tx => {
         // 1. Get current balance with lock
         const user = await tx.user.findUnique({
           where: { id: userId },
@@ -96,7 +97,7 @@ export class CreditService {
   }): Promise<void> {
     const { userId, amount, reason, assetId } = params;
 
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async tx => {
       // 1. Add credits back
       const updatedUser = await tx.user.update({
         where: { id: userId },
@@ -130,7 +131,7 @@ export class CreditService {
   }): Promise<void> {
     const { userId, amount, type, reason, description, purchaseId } = params;
 
-    await prisma.$transaction(async (tx) => {
+    await prisma.$transaction(async tx => {
       const updatedUser = await tx.user.update({
         where: { id: userId },
         data: {
@@ -185,10 +186,7 @@ export class CreditService {
   }
 
   // Get credit history
-  static async getHistory(
-    userId: string,
-    options?: { limit?: number; offset?: number }
-  ) {
+  static async getHistory(userId: string, options?: { limit?: number; offset?: number }) {
     return prisma.creditTransaction.findMany({
       where: { userId },
       orderBy: { createdAt: "desc" },
@@ -229,10 +227,7 @@ export class CreditService {
       },
     });
 
-    const totalUsed = transactions.reduce(
-      (sum, t) => sum + Math.abs(t.amount),
-      0
-    );
+    const totalUsed = transactions.reduce((sum, t) => sum + Math.abs(t.amount), 0);
 
     const byFeature = transactions.reduce(
       (acc, t) => {

@@ -1,15 +1,10 @@
 "use client";
 
-import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
-import {
-  Card,
-  CardContent,
-  CardDescription,
-  CardHeader,
-  CardTitle,
-} from "@/components/ui/card";
-import { authClient } from "@/lib/auth-client";
 import { useTranslations } from "next-intl";
+
+import BetterAuthActionButton from "@/app/[locale]/(auth)/_components/better-auth-action-button";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { authClient } from "@/lib/auth-client";
 
 export function DangerZone() {
   const t = useTranslations("settings.profile.dangerZone");
@@ -24,12 +19,8 @@ export function DangerZone() {
         <div className="rounded-lg border border-destructive/50 bg-destructive/5 p-4">
           <div className="flex items-center justify-between">
             <div>
-              <p className="font-medium text-destructive">
-                {t("deleteAccount")}
-              </p>
-              <p className="text-sm text-muted-foreground">
-                {t("deleteDescription")}
-              </p>
+              <p className="font-medium text-destructive">{t("deleteAccount")}</p>
+              <p className="text-sm text-muted-foreground">{t("deleteDescription")}</p>
             </div>
             <BetterAuthActionButton
               action={() => {
