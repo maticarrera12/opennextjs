@@ -1,3 +1,7 @@
+import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
+import Logo from "@/components/navbar/logo";
+import ThemeToggle from "@/components/navbar/theme-toggle";
+import {WaitlistMetrics} from "./waitlist-metrics";
 import React from "react";
 
 const BentoShowcase = () => {
@@ -12,9 +16,10 @@ const BentoShowcase = () => {
           </div>
 
           {/* Logo/Brand */}
-          <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-3 lg:row-span-1 bg-card border border-border rounded-xl flex items-center justify-center">
+          <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-3 lg:row-span-1 gap-6 bg-card border border-border rounded-xl flex items-center justify-center">
+            <Logo />
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-foreground tracking-tight">
-              Your Brand
+              OpenNextJS
             </h1>
           </div>
 
@@ -48,52 +53,19 @@ const BentoShowcase = () => {
 
           {/* Date Card */}
           <div className="col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 bg-card border border-border rounded-xl flex flex-col items-center justify-center gap-0.5 p-2 md:p-3">
-            <div className="text-xs md:text-sm font-semibold text-muted-foreground">
-              Mon
-            </div>
-            <div className="text-2xl md:text-3xl font-bold text-foreground">
-              24
-            </div>
+            <ThemeToggle />
           </div>
 
           {/* Icon Card */}
           <div className="col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 bg-card border border-border rounded-xl flex items-center justify-center">
-            <div className="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary/10 flex items-center justify-center">
-              <div className="text-primary text-lg md:text-xl">🎨</div>
+            <div className="flex items-center justify-center max-w-32">
+              <LanguageSwitcher />
             </div>
           </div>
 
-          {/* Stats Card */}
-          <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 bg-card border border-border rounded-xl p-3 md:p-4 flex flex-col justify-between">
-            <div className="flex items-center justify-between mb-2">
-              <span className="text-xs font-medium text-muted-foreground">
-                Metrics
-              </span>
-              <button className="w-6 h-6 md:w-7 md:h-7 rounded-full bg-primary text-primary-foreground flex items-center justify-center text-sm hover:bg-primary/90 transition">
-                +
-              </button>
-            </div>
-            <div className="text-2xl md:text-3xl font-bold text-foreground mb-2">
-              2.4K
-            </div>
-            <div className="h-12 md:h-14 relative">
-              <svg className="w-full h-full" viewBox="0 0 200 60">
-                <polyline
-                  points="0,45 20,40 40,35 60,50 80,30 100,25 120,45 140,20 160,35 180,15 200,25"
-                  fill="none"
-                  stroke="currentColor"
-                  strokeWidth="2"
-                  className="text-primary"
-                />
-                <circle
-                  cx="100"
-                  cy="25"
-                  r="4"
-                  fill="currentColor"
-                  className="text-primary"
-                />
-              </svg>
-            </div>
+          {/* Metrics Card */}
+          <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 flex w-full h-full">
+            <WaitlistMetrics />
           </div>
 
           {/* Timer Card */}
