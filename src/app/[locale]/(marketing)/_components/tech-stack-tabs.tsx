@@ -21,7 +21,7 @@ export function TechStackTabs() {
     core: [
       {
         name: "Next.js",
-        image: "/assets/nextjs.jpeg",
+        image: "/assets/nextjs.png",
         description: t("core.nextjs"),
       },
       {
@@ -48,7 +48,7 @@ export function TechStackTabs() {
     frontend: [
       {
         name: "Shadcn UI",
-        image: "/assets/shadcn.jpeg",
+        image: "/assets/shadcn.png",
         description: t("frontend.shadcn"),
       },
       {

@@ -40,7 +40,6 @@ export default function WaitlistPage() {
     resolver: zodResolver(waitlistSchema),
     defaultValues: {
       email: "",
-      name: "",
     },
   });
 
@@ -315,27 +314,6 @@ export default function WaitlistPage() {
                       <Input
                         type="email"
                         placeholder="your@email.com"
-                        className="h-12 bg-background"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground">
-                      Name <span className="text-muted-foreground">(optional)</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Your name"
                         className="h-12 bg-background"
                         {...field}
                       />

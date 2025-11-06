@@ -1,5 +1,6 @@
 "use client";
 
+import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useRef } from "react";
 
@@ -8,6 +9,8 @@ import CloneCommand from "@/components/CloneCommand";
 
 const Hero = () => {
   const t = useTranslations("hero");
+  const pathname = usePathname();
+  const locale = pathname.split("/")[1] || "en";
   const videoRef = useRef<React.ElementRef<"video">>(null);
 
   useEffect(() => {
@@ -67,7 +70,7 @@ const Hero = () => {
             <div className="flex-col md:flex-row items-center justify-center gap-4 pt-4">
               <AnimatedButton
                 label={t("cta")}
-                route="/waitlist"
+                route={`/${locale}/waitlist`}
                 animate={true}
                 animateOnScroll={true}
                 delay={0.2}
