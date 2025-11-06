@@ -387,7 +387,7 @@ export default function WaitlistPage() {
         )}
 
         {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
+        {/* <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
           <div className="text-center space-y-2">
             <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
               <Sparkles className="w-6 h-6 text-primary" />
@@ -408,8 +408,8 @@ export default function WaitlistPage() {
             </div>
             <h3 className="font-semibold text-foreground">Referral Rewards</h3>
             <p className="text-sm text-muted-foreground">Skip ahead by inviting friends</p>
-          </div>
-        </div>
+          </div> 
+        </div>*/}
       </div>
     </div>
   );
