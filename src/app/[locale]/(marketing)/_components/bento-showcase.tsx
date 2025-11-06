@@ -21,10 +21,10 @@ const BentoShowcase = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 auto-rows-[100px] md:auto-rows-[110px] gap-2 md:gap-3 p-3 md:p-4 bg-muted/50 rounded-2xl md:rounded-3xl border border-border">
           {/* Hero Card */}
           <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 rounded-xl overflow-hidden relative border border-border flex flex-col items-center justify-center p-4 md:p-6 text-center">
-            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-white leading-tight mb-2">
+            <h2 className="text-2xl md:text-3xl lg:text-4xl font-bold text-foreground leading-tight mb-2">
               {tHero("title")}
             </h2>
-            <p className="text-xs md:text-sm text-white/90">{tHero("subtitle")}</p>
+            <p className="text-xs md:text-sm text-muted-foreground">{tHero("subtitle")}</p>
           </div>
 
           {/* Logo/Brand */}
@@ -37,7 +37,7 @@ const BentoShowcase = () => {
 
           {/* Features Grid - Tech Stack */}
           <div className="col-span-1 row-span-1 md:col-span-1 md:row-span-1 lg:col-span-1 lg:row-span-1 border border-border rounded-xl overflow-hidden relative p-2 md:p-3 flex flex-col justify-center">
-            <p className="text-[8px] md:text-xs text-white/80 mb-1 font-medium">
+            <p className="text-[8px] md:text-xs text-foreground mb-1 font-medium">
               {tFeatures("title")}
             </p>
             <div className="flex items-center gap-1.5">
@@ -50,7 +50,7 @@ const BentoShowcase = () => {
                   sizes="(max-width: 768px) 16px, 20px"
                 />
               </div>
-              <span className="text-[10px] md:text-xs font-semibold text-white truncate">
+              <span className="text-[10px] md:text-xs font-semibold text-muted-foreground truncate">
                 {tFeatures("nextjs")}
               </span>
             </div>
@@ -64,7 +64,7 @@ const BentoShowcase = () => {
                   sizes="(max-width: 768px) 16px, 20px"
                 />
               </div>
-              <span className="text-[10px] md:text-xs font-semibold text-white truncate">
+              <span className="text-[10px] md:text-xs font-semibold text-muted-foreground truncate">
                 {tFeatures("typescript")}
               </span>
             </div>
@@ -93,10 +93,10 @@ const BentoShowcase = () => {
               </div>
             </div>
             <div>
-              <h2 className="text-base md:text-lg lg:text-xl font-bold text-white leading-tight">
+              <h2 className="text-base md:text-lg lg:text-xl font-bold text-foreground leading-tight">
                 {tFeatureTitle("title")}
               </h2>
-              <p className="text-[10px] md:text-xs text-white/90 mt-0.5">
+              <p className="text-[10px] md:text-xs text-muted-foreground mt-0.5">
                 {tFeatureTitle("subtitle")}
               </p>
             </div>
@@ -115,15 +115,17 @@ const BentoShowcase = () => {
           </div>
 
           {/* Metrics Card */}
-          <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 flex w-full h-full" >
+          <div className="col-span-2 row-span-2 md:col-span-2 md:row-span-2 lg:col-span-2 lg:row-span-2 flex w-full h-full">
             <WaitlistMetrics />
           </div>
 
           {/* Hours Saved Card */}
           <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1 border border-border rounded-xl flex items-center justify-between px-4 md:px-6 py-3 md:py-4 overflow-hidden relative">
             <div className="flex flex-col z-10">
-              <h3 className="text-xl font-bold text-white mb-0.5">{tTimeToMarket("title")}</h3>
-              <p className="text-xs md:text-sm text-white/90">{tTimeToMarket("subtitle")}</p>
+              <h3 className="text-xl font-bold text-foreground mb-0.5">{tTimeToMarket("title")}</h3>
+              <p className="text-xs md:text-sm text-muted-foreground">
+                {tTimeToMarket("subtitle")}
+              </p>
             </div>
             <div className="text-3xl md:text-4xl lg:text-5xl opacity-80">⚡</div>
           </div>
@@ -131,10 +133,12 @@ const BentoShowcase = () => {
           {/* Tech Stack Preview */}
           <div className="col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1 border border-border rounded-xl flex items-center justify-between px-3 md:px-4 py-2 md:py-3 overflow-hidden relative">
             <div className="flex flex-col z-10">
-              <h3 className="text-sm md:text-base font-bold text-white mb-0.5">
+              <h3 className="text-sm md:text-base font-bold text-foreground mb-0.5">
                 {tTechStack("title")}
               </h3>
-              <p className="text-[10px] md:text-xs text-white/90">{tTechStack("subtitle")}</p>
+              <p className="text-[10px] md:text-xs text-muted-foreground">
+                {tTechStack("subtitle")}
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <div className="relative w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden bg-white/20 flex-shrink-0">
@@ -161,12 +165,14 @@ const BentoShowcase = () => {
           {/* CTA Card */}
           <div
             className="col-span-2 row-span-1 md:col-span-4 md:row-span-1 lg:col-span-4 lg:row-span-1 border border-border rounded-xl flex items-center justify-between px-4 md:px-6 py-3 overflow-hidden relative"
-            style={{
-              backgroundImage: "url('/assets/moon.jpg')",
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              backgroundRepeat: "no-repeat",
-            }}
+            style={
+              {
+                backgroundImage: "url('/assets/moon.jpg')",
+                backgroundSize: "cover",
+                backgroundPosition: "center",
+                backgroundRepeat: "no-repeat",
+              } as React.CSSProperties
+            }
           >
             <div className="z-10">
               <h3 className="text-xl md:text-2xl font-bold text-white leading-tight">

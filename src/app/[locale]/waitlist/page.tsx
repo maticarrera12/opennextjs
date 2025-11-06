@@ -3,7 +3,7 @@
 import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Copy, Check, Share2, Users, Sparkles, RefreshCw } from "lucide-react";
-import { useSearchParams } from "next/navigation";
+import { usePathname, useSearchParams } from "next/navigation";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
@@ -25,7 +25,10 @@ type WaitlistForm = z.infer<typeof waitlistSchema>;
 
 export default function WaitlistPage() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const referralParam = searchParams.get("ref");
+  // Extraer el locale del pathname (ej: /es/waitlist -> es, /en/waitlist -> en)
+  const locale = pathname.split("/")[1] || "en";
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referralCode, setReferralCode] = useState("");
@@ -53,6 +56,7 @@ export default function WaitlistPage() {
         body: JSON.stringify({
           ...data,
           referral: referralParam || undefined,
+          locale,
         }),
       });
 

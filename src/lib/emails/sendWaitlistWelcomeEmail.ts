@@ -5,13 +5,15 @@ export function sendWaitlistWelcomeEmail({
   user,
   referralCode,
   position,
+  locale = "en",
 }: {
   user: { email: string; name?: string | null };
   referralCode: string;
   position: number;
+  locale?: string;
 }) {
   const baseURL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const referralUrl = `${baseURL}/waitlist?ref=${referralCode}`;
+  const referralUrl = `${baseURL}/${locale}/waitlist?ref=${referralCode}`;
 
   return sendEmail({
     to: user.email,

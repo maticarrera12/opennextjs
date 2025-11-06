@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     // Validar datos
     const parsed = waitlistSchema.parse(body);
 
-    const { email, name, referral } = parsed;
+    const { email, name, referral, locale } = parsed;
     const existing = await prisma.waitlistUser.findUnique({ where: { email } });
     if (existing) {
       // Si ya existe, devolver su referral code
@@ -61,6 +61,7 @@ export async function POST(req: Request) {
         user: { email: newUser.email, name: newUser.name },
         referralCode: newUser.referralCode,
         position,
+        locale: locale || "en",
       });
       
       // Verificar que el email se haya enviado correctamente
