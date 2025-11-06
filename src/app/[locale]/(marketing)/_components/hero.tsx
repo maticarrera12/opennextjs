@@ -43,7 +43,7 @@ const Hero = () => {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 lg:px-8">
-      <div className="container max-w-6xl mx-auto">
+      <div className="container max-w-3xl mx-auto">
         <div className="flex flex-col items-center space-y-12 py-20">
           {/* Content Section */}
           <div className="text-center space-y-6 max-w-3xl">
