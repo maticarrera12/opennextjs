@@ -684,7 +684,7 @@ const AreaChart = React.forwardRef<HTMLDivElement, AreaChartProps>((props, ref) 
             {yAxisLabel && (
               <Label
                 position="insideLeft"
-                style={{ textAnchor: "middle" }}
+                textAnchor="middle"
                 angle={-90}
                 offset={-15}
                 className="fill-gray-800 text-sm font-medium dark:fill-gray-200"
@@ -712,23 +712,25 @@ const AreaChart = React.forwardRef<HTMLDivElement, AreaChartProps>((props, ref) 
                   }))
                 : [];
 
+              const labelString = label != null ? String(label) : "";
+
               if (
                 tooltipCallback &&
-                (active !== prevActiveRef.current || label !== prevLabelRef.current)
+                (active !== prevActiveRef.current || labelString !== prevLabelRef.current)
               ) {
-                tooltipCallback({ active, payload: cleanPayload, label });
+                tooltipCallback({ active, payload: cleanPayload, label: labelString });
                 prevActiveRef.current = active;
-                prevLabelRef.current = label;
+                prevLabelRef.current = labelString;
               }
 
               return showTooltip && active ? (
                 CustomTooltip ? (
-                  <CustomTooltip active={active} payload={cleanPayload} label={label} />
+                  <CustomTooltip active={active} payload={cleanPayload} label={labelString} />
                 ) : (
                   <ChartTooltip
                     active={active}
                     payload={cleanPayload}
-                    label={label}
+                    label={labelString}
                     valueFormatter={valueFormatter}
                   />
                 )

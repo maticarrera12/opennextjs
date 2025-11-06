@@ -1,13 +1,12 @@
 // app/api/generate/logo/route.ts
 
 import { NextRequest, NextResponse } from "next/server";
-
 import { auth } from "@/lib/auth";
 import { CreditService } from "@/lib/credits";
 import { CREDIT_COSTS, PLAN_FEATURES } from "@/lib/credits/constants";
-import { openai } from "@/lib/openai";
 import { prisma } from "@/lib/prisma";
 import { uploadImage } from "@/lib/storage";
+import { openai } from "@/lib/openai";
 
 export async function POST(req: NextRequest) {
   try {

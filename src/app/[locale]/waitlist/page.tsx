@@ -1,13 +1,14 @@
 "use client";
 
+import React, { useState, useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Copy, Check, Share2, Users, Sparkles, RefreshCw } from "lucide-react";
 import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
 import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 import { z } from "zod";
 
+import { waitlistSchema } from "@/lib/schemas/waitlist.schema";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -19,7 +20,6 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { waitlistSchema } from "@/lib/schemas/waitlist.schema";
 
 type WaitlistForm = z.infer<typeof waitlistSchema>;
 

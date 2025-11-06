@@ -13,6 +13,8 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
+import { emailStyle } from "./email-styles";
+
 interface WelcomeEmailProps {
   userName?: string;
   verificationUrl?: string;
@@ -82,13 +84,13 @@ export const WelcomeEmail = ({
 export default WelcomeEmail;
 
 // Styles
-const main = {
+const main = emailStyle({
   backgroundColor: "#f6f9fc",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
-};
+});
 
-const container = {
+const container = emailStyle({
   backgroundColor: "#ffffff",
   margin: "0 auto",
   marginTop: "40px",
@@ -97,47 +99,47 @@ const container = {
   borderRadius: "16px",
   maxWidth: "600px",
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.07)",
-};
+});
 
-const logoSection = {
+const logoSection = emailStyle({
   padding: "32px 40px",
   textAlign: "center" as const,
   borderBottom: "1px solid #f0f0f0",
-};
+});
 
-const logoText = {
+const logoText = emailStyle({
   margin: "0",
   fontSize: "28px",
   fontWeight: "700",
   color: "#6366f1",
   textAlign: "center" as const,
-};
+});
 
-const content = {
+const content = emailStyle({
   padding: "40px 40px 32px",
-};
+});
 
-const heading = {
+const heading = emailStyle({
   fontSize: "24px",
   fontWeight: "700",
   color: "#1f2937",
   margin: "0 0 24px",
   textAlign: "center" as const,
-};
+});
 
-const paragraph = {
+const paragraph = emailStyle({
   fontSize: "16px",
   lineHeight: "26px",
   color: "#374151",
   margin: "0 0 16px",
-};
+});
 
-const buttonContainer = {
+const buttonContainer = emailStyle({
   textAlign: "center" as const,
   margin: "32px 0",
-};
+});
 
-const button = {
+const button = emailStyle({
   backgroundColor: "#6366f1",
   borderRadius: "8px",
   color: "#ffffff",
@@ -148,35 +150,35 @@ const button = {
   display: "inline-block",
   padding: "14px 32px",
   cursor: "pointer",
-};
+});
 
-const link = {
+const link = emailStyle({
   fontSize: "14px",
   color: "#6366f1",
   textDecoration: "none",
   wordBreak: "break-all" as const,
   margin: "0 0 24px",
   display: "block",
-};
+});
 
-const anchor = {
+const anchor = emailStyle({
   color: "#6366f1",
   textDecoration: "underline",
-};
+});
 
-const hr = {
+const hr = emailStyle({
   borderColor: "#e5e7eb",
   margin: "32px 0",
-};
+});
 
-const footer = {
+const footer = emailStyle({
   padding: "0 40px 32px",
-};
+});
 
-const footerText = {
+const footerText = emailStyle({
   fontSize: "13px",
   lineHeight: "20px",
   color: "#6b7280",
   textAlign: "center" as const,
   margin: "4px 0",
-};
+});

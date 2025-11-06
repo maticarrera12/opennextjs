@@ -1,7 +1,4 @@
-import { Eye, EyeOff } from "lucide-react";
 import React, { useState } from "react";
-import { UseFormReturn, FieldValues, Path } from "react-hook-form";
-
 import {
   FormControl,
   FormField,
@@ -10,6 +7,8 @@ import {
   FormMessage,
 } from "../../../../components/ui/form";
 import { Input } from "../../../../components/ui/input";
+import { Eye, EyeOff } from "lucide-react";
+import { UseFormReturn, FieldValues, Path } from "react-hook-form";
 import { PasswordStrength } from "../../../../components/ui/password-strength";
 
 interface PasswordInputProps<T extends FieldValues & { password: string }> {
