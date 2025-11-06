@@ -26,15 +26,11 @@ export async function sendEmail({
 }) {
   // Validar que las variables de entorno existen
   if (!process.env.RESEND_API_KEY) {
-    const error = new Error("RESEND_API_KEY is not configured in environment variables");
-    console.error("[SEND_EMAIL] Missing RESEND_API_KEY");
-    throw error;
+    throw new Error("RESEND_API_KEY is not configured in environment variables");
   }
 
   if (!process.env.RESEND_FROM_EMAIL) {
-    const error = new Error("RESEND_FROM_EMAIL is not configured in environment variables");
-    console.error("[SEND_EMAIL] Missing RESEND_FROM_EMAIL");
-    throw error;
+    throw new Error("RESEND_FROM_EMAIL is not configured in environment variables");
   }
 
   // Si se proporciona un componente React, renderizarlo
@@ -60,16 +56,12 @@ export async function sendEmail({
 
   // Verificar si hay un error en la respuesta
   if (result.error) {
-    const errorMessage = `Resend API error: ${result.error.message || JSON.stringify(result.error)}`;
-    console.error("[SEND_EMAIL] Resend API error:", result.error);
-    throw new Error(errorMessage);
+    throw new Error(`Resend API error: ${result.error.message || JSON.stringify(result.error)}`);
   }
 
   // Verificar que se haya enviado correctamente
   if (!result.data?.id) {
-    const error = new Error("Email was not sent - no ID returned from Resend");
-    console.error("[SEND_EMAIL] No ID returned from Resend:", result);
-    throw error;
+    throw new Error("Email was not sent - no ID returned from Resend");
   }
 
   return result;
