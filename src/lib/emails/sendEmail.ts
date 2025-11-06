@@ -46,11 +46,23 @@ export async function sendEmail({
   }
 
   const resend = getResend();
-  return resend.emails.send({
+  const result = await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to,
     subject,
     html: htmlContent!,
     text: textContent,
   });
+
+  // Verificar si hay un error en la respuesta
+  if (result.error) {
+    throw new Error(`Resend API error: ${result.error.message || JSON.stringify(result.error)}`);
+  }
+
+  // Verificar que se haya enviado correctamente
+  if (!result.data?.id) {
+    throw new Error("Email was not sent - no ID returned from Resend");
+  }
+
+  return result;
 }

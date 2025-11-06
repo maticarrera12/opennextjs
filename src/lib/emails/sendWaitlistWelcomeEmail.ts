@@ -12,7 +12,6 @@ export function sendWaitlistWelcomeEmail({
 }) {
   const baseURL = process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
   const referralUrl = `${baseURL}/waitlist?ref=${referralCode}`;
-  const logoUrl = `${baseURL}/logo/logo.png`;
 
   return sendEmail({
     to: user.email,
@@ -22,7 +21,6 @@ export function sendWaitlistWelcomeEmail({
       referralCode,
       referralUrl,
       position,
-      logoUrl,
     }),
   });
 }

@@ -57,11 +57,16 @@ export async function POST(req: Request) {
     // Enviar email de bienvenida
     let emailError: Error | null = null;
     try {
-      await sendWaitlistWelcomeEmail({
+      const emailResult = await sendWaitlistWelcomeEmail({
         user: { email: newUser.email, name: newUser.name },
         referralCode: newUser.referralCode,
         position,
       });
+      
+      // Verificar que el email se haya enviado correctamente
+      if (!emailResult?.data?.id) {
+        throw new Error("Email was not sent - no ID returned from Resend");
+      }
     } catch (err) {
       emailError = err instanceof Error ? err : new Error(String(err));
       // No fallar la request si el email falla
@@ -86,7 +91,6 @@ export async function POST(req: Request) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }
-    console.error(error);
     return NextResponse.json({ error: "Something went wrong." }, { status: 500 });
   }
 }
