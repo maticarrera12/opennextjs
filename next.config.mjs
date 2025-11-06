@@ -3,22 +3,13 @@ import nextra from "nextra";
 
 const withNextIntl = createNextIntlPlugin("./src/i18n/request.ts");
 
-const withNextra = nextra({
-  theme: "nextra-theme-docs",
-  defaultShowCopyCode: true,
-});
+const withNextra = nextra({});
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  // Ensure Nextra works correctly in production
-  experimental: {
-    serverComponentsExternalPackages: ["nextra", "nextra-theme-docs"],
-  },
-  // Transpile Nextra packages
-  transpilePackages: ["nextra", "nextra-theme-docs"],
 };
 
 export default withNextIntl(withNextra(nextConfig));
