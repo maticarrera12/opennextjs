@@ -548,5 +548,10 @@
       "title": "Get Started Today",
       "subtitle": "Build something amazing"
     }
+  },
+  "banner": {
+    "text": "Don't forget to give us a star on",
+    "textMobile": "Star us on",
+    "github": "GitHub"
   }
 }

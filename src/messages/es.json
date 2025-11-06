@@ -548,5 +548,10 @@
       "title": "Comienza Hoy",
       "subtitle": "Crea algo increíble"
     }
+  },
+  "banner": {
+    "text": "No olvides darnos una estrella en",
+    "textMobile": "Dános una estrella en",
+    "github": "GitHub"
   }
 }
