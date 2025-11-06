@@ -69,6 +69,12 @@ export async function POST(req: Request) {
       }
     } catch (err) {
       emailError = err instanceof Error ? err : new Error(String(err));
+      // Log el error para debugging (también en producción)
+      console.error("[WAITLIST] Email sending failed:", {
+        email: newUser.email,
+        error: emailError.message,
+        stack: emailError.stack,
+      });
       // No fallar la request si el email falla
     }
 
@@ -80,8 +86,8 @@ export async function POST(req: Request) {
       emailError: emailError
         ? {
             message: emailError.message,
-            // Solo en desarrollo, incluir más detalles del error
-            ...(process.env.NODE_ENV === "development" && {
+            // Incluir detalles del error en producción también para debugging
+            ...(emailError.stack && {
               details: emailError.stack,
             }),
           }
