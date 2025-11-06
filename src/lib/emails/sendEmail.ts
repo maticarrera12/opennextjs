@@ -2,7 +2,14 @@ import { render } from "@react-email/render";
 import { ReactElement } from "react";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid errors during build when env vars are not set
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+  return new Resend(apiKey);
+}
 
 export async function sendEmail({
   to,
@@ -27,9 +34,18 @@ export async function sendEmail({
   }
 
   // Si se proporciona un componente React, renderizarlo
-  const htmlContent = react ? await render(react) : html;
-  const textContent = react ? await render(react, { plainText: true }) : text;
+  let htmlContent: string | undefined;
+  let textContent: string | undefined;
 
+  if (react) {
+    htmlContent = await render(react);
+    textContent = await render(react, { plainText: true });
+  } else {
+    htmlContent = html;
+    textContent = text;
+  }
+
+  const resend = getResend();
   return resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to,

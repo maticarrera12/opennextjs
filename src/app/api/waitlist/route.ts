@@ -55,14 +55,15 @@ export async function POST(req: Request) {
     });
 
     // Enviar email de bienvenida
+    let emailError: Error | null = null;
     try {
       await sendWaitlistWelcomeEmail({
         user: { email: newUser.email, name: newUser.name },
         referralCode: newUser.referralCode,
         position,
       });
-    } catch (emailError) {
-      console.error("Failed to send welcome email:", emailError);
+    } catch (err) {
+      emailError = err instanceof Error ? err : new Error(String(err));
       // No fallar la request si el email falla
     }
 
@@ -70,6 +71,16 @@ export async function POST(req: Request) {
       message: "Successfully joined the waitlist! 🎉",
       referralCode: newUser.referralCode,
       position,
+      emailSent: !emailError,
+      emailError: emailError
+        ? {
+            message: emailError.message,
+            // Solo en desarrollo, incluir más detalles del error
+            ...(process.env.NODE_ENV === "development" && {
+              details: emailError.stack,
+            }),
+          }
+        : null,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {

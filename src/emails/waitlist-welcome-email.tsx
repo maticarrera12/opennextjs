@@ -6,6 +6,7 @@ import {
   Heading,
   Hr,
   Html,
+  Img,
   Link,
   Preview,
   Section,
@@ -20,6 +21,7 @@ interface WaitlistWelcomeEmailProps {
   referralCode?: string;
   referralUrl?: string;
   position?: number;
+  logoUrl?: string;
 }
 
 export const WaitlistWelcomeEmail = ({
@@ -27,8 +29,12 @@ export const WaitlistWelcomeEmail = ({
   referralCode = "ABC12345",
   referralUrl = `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/waitlist?ref=ABC12345`,
   position = 150,
+  logoUrl,
 }: WaitlistWelcomeEmailProps) => {
   const currentYear = new Date().getFullYear();
+  // Si no se proporciona logoUrl, usar la URL por defecto
+  const finalLogoUrl =
+    logoUrl || `${process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"}/logo/logo.png`;
 
   return (
     <Html>
@@ -38,7 +44,7 @@ export const WaitlistWelcomeEmail = ({
         <Container style={container}>
           {/* Logo/Brand Section */}
           <Section style={logoSection}>
-            <Heading style={logoText}>🚀 Your Brand</Heading>
+            <Img src={finalLogoUrl} alt="OpenNextJS" width="120" height="120" style={logoImage} />
           </Section>
 
           {/* Main Content */}
@@ -130,12 +136,11 @@ const logoSection = emailStyle({
   borderBottom: "1px solid #f0f0f0",
 });
 
-const logoText = emailStyle({
-  margin: "0",
-  fontSize: "28px",
-  fontWeight: "700",
-  color: "#6366f1",
-  textAlign: "center" as const,
+const logoImage = emailStyle({
+  margin: "0 auto",
+  display: "block",
+  maxWidth: "120px",
+  height: "auto",
 });
 
 const content = emailStyle({
