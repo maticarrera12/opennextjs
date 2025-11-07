@@ -1,15 +1,13 @@
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "../globals.css";
-import { headers } from "next/headers";
 import { NextIntlClientProvider } from "next-intl";
 import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/navbar/theme-provider";
-import { auth } from "@/lib/auth";
 
-import { Analytics } from "@vercel/analytics/next";
-import { SpeedInsights } from "@vercel/speed-insights/next";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -63,15 +61,17 @@ export default async function LocaleLayout({
   const { locale } = await params;
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
-  const session = await auth.api.getSession({
-    headers: await headers(),
-  });
 
   return (
-    <html lang={locale}>
+    <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
         <NextIntlClientProvider locale={locale} messages={messages}>
-          <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+            disableTransitionOnChange
+          >
             {children}
             <Toaster position="top-right" richColors />
             <Analytics />

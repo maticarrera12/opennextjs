@@ -28,7 +28,7 @@ const BentoShowcase = () => {
           </div>
 
           {/* Logo/Brand */}
-          <div className="bg-gradient-to-r from-pink-500 to-purple-600 col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-3 lg:row-span-1 gap-6 border border-border rounded-xl flex items-center justify-center overflow-hidden relative">
+          <div className="bg-linear-to-r from-pink-500 to-purple-600 col-span-2 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-3 lg:row-span-1 gap-6 border border-border rounded-xl flex items-center justify-center overflow-hidden relative">
             <Logo />
             <h1 className="text-xl md:text-2xl lg:text-3xl font-bold text-gray-800 tracking-tight">
               OpenNextJS
@@ -41,9 +41,9 @@ const BentoShowcase = () => {
               {tFeatures("title")}
             </p>
             <div className="flex items-center gap-1.5">
-              <div className="relative w-4 h-4 md:w-5 md:h-5 flex-shrink-0 rounded overflow-hidden bg-white/20">
+              <div className="relative w-4 h-4 md:w-5 md:h-5 shrink-0 rounded overflow-hidden bg-white/20">
                 <Image
-                  src="/assets/nextjs.jpeg"
+                  src="/assets/nextjs.png"
                   alt="Next.js"
                   fill
                   className="object-cover"
@@ -55,7 +55,7 @@ const BentoShowcase = () => {
               </span>
             </div>
             <div className="flex items-center gap-1.5 mt-1">
-              <div className="relative w-4 h-4 md:w-5 md:h-5 flex-shrink-0 rounded overflow-hidden bg-white/20">
+              <div className="relative w-4 h-4 md:w-5 md:h-5 shrink-0 rounded overflow-hidden bg-white/20">
                 <Image
                   src="/assets/Typescript.png"
                   alt="TypeScript"
@@ -73,7 +73,7 @@ const BentoShowcase = () => {
           {/* Feature Title - Auth & Payments */}
           <div className="col-span-1 row-span-1 md:col-span-2 md:row-span-1 lg:col-span-2 lg:row-span-1 border border-border rounded-xl p-3 md:p-4 flex flex-col justify-between overflow-hidden relative">
             <div className="flex items-center gap-2 mb-2">
-              <div className="relative w-6 h-6 md:w-7 md:h-7 rounded overflow-hidden bg-white/20 flex-shrink-0">
+              <div className="relative w-6 h-6 md:w-7 md:h-7 rounded overflow-hidden bg-white/20 shrink-0">
                 <Image
                   src="/assets/better-auth-logo.png"
                   alt="Better Auth"
@@ -82,7 +82,7 @@ const BentoShowcase = () => {
                   sizes="(max-width: 768px) 24px, 28px"
                 />
               </div>
-              <div className="relative w-6 h-6 md:w-7 md:h-7 rounded overflow-hidden bg-white/20 flex-shrink-0">
+              <div className="relative w-6 h-6 md:w-7 md:h-7 rounded overflow-hidden bg-white/20 shrink-0">
                 <Image
                   src="/assets/stripe.png"
                   alt="Stripe"
@@ -141,7 +141,7 @@ const BentoShowcase = () => {
               </p>
             </div>
             <div className="flex items-center gap-2">
-              <div className="relative w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden bg-white/20 flex-shrink-0">
+              <div className="relative w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden bg-white/20 shrink-0">
                 <Image
                   src="/assets/prisma.png"
                   alt="Prisma"
@@ -150,7 +150,7 @@ const BentoShowcase = () => {
                   sizes="(max-width: 768px) 24px, 32px"
                 />
               </div>
-              <div className="relative w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden bg-white/20 flex-shrink-0">
+              <div className="relative w-6 h-6 md:w-8 md:h-8 rounded overflow-hidden bg-white/20 shrink-0">
                 <Image
                   src="/assets/db.svg"
                   alt="PostgreSQL"

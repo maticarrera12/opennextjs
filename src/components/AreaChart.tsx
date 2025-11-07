@@ -605,8 +605,14 @@ const AreaChart = React.forwardRef<HTMLDivElement, AreaChartProps>((props, ref) 
   }
 
   return (
-    <div ref={ref} className={cx("h-80 w-full", className)} tremor-id="tremor-raw" {...other}>
-      <ResponsiveContainer>
+    <div
+      ref={ref}
+      className={cx("h-80 w-full", className)}
+      style={{ minWidth: 0, minHeight: 0, position: "relative" }}
+      tremor-id="tremor-raw"
+      {...other}
+    >
+      <ResponsiveContainer width="100%" height="100%" minWidth={0} minHeight={0} debounce={1}>
         <RechartsAreaChart
           data={data}
           onClick={
@@ -762,9 +768,8 @@ const AreaChart = React.forwardRef<HTMLDivElement, AreaChartProps>((props, ref) 
             const categoryId = `${areaId}-${category.replace(/[^a-zA-Z0-9]/g, "")}`;
             return (
               <React.Fragment key={category}>
-                <defs key={category}>
+                <defs>
                   <linearGradient
-                    key={category}
                     className={cx(
                       getColorClassName(
                         categoryColors.get(category) as AvailableChartColorsKeys,
