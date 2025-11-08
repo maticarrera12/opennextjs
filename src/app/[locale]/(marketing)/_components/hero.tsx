@@ -52,7 +52,7 @@ const Hero = () => {
           <div className="text-center space-y-6 max-w-3xl">
             <h1
               className="
-   bg-gradient-to-r from-pink-500 to-purple-600
+   bg-gradient-to-r from-pink-500 to-purple-800
     text-3xl sm:text-4xl md:text-5xl font-bold leading-tight 
     inline-block px-6 py-3 rounded-lg -skew-x-3 transform rotate-[-1deg]
     text-gray-900 dark:text-gray-900
