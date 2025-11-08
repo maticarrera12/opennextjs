@@ -2,7 +2,7 @@
 
 import { useEffect, useState } from "react";
 
-import { AreaChart } from "@/components/AreaChart";
+import { BarChart } from "@/components/tremor/BarChart";
 
 interface ChartDataPoint {
   date: string;
@@ -38,8 +38,7 @@ export const WaitlistMetrics = () => {
         }
         const metricsData = await response.json();
         setData(metricsData);
-      } catch (err) {
-        console.error("Error fetching waitlist metrics:", err);
+      } catch {
         setData({
           totalUsers: 0,
           chartData: [],
@@ -58,10 +57,10 @@ export const WaitlistMetrics = () => {
   // Transformar datos del API al formato que espera Tremor
   const tremorData = chartData.map(item => ({
     date: formatDate(item.date),
-    users: item.total,
+    "New users": item.count,
   }));
 
-  const hasData = chartData.length >= 2 && totalUsers > 0;
+  const hasData = chartData.some(item => item.count > 0);
 
   if (loading) {
     return (
@@ -88,15 +87,14 @@ export const WaitlistMetrics = () => {
       {/* Chart */}
       <div className="relative w-full flex-1 min-h-0">
         {hasData ? (
-          <AreaChart
+          <BarChart
             className="h-full"
             data={tremorData}
             index="date"
-            categories={["users"]}
+            categories={["New users"]}
             valueFormatter={(number: number) => formatNumber(Math.round(number))}
             yAxisWidth={40}
             startEndOnly={tremorData.length > 7}
-            connectNulls
             showLegend={false}
             showTooltip={true}
             colors={["violet"]}
