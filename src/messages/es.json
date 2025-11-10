@@ -11,6 +11,9 @@
       "logout": "Cerrar Sesión"
     }
   },
+  "navbar": {
+    "demoButton": "Ver Demo"
+  },
   "auth": {
     "signin": {
       "title": "Bienvenido de nuevo",

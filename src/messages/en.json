@@ -11,6 +11,9 @@
       "logout": "Log Out"
     }
   },
+  "navbar": {
+    "demoButton": "See Demo"
+  },
   "auth": {
     "signin": {
       "title": "Welcome back",
