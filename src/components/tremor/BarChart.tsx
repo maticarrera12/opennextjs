@@ -6,7 +6,6 @@
 import { RiArrowLeftSLine, RiArrowRightSLine } from "@remixicon/react";
 import React from "react";
 
-
 import {
   Bar,
   CartesianGrid,
@@ -196,7 +195,9 @@ const ScrollButton = ({ icon, onClick, disabled }: ScrollButtonProps) => {
   );
 };
 
-interface LegendProps extends React.OlHTMLAttributes<HTMLOListElement> {
+type BaseLegendProps = React.ComponentPropsWithoutRef<"ol">;
+
+interface LegendProps extends BaseLegendProps {
   categories: string[];
   colors?: AvailableChartColorsKeys[];
   onClickLegendItem?: (category: string, color: string) => void;
@@ -209,7 +210,7 @@ type HasScrollProps = {
   right: boolean;
 };
 
-const Legend = React.forwardRef<HTMLOListElement, LegendProps>((props, ref) => {
+const Legend = React.forwardRef<React.ElementRef<"ol">, LegendProps>((props, ref) => {
   const {
     categories,
     colors = AvailableChartColors,
@@ -575,7 +576,7 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>((props, forward
   const stacked = type === "stacked" || type === "percent";
 
   const prevActiveRef = React.useRef<boolean | undefined>(undefined);
-  const prevLabelRef = React.useRef<string | undefined>(undefined);
+  const prevLabelRef = React.useRef<string>("");
 
   function valueToPercent(value: number) {
     return `${(value * 100).toFixed(0)}%`;
@@ -761,23 +762,25 @@ const BarChart = React.forwardRef<HTMLDivElement, BarChartProps>((props, forward
                   }))
                 : [];
 
+              const normalizedLabel = label === undefined || label === null ? "" : String(label);
+
               if (
                 tooltipCallback &&
-                (active !== prevActiveRef.current || label !== prevLabelRef.current)
+                (active !== prevActiveRef.current || normalizedLabel !== prevLabelRef.current)
               ) {
-                tooltipCallback({ active, payload: cleanPayload, label });
+                tooltipCallback({ active, payload: cleanPayload, label: normalizedLabel });
                 prevActiveRef.current = active;
-                prevLabelRef.current = label;
+                prevLabelRef.current = normalizedLabel;
               }
 
               return showTooltip && active ? (
                 CustomTooltip ? (
-                  <CustomTooltip active={active} payload={cleanPayload} label={label} />
+                  <CustomTooltip active={active} payload={cleanPayload} label={normalizedLabel} />
                 ) : (
                   <ChartTooltip
                     active={active}
                     payload={cleanPayload}
-                    label={label}
+                    label={normalizedLabel}
                     valueFormatter={valueFormatter}
                   />
                 )
