@@ -158,6 +158,7 @@
       "share": "Compartir",
       "shareTitle": "Únete a la lista de espera",
       "shareMessage": "¡Únete conmigo a la lista de espera de esta increíble app!",
+      "shareError": "No se pudo compartir. Copia el enlace en su lugar.",
       "proTip": "Consejo:",
       "proTipMessage": "¡Por cada amigo que se una usando tu enlace, ambos avanzarán en la fila!",
       "checkEmail": "Revisa tu correo para ver tu mensaje de bienvenida y enlace de referido.",
@@ -309,6 +310,7 @@
       "part2": "que te ahorran horas de configuración y te permiten lanzar más rápido."
     },
     "cta": "Waitlist",
+    "waitlistCount": "Únete a {count} desarrolladores que ya están en la waitlist",
     "imagePlaceholder": "Reemplazar imagen"
   },
   "cloneCommand": {

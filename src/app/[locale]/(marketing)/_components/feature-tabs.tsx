@@ -27,7 +27,7 @@ export function FeatureTabs() {
               key={tab.value}
               value={tab.value}
               className="flex-1 rounded-full py-6 text-base font-medium transition-all 
-                ata-[state=active]:bg-linear-to-r data-[state=active]:from-pink-500
+                data-[state=active]:bg-linear-to-r data-[state=active]:from-pink-500
                 data-[state=active]:to-purple-600 data-[state=active]:text-white 
                 data-[state=active]:shadow-md hover:bg-muted/30 flex items-center justify-center gap-2"
             >

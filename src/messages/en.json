@@ -158,6 +158,7 @@
       "share": "Share",
       "shareTitle": "Join the Waitlist",
       "shareMessage": "Join me on the waitlist for this amazing app!",
+      "shareError": "Sharing failed. Please copy the link instead.",
       "proTip": "Pro tip:",
       "proTipMessage": "For every friend who joins using your link, you'll both move up in the queue!",
       "checkEmail": "Check your email for your welcome message and referral link.",
@@ -309,6 +310,7 @@
       "part2": "that save you hours of setup and help you launch faster."
     },
     "cta": "Waitlist",
+    "waitlistCount": "Join {count} developers already on the waitlist",
     "imagePlaceholder": "Replace image"
   },
   "cloneCommand": {

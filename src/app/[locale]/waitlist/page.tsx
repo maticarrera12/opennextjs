@@ -1,8 +1,8 @@
 "use client";
 
 import { Copy, Check, Share2, Users, Sparkles, RefreshCw } from "lucide-react";
-import { useTranslations } from "next-intl";
 import { usePathname, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
 import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
 
