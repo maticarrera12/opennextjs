@@ -1,14 +1,10 @@
 "use client";
 
-import React, { useState, useEffect } from "react";
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Copy, Check, Share2, Users, Sparkles, RefreshCw } from "lucide-react";
 import { usePathname, useSearchParams } from "next/navigation";
-import { useForm } from "react-hook-form";
+import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { z } from "zod";
 
-import { waitlistSchema } from "@/lib/schemas/waitlist.schema";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -20,8 +16,7 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-
-type WaitlistForm = z.infer<typeof waitlistSchema>;
+import { useWaitlistForm } from "@/hooks/use-waitlist-form";
 
 export default function WaitlistPage() {
   const searchParams = useSearchParams();
@@ -39,46 +34,17 @@ export default function WaitlistPage() {
   const [lookupValue, setLookupValue] = useState("");
   const [isLookingUp, setIsLookingUp] = useState(false);
 
-  const form = useForm<WaitlistForm>({
-    resolver: zodResolver(waitlistSchema),
-    defaultValues: {
-      email: "",
-    },
-  });
-
-  const { isSubmitting } = form.formState;
-
-  async function onSubmit(data: WaitlistForm) {
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          referral: referralParam || undefined,
-          locale,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Something went wrong");
-      }
-
+  const { form, onSubmit, isSubmitting } = useWaitlistForm({
+    locale,
+    referralParam,
+    onSuccess: result => {
       setReferralCode(result.referralCode);
       setPosition(result.position || null);
       setIsSubmitted(true);
 
-      // Guardar en localStorage para recuperación futura
       localStorage.setItem("waitlist_referral_code", result.referralCode);
-
-      toast.success(result.message || "Successfully joined!");
-    } catch (error) {
-      console.error(error);
-      toast.error(error instanceof Error ? error.message : "Failed to join waitlist");
-    }
-  }
+    },
+  });
 
   const handleCopyReferralLink = () => {
     const baseURL = window.location.origin;
@@ -101,7 +67,7 @@ export default function WaitlistPage() {
           url: referralUrl,
         });
       } catch (err) {
-        console.error("Share failed:", err);
+        toast.error("Share failed:", err!);
       }
     } else {
       handleCopyReferralLink();
@@ -119,7 +85,7 @@ export default function WaitlistPage() {
         setReferralCount(data.referralCount);
       }
     } catch (error) {
-      console.error("Failed to refresh stats:", error);
+      toast.error("Failed to refresh stats:", error!);
     }
   };
 
@@ -158,7 +124,6 @@ export default function WaitlistPage() {
       setShowLookup(false);
       toast.success("Welcome back!");
     } catch (error) {
-      console.error(error);
       toast.error(error instanceof Error ? error.message : "Failed to find your waitlist entry");
     } finally {
       setIsLookingUp(false);
@@ -180,7 +145,6 @@ export default function WaitlistPage() {
     if (isSubmitted && referralCode) {
       refreshStats();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitted, referralCode]);
 
   if (isSubmitted) {
@@ -307,7 +271,7 @@ export default function WaitlistPage() {
         {/* Form Card */}
         <div className="bg-card rounded-2xl border border-border p-8 shadow-sm">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={onSubmit} className="space-y-6">
               <FormField
                 control={form.control}
                 name="email"

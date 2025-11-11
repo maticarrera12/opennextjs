@@ -27,7 +27,7 @@ export function FeatureTabs() {
               key={tab.value}
               value={tab.value}
               className="flex-1 rounded-full py-6 text-base font-medium transition-all 
-                data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500
+                ata-[state=active]:bg-linear-to-r data-[state=active]:from-pink-500
                 data-[state=active]:to-purple-600 data-[state=active]:text-white 
                 data-[state=active]:shadow-md hover:bg-muted/30 flex items-center justify-center gap-2"
             >
@@ -94,7 +94,7 @@ function FeatureCard({
 }) {
   return (
     <Card className="p-6 bg-card/60 backdrop-blur-md border border-border rounded-2xl space-y-4">
-      <div className="bg-gradient-to-r from-pink-500 to-purple-600 inline-flex items-center justify-center w-14 h-14 rounded-xl mb-2">
+      <div className="bg-linear-to-r from-pink-500 to-purple-600 inline-flex items-center justify-center w-14 h-14 rounded-xl mb-2">
         <Icon className="text-white" size={28} />
       </div>
       <h3 className="text-xl font-semibold text-foreground">{title}</h3>

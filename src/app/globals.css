@@ -356,15 +356,6 @@
   }
 }
 
-/* Fixed gradient for hero heading - not affected by theme */
-.hero-gradient-title span {
-  color: #f472b6 !important;
-}
-
-.dark .hero-gradient-title span {
-  color: #f472b6 !important;
-}
-
 @layer utilities {
   .scrollbar-hide {
     -ms-overflow-style: none;

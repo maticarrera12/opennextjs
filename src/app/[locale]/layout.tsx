@@ -61,7 +61,6 @@ export default async function LocaleLayout({
   const { locale } = await params;
   const messages = (await import(`@/messages/${locale}.json`)).default;
 
-
   return (
     <html lang={locale} suppressHydrationWarning>
       <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
