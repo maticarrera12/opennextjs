@@ -137,6 +137,8 @@
       "earlyAccess": "Get early access and exclusive updates",
       "alreadyJoined": "Already joined? Check your status →",
       "referred": "You've been referred! You'll start with a boost in the queue.",
+      "joinSuccess": "Successfully joined!",
+      "joinError": "Failed to join waitlist",
       "errors": {
         "invalidEmail": "Invalid email address",
         "nameLength": "Name must be at least 2 characters",
@@ -154,10 +156,14 @@
       "copyLink": "Copy Link",
       "copied": "Copied!",
       "share": "Share",
+      "shareTitle": "Join the Waitlist",
+      "shareMessage": "Join me on the waitlist for this amazing app!",
       "proTip": "Pro tip:",
       "proTipMessage": "For every friend who joins using your link, you'll both move up in the queue!",
       "checkEmail": "Check your email for your welcome message and referral link.",
-      "notify": "We'll notify you when it's your turn!"
+      "notify": "We'll notify you when it's your turn!",
+      "refreshTooltip": "Refresh stats",
+      "refreshError": "Failed to refresh stats"
     },
     "lookup": {
       "title": "Check Your Status",
@@ -183,6 +189,11 @@
         "description": "Skip ahead by inviting friends"
       }
     }
+  },
+  "ctaWaitlist": {
+    "title": "Still here? You’re clearly serious about building cool stuff",
+    "placeholder": "Enter your email",
+    "button": "Join Waitlist"
   },
   "settings": {
     "title": "Settings",

@@ -16,6 +16,10 @@ interface UseWaitlistFormOptions {
     message?: string;
   }) => void;
   onError?: (error: Error) => void;
+  messages?: {
+    success?: string;
+    error?: string;
+  };
 }
 
 export function useWaitlistForm({
@@ -23,6 +27,7 @@ export function useWaitlistForm({
   referralParam,
   onSuccess,
   onError,
+  messages,
 }: UseWaitlistFormOptions) {
   const form = useForm<WaitlistFormValues>({
     resolver: zodResolver(waitlistSchema),
@@ -30,6 +35,9 @@ export function useWaitlistForm({
   });
 
   const submitHandler = form.handleSubmit(async data => {
+    const successMessage = messages?.success ?? "Successfully joined!";
+    const defaultErrorMessage = messages?.error ?? "Failed to join waitlist";
+
     try {
       const response = await fetch("/api/waitlist", {
         method: "POST",
@@ -47,15 +55,15 @@ export function useWaitlistForm({
         throw new Error(result.error || "Something went wrong");
       }
 
-      toast.success(result.message || "Successfully joined!");
+      toast.success(result.message || successMessage);
       onSuccess?.({
         referralCode: result.referralCode,
         position: result.position,
         message: result.message,
       });
     } catch (error) {
-      const err = error instanceof Error ? error : new Error("Failed to join waitlist");
-      toast.error(err.message);
+      const err = error instanceof Error ? error : new Error(defaultErrorMessage);
+      toast.error(err.message || defaultErrorMessage);
       onError?.(err);
     }
   });
@@ -66,5 +74,3 @@ export function useWaitlistForm({
     isSubmitting: form.formState.isSubmitting,
   };
 }
-
-
