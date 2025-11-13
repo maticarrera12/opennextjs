@@ -1,3 +1,4 @@
+import { createNavigation } from "next-intl/navigation";
 import { defineRouting } from "next-intl/routing";
 
 export const routing = defineRouting({
@@ -6,4 +7,9 @@ export const routing = defineRouting({
 
   // Used when no locale matches
   defaultLocale: "en",
+
+  // Always include the locale in URLs since our routes live under /[locale]
+  localePrefix: "always",
 });
+
+export const { Link, redirect, usePathname, useRouter } = createNavigation(routing);

@@ -14,14 +14,9 @@ const Hero = () => {
     const video = videoRef.current;
     if (!video) return;
 
-    // Intentar reproducir cuando el video esté listo
     const playVideo = () => {
-      video.play().catch(() => {
-        // Si falla la reproducción automática, no hacer nada
-      });
+      video.play().catch(() => {});
     };
-
-    // Manejar el loop manualmente para asegurar que el video termine completamente
     const handleEnded = () => {
       video.currentTime = 0;
       video.play();

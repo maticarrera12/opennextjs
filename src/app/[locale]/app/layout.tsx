@@ -1,14 +1,24 @@
-import React from "react";
+import { headers } from "next/headers";
 
-import AppMainSidebar from "./(app)/_components/app-main-sidebar";
+import AppMainSidebar from "./_components/app-main-sidebar";
+import { redirect } from "@/i18n/routing";
+import { auth } from "@/lib/auth";
 
-const layout = ({ children }: { children: React.ReactNode }) => {
+const layout = async ({ children, params }: any) => {
+  const session = await auth.api.getSession({ headers: await headers() });
+
+  if (!session?.user) {
+    redirect({ href: "/signin", locale: params.locale });
+    return null;
+  }
   return (
-    <div className="flex min-h-screen bg-muted/30">
+    <div className="flex min-h-screen">
       <AppMainSidebar />
-      <main className="flex-1 overflow-y-auto border-t border-border bg-background pt-14 md:pt-0">
-        <div className="mx-auto max-w-7xl p-6 md:p-10">{children}</div>
-      </main>
+      <div className="flex flex-1 flex-col">
+        <main className="flex-1 overflow-y-auto border-border bg-background pt-14 md:pt-0">
+          <div className="mx-auto max-w-7xl p-6 md:p-10">{children}</div>
+        </main>
+      </div>
     </div>
   );
 };
