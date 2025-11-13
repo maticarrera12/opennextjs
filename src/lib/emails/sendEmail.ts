@@ -2,7 +2,14 @@ import { render } from "@react-email/render";
 import { ReactElement } from "react";
 import { Resend } from "resend";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Lazy initialization to avoid errors during build when env vars are not set
+function getResend() {
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    throw new Error("RESEND_API_KEY is not configured");
+  }
+  return new Resend(apiKey);
+}
 
 export async function sendEmail({
   to,
@@ -27,14 +34,35 @@ export async function sendEmail({
   }
 
   // Si se proporciona un componente React, renderizarlo
-  const htmlContent = react ? await render(react) : html;
-  const textContent = react ? await render(react, { plainText: true }) : text;
+  let htmlContent: string | undefined;
+  let textContent: string | undefined;
 
-  return resend.emails.send({
+  if (react) {
+    htmlContent = await render(react);
+    textContent = await render(react, { plainText: true });
+  } else {
+    htmlContent = html;
+    textContent = text;
+  }
+
+  const resend = getResend();
+  const result = await resend.emails.send({
     from: process.env.RESEND_FROM_EMAIL!,
     to,
     subject,
     html: htmlContent!,
     text: textContent,
   });
+
+  // Verificar si hay un error en la respuesta
+  if (result.error) {
+    throw new Error(`Resend API error: ${result.error.message || JSON.stringify(result.error)}`);
+  }
+
+  // Verificar que se haya enviado correctamente
+  if (!result.data?.id) {
+    throw new Error("Email was not sent - no ID returned from Resend");
+  }
+
+  return result;
 }

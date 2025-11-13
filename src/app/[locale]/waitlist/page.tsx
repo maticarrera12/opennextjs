@@ -1,12 +1,10 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
 import { Copy, Check, Share2, Users, Sparkles, RefreshCw } from "lucide-react";
-import { useSearchParams } from "next/navigation";
-import { useState, useEffect } from "react";
-import { useForm } from "react-hook-form";
+import { usePathname, useSearchParams } from "next/navigation";
+import { useTranslations } from "next-intl";
+import React, { useState, useEffect } from "react";
 import { toast } from "sonner";
-import { z } from "zod";
 
 import { Button } from "@/components/ui/button";
 import {
@@ -19,13 +17,15 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { waitlistSchema } from "@/lib/schemas/waitlist.schema";
-
-type WaitlistForm = z.infer<typeof waitlistSchema>;
+import { useWaitlistForm } from "@/hooks/use-waitlist-form";
 
 export default function WaitlistPage() {
   const searchParams = useSearchParams();
+  const pathname = usePathname();
   const referralParam = searchParams.get("ref");
+  // Extraer el locale del pathname (ej: /es/waitlist -> es, /en/waitlist -> en)
+  const locale = pathname.split("/")[1] || "en";
+  const t = useTranslations("waitlist");
 
   const [isSubmitted, setIsSubmitted] = useState(false);
   const [referralCode, setReferralCode] = useState("");
@@ -36,53 +36,28 @@ export default function WaitlistPage() {
   const [lookupValue, setLookupValue] = useState("");
   const [isLookingUp, setIsLookingUp] = useState(false);
 
-  const form = useForm<WaitlistForm>({
-    resolver: zodResolver(waitlistSchema),
-    defaultValues: {
-      email: "",
-      name: "",
-    },
-  });
-
-  const { isSubmitting } = form.formState;
-
-  async function onSubmit(data: WaitlistForm) {
-    try {
-      const response = await fetch("/api/waitlist", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          ...data,
-          referral: referralParam || undefined,
-        }),
-      });
-
-      const result = await response.json();
-
-      if (!response.ok) {
-        throw new Error(result.error || "Something went wrong");
-      }
-
+  const { form, onSubmit, isSubmitting } = useWaitlistForm({
+    locale,
+    referralParam,
+    onSuccess: result => {
       setReferralCode(result.referralCode);
       setPosition(result.position || null);
       setIsSubmitted(true);
 
-      // Guardar en localStorage para recuperación futura
       localStorage.setItem("waitlist_referral_code", result.referralCode);
-
-      toast.success(result.message || "Successfully joined!");
-    } catch (error) {
-      console.error(error);
-      toast.error(error instanceof Error ? error.message : "Failed to join waitlist");
-    }
-  }
+    },
+    messages: {
+      success: t("form.joinSuccess"),
+      error: t("form.joinError"),
+    },
+  });
 
   const handleCopyReferralLink = () => {
     const baseURL = window.location.origin;
     const referralUrl = `${baseURL}/waitlist?ref=${referralCode}`;
     navigator.clipboard.writeText(referralUrl);
     setCopied(true);
-    toast.success("Referral link copied!");
+    toast.success(t("success.copied"));
     setTimeout(() => setCopied(false), 2000);
   };
 
@@ -93,12 +68,12 @@ export default function WaitlistPage() {
     if (navigator.share) {
       try {
         await navigator.share({
-          title: "Join the Waitlist",
-          text: "Join me on the waitlist for this amazing app!",
+          title: t("success.shareTitle"),
+          text: t("success.shareMessage"),
           url: referralUrl,
         });
       } catch (err) {
-        console.error("Share failed:", err);
+        toast.error("Share failed:", err!);
       }
     } else {
       handleCopyReferralLink();
@@ -116,13 +91,14 @@ export default function WaitlistPage() {
         setReferralCount(data.referralCount);
       }
     } catch (error) {
-      console.error("Failed to refresh stats:", error);
+      console.error(error);
+      toast.error(t("success.refreshError"));
     }
   };
 
   const handleLookup = async () => {
     if (!lookupValue.trim()) {
-      toast.error("Please enter your email or referral code");
+      toast.error(t("lookup.enterValue"));
       return;
     }
 
@@ -138,7 +114,7 @@ export default function WaitlistPage() {
       }
 
       if (!response.ok) {
-        throw new Error("Not found. Please check your email or referral code.");
+        throw new Error(t("lookup.notFound"));
       }
 
       const data = await response.json();
@@ -153,10 +129,10 @@ export default function WaitlistPage() {
       localStorage.setItem("waitlist_referral_code", data.referralCode || lookupValue);
 
       setShowLookup(false);
-      toast.success("Welcome back!");
+      toast.success(t("lookup.welcomeBack"));
     } catch (error) {
-      console.error(error);
-      toast.error(error instanceof Error ? error.message : "Failed to find your waitlist entry");
+      const message = error instanceof Error ? error.message : t("lookup.notFound");
+      toast.error(message);
     } finally {
       setIsLookingUp(false);
     }
@@ -177,7 +153,6 @@ export default function WaitlistPage() {
     if (isSubmitted && referralCode) {
       refreshStats();
     }
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isSubmitted, referralCode]);
 
   if (isSubmitted) {
@@ -189,16 +164,20 @@ export default function WaitlistPage() {
             <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">
               <Check className="w-10 h-10 text-primary" />
             </div>
-            <h1 className="text-4xl font-bold text-foreground">You&apos;re on the list! 🎉</h1>
+            <h1 className="text-4xl font-bold text-foreground">{t("success.title")} 🎉</h1>
             <div className="flex items-center justify-center gap-6">
               {position && (
                 <div className="text-center">
-                  <p className="text-sm text-muted-foreground uppercase tracking-wide">Position</p>
+                  <p className="text-sm text-muted-foreground uppercase tracking-wide">
+                    {t("success.position")}
+                  </p>
                   <p className="text-3xl font-bold text-primary">#{position}</p>
                 </div>
               )}
               <div className="text-center">
-                <p className="text-sm text-muted-foreground uppercase tracking-wide">Referrals</p>
+                <p className="text-sm text-muted-foreground uppercase tracking-wide">
+                  {t("success.referrals")}
+                </p>
                 <p className="text-3xl font-bold text-primary">{referralCount}</p>
               </div>
             </div>
@@ -210,23 +189,23 @@ export default function WaitlistPage() {
               <div className="flex items-center justify-center gap-2">
                 <h2 className="text-2xl font-bold text-foreground flex items-center gap-2">
                   <Users className="w-6 h-6 text-primary" />
-                  Skip the Line
+                  {t("success.skipTheLineTitle")}
                 </h2>
                 <button
                   onClick={refreshStats}
                   className="p-1.5 rounded-lg hover:bg-muted transition-colors"
-                  title="Refresh stats"
+                  title={t("success.refreshTooltip")}
                 >
                   <RefreshCw className="w-4 h-4 text-muted-foreground" />
                 </button>
               </div>
-              <p className="text-muted-foreground">Share your referral link and move up faster!</p>
+              <p className="text-muted-foreground">{t("success.skipTheLineSubtitle")}</p>
             </div>
 
             {/* Referral Code Display */}
             <div className="bg-muted/50 rounded-xl p-6 space-y-3">
               <p className="text-sm text-muted-foreground text-center uppercase tracking-wider">
-                Your Referral Code
+                {t("success.referralCodeLabel")}
               </p>
               <p className="text-4xl font-bold text-center text-primary font-mono tracking-wider">
                 {referralCode}
@@ -239,38 +218,33 @@ export default function WaitlistPage() {
                 {copied ? (
                   <>
                     <Check className="w-4 h-4 mr-2" />
-                    Copied!
+                    {t("success.copied")}
                   </>
                 ) : (
                   <>
                     <Copy className="w-4 h-4 mr-2" />
-                    Copy Link
+                    {t("success.copyLink")}
                   </>
                 )}
               </Button>
               <Button onClick={handleShare} className="flex-1 h-12 bg-primary hover:bg-primary/90">
                 <Share2 className="w-4 h-4 mr-2" />
-                Share
+                {t("success.share")}
               </Button>
             </div>
 
             {/* Info */}
             <div className="bg-primary/5 border border-primary/20 rounded-lg p-4">
               <p className="text-sm text-center text-foreground">
-                <strong>Pro tip:</strong> For every friend who joins using your link, you&apos;ll
-                both move up in the queue! 🚀
+                <strong>{t("success.proTip")}</strong> {t("success.proTipMessage")}
               </p>
             </div>
           </div>
 
           {/* Additional Info */}
           <div className="text-center space-y-2">
-            <p className="text-sm text-muted-foreground">
-              Check your email for your welcome message and referral link.
-            </p>
-            <p className="text-sm text-muted-foreground">
-              We&apos;ll notify you when it&apos;s your turn!
-            </p>
+            <p className="text-sm text-muted-foreground">{t("success.checkEmail")}</p>
+            <p className="text-sm text-muted-foreground">{t("success.notify")}</p>
           </div>
         </div>
       </div>
@@ -285,57 +259,34 @@ export default function WaitlistPage() {
           <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary/10 mb-4">
             <Sparkles className="w-8 h-8 text-primary" />
           </div>
-          <h1 className="text-4xl md:text-5xl font-bold text-foreground">Join the Waitlist</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground">{t("form.title")}</h1>
           <p className="text-xl text-muted-foreground max-w-lg mx-auto">
-            Be among the first to experience the future of{" "}
-            <span className="text-primary font-semibold">AI-powered brand creation</span>
+            {t("form.subtitle")}{" "}
+            <span className="text-primary font-semibold">{t("form.subtitleHighlight")}</span>
           </p>
         </div>
 
         {/* Referral Notice */}
         {referralParam && (
           <div className="bg-primary/10 border border-primary/30 rounded-lg p-4 text-center">
-            <p className="text-sm text-primary font-medium">
-              🎉 You&apos;ve been referred! You&apos;ll start with a boost in the queue.
-            </p>
+            <p className="text-sm text-primary font-medium">🎉 {t("form.referred")}</p>
           </div>
         )}
 
         {/* Form Card */}
         <div className="bg-card rounded-2xl border border-border p-8 shadow-sm">
           <Form {...form}>
-            <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-6">
+            <form onSubmit={onSubmit} className="space-y-6">
               <FormField
                 control={form.control}
                 name="email"
                 render={({ field }) => (
                   <FormItem>
-                    <FormLabel className="text-foreground">Email *</FormLabel>
+                    <FormLabel className="text-foreground">{t("form.email")} *</FormLabel>
                     <FormControl>
                       <Input
                         type="email"
-                        placeholder="your@email.com"
-                        className="h-12 bg-background"
-                        {...field}
-                      />
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
-
-              <FormField
-                control={form.control}
-                name="name"
-                render={({ field }) => (
-                  <FormItem>
-                    <FormLabel className="text-foreground">
-                      Name <span className="text-muted-foreground">(optional)</span>
-                    </FormLabel>
-                    <FormControl>
-                      <Input
-                        type="text"
-                        placeholder="Your name"
+                        placeholder={t("form.emailPlaceholder")}
                         className="h-12 bg-background"
                         {...field}
                       />
@@ -350,18 +301,18 @@ export default function WaitlistPage() {
                 disabled={isSubmitting}
                 className="w-full h-12 text-base font-semibold bg-primary hover:bg-primary/90"
               >
-                <LoadingSwap isLoading={isSubmitting}>Join the Waitlist</LoadingSwap>
+                <LoadingSwap isLoading={isSubmitting}>{t("form.submit")}</LoadingSwap>
               </Button>
             </form>
           </Form>
 
           <div className="mt-6 text-center space-y-3">
-            <p className="text-sm text-muted-foreground">Get early access and exclusive updates</p>
+            <p className="text-sm text-muted-foreground">{t("form.earlyAccess")}</p>
             <button
               onClick={() => setShowLookup(true)}
               className="text-sm text-primary hover:underline font-medium"
             >
-              Already joined? Check your status →
+              {t("form.alreadyJoined")}
             </button>
           </div>
         </div>
@@ -372,13 +323,13 @@ export default function WaitlistPage() {
             <div className="bg-card rounded-2xl border border-border p-8 max-w-md w-full shadow-xl">
               <div className="space-y-4">
                 <div className="text-center">
-                  <h3 className="text-2xl font-bold text-foreground mb-2">Check Your Status</h3>
-                  <p className="text-sm text-muted-foreground">Enter your email or referral code</p>
+                  <h3 className="text-2xl font-bold text-foreground mb-2">{t("lookup.title")}</h3>
+                  <p className="text-sm text-muted-foreground">{t("lookup.subtitle")}</p>
                 </div>
 
                 <Input
                   type="text"
-                  placeholder="email@example.com or ABC12345"
+                  placeholder={t("lookup.placeholder")}
                   value={lookupValue}
                   onChange={e => setLookupValue(e.target.value)}
                   onKeyPress={e => e.key === "Enter" && handleLookup()}
@@ -393,45 +344,20 @@ export default function WaitlistPage() {
                     className="flex-1 h-12"
                     disabled={isLookingUp}
                   >
-                    Cancel
+                    {t("lookup.cancel")}
                   </Button>
                   <Button
                     onClick={handleLookup}
                     className="flex-1 h-12 bg-primary hover:bg-primary/90"
                     disabled={isLookingUp}
                   >
-                    <LoadingSwap isLoading={isLookingUp}>Check Status</LoadingSwap>
+                    <LoadingSwap isLoading={isLookingUp}>{t("lookup.submit")}</LoadingSwap>
                   </Button>
                 </div>
               </div>
             </div>
           </div>
         )}
-
-        {/* Features */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-4 pt-4">
-          <div className="text-center space-y-2">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-              <Sparkles className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold text-foreground">Early Access</h3>
-            <p className="text-sm text-muted-foreground">Be first to try new features</p>
-          </div>
-          <div className="text-center space-y-2">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-              <Users className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold text-foreground">Exclusive Community</h3>
-            <p className="text-sm text-muted-foreground">Connect with early adopters</p>
-          </div>
-          <div className="text-center space-y-2">
-            <div className="inline-flex items-center justify-center w-12 h-12 rounded-full bg-primary/10">
-              <Share2 className="w-6 h-6 text-primary" />
-            </div>
-            <h3 className="font-semibold text-foreground">Referral Rewards</h3>
-            <p className="text-sm text-muted-foreground">Skip ahead by inviting friends</p>
-          </div>
-        </div>
       </div>
     </div>
   );

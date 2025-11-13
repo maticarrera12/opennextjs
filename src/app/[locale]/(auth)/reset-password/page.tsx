@@ -1,19 +1,18 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 import { useForm } from "react-hook-form";
-import { toast } from "sonner";
-
-import PasswordInput from "@/app/[locale]/(auth)/_components/password-input";
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { zodResolver } from "@hookform/resolvers/zod";
 import { Form, FormControl, FormField, FormItem, FormMessage } from "@/components/ui/form";
+import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { authClient } from "@/lib/auth-client";
+import { toast } from "sonner";
+import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import { useRouter, useSearchParams } from "next/navigation";
+import Link from "next/link";
 import { ResetPasswordInput, resetPasswordSchema } from "@/lib/schemas";
+import { authClient } from "@/lib/auth-client";
+import { useTranslations } from "next-intl";
+import PasswordInput from "@/app/[locale]/(auth)/_components/password-input";
 
 export default function ResetPasswordPage() {
   const router = useRouter();
@@ -40,7 +39,7 @@ export default function ResetPasswordPage() {
         token,
       },
       {
-        onError: error => {
+        onError: (error) => {
           toast.error(error.error.message || t("error"));
         },
         onSuccess: () => {

@@ -21,7 +21,7 @@ export function TechStackTabs() {
     core: [
       {
         name: "Next.js",
-        image: "/assets/nextjs.jpeg",
+        image: "/assets/nextjs.png",
         description: t("core.nextjs"),
       },
       {
@@ -48,7 +48,7 @@ export function TechStackTabs() {
     frontend: [
       {
         name: "Shadcn UI",
-        image: "/assets/shadcn.jpeg",
+        image: "/assets/shadcn.png",
         description: t("frontend.shadcn"),
       },
       {
@@ -154,7 +154,7 @@ export function TechStackTabs() {
               key={tab.value}
               value={tab.value}
               className="flex-1 rounded-full py-6 text-base font-medium transition-all 
-                data-[state=active]:bg-gradient-to-r data-[state=active]:from-pink-500
+                data-[state=active]:bg-linear-to-r data-[state=active]:from-pink-500
                 data-[state=active]:to-purple-600 data-[state=active]:text-white 
                 data-[state=active]:shadow-md hover:bg-muted/30 flex items-center justify-center gap-2"
             >
@@ -210,11 +210,11 @@ function TechCard({ item }: { item: TechItem }) {
         min-w-[180px] max-w-[180px] md:max-w-none
         min-h-[140px] md:min-h-[160px]
         h-full
-        flex-shrink-0
+        shrink-0
       "
     >
       <div className="flex items-center gap-2.5 md:gap-4">
-        <div className="relative w-9 h-9 md:w-14 md:h-14 flex-shrink-0 rounded-lg overflow-hidden bg-muted/50">
+        <div className="relative w-9 h-9 md:w-14 md:h-14 shrink-0 rounded-lg overflow-hidden bg-muted/50">
           <Image
             src={item.image}
             alt={item.name}
@@ -225,7 +225,7 @@ function TechCard({ item }: { item: TechItem }) {
         </div>
         <h3 className="text-sm md:text-lg font-semibold text-foreground truncate">{item.name}</h3>
       </div>
-      <p className="text-xs md:text-sm text-muted-foreground leading-snug line-clamp-3 md:line-clamp-2 mt-2 min-h-[3rem] md:min-h-[2.5rem]">
+      <p className="text-xs md:text-sm text-muted-foreground leading-snug line-clamp-3 md:line-clamp-2 mt-2 min-h-12 md:min-h-10">
         {item.description}
       </p>
     </Card>

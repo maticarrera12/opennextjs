@@ -11,6 +11,9 @@
       "logout": "Cerrar Sesión"
     }
   },
+  "navbar": {
+    "demoButton": "Ver Demo"
+  },
   "auth": {
     "signin": {
       "title": "Bienvenido de nuevo",
@@ -134,6 +137,8 @@
       "earlyAccess": "Obtén acceso anticipado y actualizaciones exclusivas",
       "alreadyJoined": "¿Ya te uniste? Revisa tu estado →",
       "referred": "¡Has sido referido! Comenzarás con un impulso en la fila.",
+      "joinSuccess": "¡Te uniste con éxito!",
+      "joinError": "No se pudo unir a la lista de espera",
       "errors": {
         "invalidEmail": "Correo electrónico inválido",
         "nameLength": "El nombre debe tener al menos 2 caracteres",
@@ -151,10 +156,15 @@
       "copyLink": "Copiar Enlace",
       "copied": "¡Copiado!",
       "share": "Compartir",
+      "shareTitle": "Únete a la lista de espera",
+      "shareMessage": "¡Únete conmigo a la lista de espera de esta increíble app!",
+      "shareError": "No se pudo compartir. Copia el enlace en su lugar.",
       "proTip": "Consejo:",
       "proTipMessage": "¡Por cada amigo que se una usando tu enlace, ambos avanzarán en la fila!",
       "checkEmail": "Revisa tu correo para ver tu mensaje de bienvenida y enlace de referido.",
-      "notify": "¡Te notificaremos cuando sea tu turno!"
+      "notify": "¡Te notificaremos cuando sea tu turno!",
+      "refreshTooltip": "Actualizar estadísticas",
+      "refreshError": "No se pudieron actualizar las estadísticas"
     },
     "lookup": {
       "title": "Revisa tu Estado",
@@ -180,6 +190,11 @@
         "description": "Avanza invitando amigos"
       }
     }
+  },
+  "ctaWaitlist": {
+    "title": "¿Sigues aquí? Claramente estás listo para crear algo increíble",
+    "placeholder": "Ingresa tu correo",
+    "button": "Unirme a la lista"
   },
   "settings": {
     "title": "Configuración",
@@ -295,6 +310,7 @@
       "part2": "que te ahorran horas de configuración y te permiten lanzar más rápido."
     },
     "cta": "Waitlist",
+    "waitlistCount": "Únete a {count} desarrolladores que ya están en la waitlist",
     "imagePlaceholder": "Reemplazar imagen"
   },
   "cloneCommand": {
@@ -548,5 +564,10 @@
       "title": "Comienza Hoy",
       "subtitle": "Crea algo increíble"
     }
+  },
+  "banner": {
+    "text": "No olvides darnos una estrella en",
+    "textMobile": "Dános una estrella en",
+    "github": "GitHub"
   }
 }

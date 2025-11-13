@@ -1,6 +1,7 @@
 "use client";
 import { motion, AnimatePresence } from "framer-motion";
 import { HomeIcon } from "lucide-react";
+import { useTranslations } from "next-intl";
 import { useState } from "react";
 
 import { LanguageSwitcher } from "@/components/navbar/languaje-switcher";
@@ -12,7 +13,6 @@ import {
   NavigationMenuItem,
   NavigationMenuList,
 } from "@/components/ui/navigation-menu";
-import { authClient } from "@/lib/auth-client";
 
 // Navigation links
 const navigationLinks = [
@@ -22,7 +22,7 @@ const navigationLinks = [
 ];
 
 export default function Navbar() {
-  const { data: session, isPending: loading } = authClient.useSession();
+  const t = useTranslations("navbar");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const handleNavigation = (
@@ -60,7 +60,7 @@ export default function Navbar() {
 
   return (
     <>
-      <header className="fixed top-0 left-0 right-0 z-50 border-b bg-background">
+      <header className="sticky top-0 left-0 right-0 z-50 border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
         <div className="max-w-7xl mx-auto px-4 md:px-6">
           <div className="flex h-16 items-center justify-between gap-4">
             {/* Left side */}
@@ -138,7 +138,9 @@ export default function Navbar() {
               <ThemeToggle />
               {/* Language selector */}
               <LanguageSwitcher />
-
+              <Button asChild className="bg-primary text-white hover:bg-primary/90">
+                <a href="https://open-next-two.vercel.app/">{t("demoButton")}</a>
+              </Button>
               {/* <Button
                 onClick={() => (window.location.href = "/waitlist")}
                 className="text-sm  cursor-pointer border-2 bg-transparent border-indigo-700 hover:bg-indigo-700 text-foreground"

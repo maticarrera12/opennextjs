@@ -8,6 +8,7 @@ import { TechStackTabs } from "./_components/tech-stack-tabs";
 import BentoShowcase from "@/app/[locale]/(marketing)/_components/bento-showcase";
 import Faq from "@/app/[locale]/(marketing)/_components/faq";
 import Hero from "@/app/[locale]/(marketing)/_components/hero";
+import CTAWaitlist from "./_components/cta-waitlist";
 
 const page = () => {
   return (
@@ -19,6 +20,7 @@ const page = () => {
       <HoursSavedSection />
       <FeatureTabs />
       <Faq />
+      <CTAWaitlist />
     </div>
   );
 };

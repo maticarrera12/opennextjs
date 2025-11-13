@@ -1,15 +1,14 @@
 "use client";
-import { zodResolver } from "@hookform/resolvers/zod";
-import { Eye, EyeOff } from "lucide-react";
-import Link from "next/link";
-import { useRouter, useSearchParams } from "next/navigation";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signIn } from "@/lib/actions/auth-actions";
 import { toast } from "sonner";
-
-import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
-import { Button } from "@/components/ui/button";
+import Link from "next/link";
+import { Eye, EyeOff } from "lucide-react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signInSchema, type SignInInput } from "@/lib/schemas";
+import { useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -19,11 +18,11 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { Separator } from "@/components/ui/separator";
-import { signIn } from "@/lib/actions/auth-actions";
 import { authClient } from "@/lib/auth-client";
-import { signInSchema, type SignInInput } from "@/lib/schemas";
+import { Separator } from "@/components/ui/separator";
+import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
 
 export default function SignInPage() {
   const [showPassword, setShowPassword] = useState(false);
@@ -63,7 +62,7 @@ export default function SignInPage() {
   };
 
   useEffect(() => {
-    authClient.getSession().then(session => {
+    authClient.getSession().then((session) => {
       if (session.data != null) router.push("/");
     });
   }, [router]);

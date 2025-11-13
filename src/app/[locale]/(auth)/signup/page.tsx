@@ -1,15 +1,13 @@
 "use client";
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import Link from "next/link";
-import { useRouter } from "next/navigation";
-import { useTranslations } from "next-intl";
 import { useEffect, useState } from "react";
 import { useForm } from "react-hook-form";
-
-import PasswordInput from "@/app/[locale]/(auth)/_components/password-input";
-import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
-import { Button } from "@/components/ui/button";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { signUp } from "@/lib/actions/auth-actions";
+import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { signUpSchema, type SignUpInput } from "@/lib/schemas";
+import { useTranslations } from "next-intl";
 import {
   Form,
   FormControl,
@@ -19,11 +17,12 @@ import {
   FormMessage,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
 import { LoadingSwap } from "@/components/ui/loading-swap";
-import { Separator } from "@/components/ui/separator";
-import { signUp } from "@/lib/actions/auth-actions";
 import { authClient } from "@/lib/auth-client";
-import { signUpSchema, type SignUpInput } from "@/lib/schemas";
+import { Separator } from "@/components/ui/separator";
+import SocialAuthButtons from "@/app/[locale]/(auth)/_components/social-auth-buttons";
+import PasswordInput from "@/app/[locale]/(auth)/_components/password-input";
 
 export default function SignUpPage() {
   const [error, setError] = useState("");
@@ -59,7 +58,7 @@ export default function SignUpPage() {
   };
 
   useEffect(() => {
-    authClient.getSession().then(session => {
+    authClient.getSession().then((session) => {
       if (session.data != null) router.push("/");
     });
   }, [router]);

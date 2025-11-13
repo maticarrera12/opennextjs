@@ -15,7 +15,7 @@ export async function POST(req: Request) {
     // Validar datos
     const parsed = waitlistSchema.parse(body);
 
-    const { email, name, referral } = parsed;
+    const { email, name, referral, locale } = parsed;
     const existing = await prisma.waitlistUser.findUnique({ where: { email } });
     if (existing) {
       // Si ya existe, devolver su referral code
@@ -55,14 +55,21 @@ export async function POST(req: Request) {
     });
 
     // Enviar email de bienvenida
+    let emailError: Error | null = null;
     try {
-      await sendWaitlistWelcomeEmail({
+      const emailResult = await sendWaitlistWelcomeEmail({
         user: { email: newUser.email, name: newUser.name },
         referralCode: newUser.referralCode,
         position,
+        locale: locale || "en",
       });
-    } catch (emailError) {
-      console.error("Failed to send welcome email:", emailError);
+      
+      // Verificar que el email se haya enviado correctamente
+      if (!emailResult?.data?.id) {
+        throw new Error("Email was not sent - no ID returned from Resend");
+      }
+    } catch (err) {
+      emailError = err instanceof Error ? err : new Error(String(err));
       // No fallar la request si el email falla
     }
 
@@ -70,12 +77,21 @@ export async function POST(req: Request) {
       message: "Successfully joined the waitlist! 🎉",
       referralCode: newUser.referralCode,
       position,
+      emailSent: !emailError,
+      emailError: emailError
+        ? {
+            message: emailError.message,
+            // Solo en desarrollo, incluir más detalles del error
+            ...(process.env.NODE_ENV === "development" && {
+              details: emailError.stack,
+            }),
+          }
+        : null,
     });
   } catch (error) {
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: error.issues }, { status: 400 });
     }
-    console.error(error);
     return NextResponse.json({ error: "Something went wrong." }, { status: 500 });
   }
 }

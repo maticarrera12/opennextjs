@@ -3,11 +3,11 @@ import { motion } from "framer-motion";
 import Image from "next/image";
 
 const logos = [
-  { src: "/assets/nextjs.svg", alt: "Next.js", width: 100, height: 40 },
-  { src: "/assets/nextjs.svg", alt: "Next.js", width: 100, height: 40 },
-  { src: "/assets/nextjs.svg", alt: "Next.js", width: 100, height: 40 },
-  { src: "/assets/nextjs.svg", alt: "Next.js", width: 100, height: 40 },
-  { src: "/assets/nextjs.svg", alt: "Next.js", width: 100, height: 40 },
+  { src: "/assets/nextjs.svg", alt: "Next.js" },
+  { src: "/assets/nextjs.svg", alt: "Next.js" },
+  { src: "/assets/nextjs.svg", alt: "Next.js" },
+  { src: "/assets/nextjs.svg", alt: "Next.js" },
+  { src: "/assets/nextjs.svg", alt: "Next.js" },
 ];
 
 export default function LogoMarquee() {
@@ -31,13 +31,17 @@ export default function LogoMarquee() {
         }}
       >
         {duplicatedLogos.map((logo, i) => (
-          <div key={i} className="relative flex-shrink-0 opacity-70 hover:opacity-100 transition">
+          <div
+            key={i}
+            className="relative h-14 w-40 shrink-0 opacity-70 transition hover:opacity-100 md:h-16 md:w-48"
+          >
             <Image
               src={logo.src}
               alt={logo.alt}
-              width={logo.width}
-              height={logo.height}
+              fill
               className="object-contain dark:invert"
+              sizes="(max-width: 768px) 160px, 192px"
+              priority={i < 4}
             />
           </div>
         ))}

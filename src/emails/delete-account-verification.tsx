@@ -13,6 +13,8 @@ import {
 } from "@react-email/components";
 import * as React from "react";
 
+import { emailStyle } from "./email-styles";
+
 interface DeleteAccountVerificationProps {
   userName?: string;
   verificationUrl?: string;
@@ -105,13 +107,13 @@ export const DeleteAccountVerification = ({
 export default DeleteAccountVerification;
 
 // Styles
-const main = {
+const main = emailStyle({
   backgroundColor: "#f6f9fc",
   fontFamily:
     '-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Ubuntu,sans-serif',
-};
+});
 
-const container = {
+const container = emailStyle({
   backgroundColor: "#ffffff",
   margin: "0 auto",
   marginTop: "40px",
@@ -120,47 +122,47 @@ const container = {
   borderRadius: "16px",
   maxWidth: "600px",
   boxShadow: "0 4px 6px rgba(0, 0, 0, 0.07)",
-};
+});
 
-const logoSection = {
+const logoSection = emailStyle({
   padding: "32px 40px",
   textAlign: "center" as const,
   borderBottom: "1px solid #f0f0f0",
-};
+});
 
-const logoText = {
+const logoText = emailStyle({
   margin: "0",
   fontSize: "28px",
   fontWeight: "700",
   color: "#dc2626",
   textAlign: "center" as const,
-};
+});
 
-const content = {
+const content = emailStyle({
   padding: "40px 40px 32px",
-};
+});
 
-const heading = {
+const heading = emailStyle({
   fontSize: "24px",
   fontWeight: "700",
   color: "#1f2937",
   margin: "0 0 24px",
   textAlign: "center" as const,
-};
+});
 
-const paragraph = {
+const paragraph = emailStyle({
   fontSize: "16px",
   lineHeight: "26px",
   color: "#374151",
   margin: "0 0 16px",
-};
+});
 
-const buttonContainer = {
+const buttonContainer = emailStyle({
   textAlign: "center" as const,
   margin: "32px 0",
-};
+});
 
-const button = {
+const button = emailStyle({
   backgroundColor: "#dc2626",
   borderRadius: "8px",
   color: "#ffffff",
@@ -171,75 +173,75 @@ const button = {
   display: "inline-block",
   padding: "14px 32px",
   cursor: "pointer",
-};
+});
 
-const link = {
+const link = emailStyle({
   fontSize: "14px",
   color: "#dc2626",
   textDecoration: "none",
   wordBreak: "break-all" as const,
   margin: "0 0 24px",
   display: "block",
-};
+});
 
-const anchor = {
+const anchor = emailStyle({
   color: "#dc2626",
   textDecoration: "underline",
-};
+});
 
-const dangerBox = {
+const dangerBox = emailStyle({
   backgroundColor: "#fee2e2",
   border: "2px solid #dc2626",
   borderRadius: "8px",
   padding: "20px",
   margin: "24px 0",
-};
+});
 
-const dangerText = {
+const dangerText = emailStyle({
   fontSize: "15px",
   lineHeight: "22px",
   color: "#991b1b",
   margin: "0 0 12px",
   fontWeight: "600",
-};
+});
 
-const dangerListItem = {
+const dangerListItem = emailStyle({
   fontSize: "14px",
   lineHeight: "22px",
   color: "#991b1b",
   margin: "4px 0",
   paddingLeft: "8px",
-};
+});
 
-const warningBox = {
+const warningBox = emailStyle({
   backgroundColor: "#fef3c7",
   border: "1px solid #fbbf24",
   borderRadius: "8px",
   padding: "16px",
   margin: "24px 0",
-};
+});
 
-const warningText = {
+const warningText = emailStyle({
   fontSize: "14px",
   lineHeight: "20px",
   color: "#92400e",
   margin: "0",
   textAlign: "center" as const,
-};
+});
 
-const hr = {
+const hr = emailStyle({
   borderColor: "#e5e7eb",
   margin: "32px 0",
-};
+});
 
-const footer = {
+const footer = emailStyle({
   padding: "0 40px 32px",
-};
+});
 
-const footerText = {
+const footerText = emailStyle({
   fontSize: "13px",
   lineHeight: "20px",
   color: "#6b7280",
   textAlign: "center" as const,
   margin: "4px 0",
-};
+});
