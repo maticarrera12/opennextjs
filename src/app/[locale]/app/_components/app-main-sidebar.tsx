@@ -9,8 +9,8 @@ import {
 import { useRouter } from "next/navigation";
 import { useTranslations } from "next-intl";
 
-import { CreditBalance } from "../../../../../components/credits/credits-balance";
 import AppSidebar from "@/components/ui/app-sidebar";
+import { CreditBalance } from "@/components/credits/credits-balance";
 
 export default function AppMainSidebar() {
   const t = useTranslations("app");
