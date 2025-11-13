@@ -1,24 +1,7 @@
-import { headers } from "next/headers";
-
-export default async function RootLayout({
-  children,
-  params,
-}: {
-  children: React.ReactNode;
-  params: { locale: string };
-}) {
-  const headersList = await headers();
-  const pathname = headersList.get("x-pathname") || "";
-
-  // Si es la ruta de docs o legal, renderizar sin el wrapper de locale
-  if (pathname.startsWith("/docs") || pathname.startsWith("/legal")) {
-    return children;
-  }
-  const { locale } = params;
-  // Para otras rutas, root layout debe proveer <html> y <body>
+export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang={locale}>
-      <body>{children}</body>
+    <html suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
     </html>
   );
 }
