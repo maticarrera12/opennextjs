@@ -1,4 +1,5 @@
-import { Metadata } from "next";
+import type { Metadata } from "next";
+import "./globals.css";
 
 export const metadata: Metadata = {
   title: "OpenNextJS",
@@ -22,11 +23,14 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OpenNextJS",
     images: ["https://www.opennextjs.com/og-image.png"],
-    site: "opennextjs.com",
+    site: "@opennextjs",
   },
 };
+
 export default function RootLayout({ children }: { children: React.ReactNode }) {
-  <html>
-    <body>{children}</body>
-  </html>;
+  return (
+    <html suppressHydrationWarning>
+      <body suppressHydrationWarning>{children}</body>
+    </html>
+  );
 }
