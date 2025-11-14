@@ -1,5 +1,5 @@
-import { redirect } from "next/navigation";
 import { headers } from "next/headers";
+import { redirect } from "next/navigation";
 
 export default async function RootPage() {
   const headersList = await headers();
@@ -11,4 +11,3 @@ export default async function RootPage() {
   // Redirigir al locale apropiado
   redirect(`/${preferredLocale}`);
 }
-
