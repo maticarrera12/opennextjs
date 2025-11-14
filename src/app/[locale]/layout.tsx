@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "OpenNextJS",
     description: "Free open source NextJS SaaS Starter Kit",
-    images: ["/og-image.png"],
+    images: [`${process.env.NEXT_PUBLIC_APP_URL}/og-image.png`],
     creator: "@mcarreradev",
     site: "mcarreradev.com",
   },
