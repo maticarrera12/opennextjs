@@ -22,15 +22,15 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Open Next",
-  description: "AI Brand Kit - Create your brand identity with AI",
+  description: "Free open source NextJS SaaS Starter Kit",
   metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
   twitter: {
     card: "summary_large_image",
-    title: "Open Next",
-    description: "AI Brand Kit - Create your brand identity with AI",
+    title: "OpenNextJS",
+    description: "Free open source NextJS SaaS Starter Kit",
     images: ["/og-image.png"],
-    creator: "@mcarreradev", // Reemplaza con tu usuario de Twitter
-    site: "mcarreradev.com", // Reemplaza con tu usuario de Twitter
+    creator: "@mcarreradev",
+    site: "mcarreradev.com",
   },
 };
 

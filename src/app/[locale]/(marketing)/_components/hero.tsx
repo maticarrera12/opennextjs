@@ -4,8 +4,8 @@ import { usePathname } from "next/navigation";
 import { useTranslations } from "next-intl";
 import React, { useEffect, useMemo, useRef, useState } from "react";
 
-import AnimatedButton from "@/components/AnimatedButton/AnimatedButton";
 import CloneCommand from "@/components/CloneCommand";
+import CtaButton from "@/components/ui/cta-button";
 
 const Hero = () => {
   const t = useTranslations("hero");
@@ -54,9 +54,7 @@ const Hero = () => {
           setWaitlistCount(typeof data.totalUsers === "number" ? data.totalUsers : 0);
         }
       } catch (error) {
-        if (process.env.NODE_ENV === "development") {
-          console.error("Failed to load waitlist count", error);
-        }
+        return error;
       }
     };
 
@@ -97,13 +95,14 @@ const Hero = () => {
                   {t("waitlistCount", { count: formattedWaitlistCount })}
                 </p>
               )}
-              <AnimatedButton
+              {/* <AnimatedButton
                 label={t("cta")}
                 route={`/${locale}/waitlist`}
                 animate={true}
                 animateOnScroll={true}
                 delay={0.2}
-              />
+              /> */}
+              <CtaButton />
 
               {/* <Link
                 href="/docs"
