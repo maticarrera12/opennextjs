@@ -54,7 +54,7 @@ export async function generateMetadata({
       description: "Free open source NextJS SaaS Starter Kit",
       images: [`${baseUrl}/og-image.png`],
       creator: "@mcarreradev",
-      site: "mcarreradev.com",
+      site: "opennextjs.com",
     },
   };
 }
