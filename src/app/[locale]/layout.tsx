@@ -20,19 +20,38 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
-export const metadata: Metadata = {
-  title: "Open Next",
-  description: "Free open source NextJS SaaS Starter Kit",
-  metadataBase: new URL(process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000"),
-  twitter: {
-    card: "summary_large_image",
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ locale: string }>;
+}): Promise<Metadata> {
+  const { locale } = await params;
+
+  return {
     title: "OpenNextJS",
-    description: "Free open source NextJS SaaS Starter Kit",
-    images: [`${process.env.NEXT_PUBLIC_APP_URL}/og-image.png`],
-    creator: "@mcarreradev",
-    site: "mcarreradev.com",
-  },
-};
+    openGraph: {
+      title: "OpenNextJS",
+      url: "https://www.opennextjs.com",
+      siteName: "OpenNextJS",
+      images: [
+        {
+          url: "https://www.opennextjs.com/og-image.png",
+          width: 1200,
+          height: 630,
+          alt: "OpenNextJS Preview",
+        },
+      ],
+      locale: locale === "es" ? "es_ES" : "en_US",
+      type: "website",
+    },
+    twitter: {
+      card: "summary_large_image",
+      title: "OpenNextJS",
+      images: ["https://www.opennextjs.com/og-image.png"],
+      site: "@opennextjs",
+    },
+  };
+}
 
 export default async function LocaleLayout({ children, params }: any) {
   const { locale } = params;
